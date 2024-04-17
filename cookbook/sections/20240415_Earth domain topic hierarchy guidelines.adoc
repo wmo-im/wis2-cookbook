@@ -1,0 +1,125 @@
+= Guidelines for WMO Earth Domains Topic Hierarchy definition
+
+== Introduction
+The WIS2 Topic Hierarchy for the notification messages is defined is the _Manual of WIS - Volume 2_ and describes the first 7 levels of the Topic Hierarchy to be used when publishing Notification Messages of WIS2.
+
+The levels address all Earth domains of WMO in a consistent manner such as:
+
+*cache/a/wis2/ma-marocmeteo/core/data/weather*
+
+Then, it is up to experts in the various Earth domains to define the levels of the Topic Hierarchy below the 7th level. 
+
+The purpose of this document is to provide guidelines to the experts so that the Topic Hierarchy definition is consistent and is useful to address the needs of WIS2 Users.
+
+== Additional Earth domain specific topics levels
+
+=== What is the use of the Topic Hierarchy ?
+
+The definition of the Topic Hierarchy is heavily linked to the use of pub/sub protocols, here MQTT[S], in WIS2. Users, when subscribing to the Global Broker, can decide which notification messages they want to get.
+
+By subscribing to:
+
+*cache/a/wis2/+/core/data/weather/surface-weather-observation/synop*
+
+Users will receive a notification when a new synop is made available from _any_ centre-id publishing message on WIS2 (this is the *+* above).
+
+They can also choose to subscribe to:
+
+*cache/a/wis2/de-dwd/core/data/weather/#*
+
+In this case, users will receive notification messages from the _de-dwd_ centre-id for _all_ weather data (this is the *#* above).
+
+By using *+* and *#*, the two defined wildcards in the MQTT[S] protocol, users can extend their subscription and receive all messages they need.
+
+The purpose of additional topic hierarchy level is to allow users to get the messages they need and to be more specific in their request.
+
+=== The Do's and Don'ts when defining the Earth Domain Topic Hierarchy
+
+- Define only a _small number_ of additional levels
+
+According the the MQTT[S] protocol specification, the accepted length of the Topic Hierarchy is more than 65kB. It means that the number of levels can be extremely large. However, as explained in https://www.emqx.com/en/blog/advanced-features-of-mqtt-topics :
+
+_Try not to use more topic levels “just because I can”. For example, my-home/room1/data is a better choice than my/home/room1/data._
+
+By default, some MQTT brokers are configured to accept a maximum of 10 levels. This can be changed in the configuration of the broker, however, this limit shows that a usable, practical Topic Hierarchy shouldn't be too deep (that is with a large number of levels).
+
+For WIS2, and considering the various Earth Domains, a limit of *4* sublevels seems appropriate.
+
+- Don't use the Topic Hierarchy as a metadata record
+
+When defining the Topic Hierarchy, the experts must focus on the users' needs. The purpose of the Topic Hierarchy is *not* to describe as precisely as possible what data users will obtain if they decide to subscribe and then download. It is _only_ to provide a filtering mechanism so that users will not be flooded by Notification Messages not useful for them.
+
+In WIS2, all datasets *must* be described using WCMP2 (_WMO Core Metadata Profile version 2_). Users will be able to discover the data they need by using the metadata record through, e.g., search engines. The Topic Hierarchy information will be part of the metadata record.
+
+- Don't allow locally defined sublevels outside the `experimental` topic hierarchy
+
+For each Earth Domain, an `experimental` topic has been defined. Typically, for `weather`, the first additional level in the domain topic hierarchy is:
+
+```
+advisories-warnings             Advisories and warnings
+aviation                        Aviation
+prediction                      "Data sets produced by quantitative algorithms, such as numerical or statistical prediction models, describing the past, present and future meteorological states"
+surface-based-observations      Surface based observations
+experimental                    Experimental topics
+```
+
+Under `experimental`, as the name suggests, it is possible to use additional topics for tests and experiments. This is not meant to be used for operations. It should only be used for testing purposes.
+
+With the exclusion of the `experimental` topic level, the Topic Hierarchy must be _fully_ defined for each Earth Domain.
+
+In some situations, it might be tempting for a data producer to use additional Topic Hierarchy levels to restrict even more the number of messages received by the users. 
+
+This is *forbidden*. 
+
+In each Earth Domain community, all WIS Centres will be able to use the entire Topic Hierarchy of the domain if they provide data corresponding to each topic. A WIS Centre will not be allowed to add additional sublevels or undefined level within the Topic Hierarchy for its own needs.
+Modification of the Topic Hierarchy will be possible by using the WMO fast-track methodology.
+
+- Consider users needs and prevent complex wildcard subscriptions
+
+The Topic Hierarchy purpose is to inform users about the availability of new data. In WIS2, obtaining data will start, in most cases, by configuring one or more subscription to topics, as defined in the associated metadata records, so that users will receive a notification  when data is available.
+The Topic Hierarchy should be defined so that users will not need to configure a very large number of different subscriptions to get the data they need. 
+Each level in the Topic Hierarchy should be seen as a "logical" group (as the earth domain `weather`, `ocean`... or like `synop` for `surface-based-observation`).
+Then, and considering that wildcard subscription (using `+`and `#` as described above), are "expensive" to manage for the brokers.
+
+A Topic Hierarchy resulting in users subscribing to 
+
+*cache/a/wis2/\+/core/data/ocean/\+/some/\+/thing/\+/else/#* 
+
+should be avoided. A subscription to
+
+*cache/a/wis2/\+/core/data/ocean/some/thing/else/#*
+
+is much more effective for both the client and the broker side.
+
+If it is likely that most users will use wildcards for a particular topic levels, then, either removing that level altogether, of moving that level a the end of the topic hierarchy is also more efficient for clients and producers.
+
+If most users end up subscribing to :
+
+*cache/a/wis2/\+/core/data/ocean/\+/thing/+/#*
+
+then, the Topic Hierarchy could be reconsidered, so that the above subscription can be replaced by:
+
+*cache/a/wis2/\+/core/data/ocean/thing/#*
+
+Reordering the levels of topics and potentially reducing the number of sublevels makes the Topic Hierarchy simpler and more efficient.
+
+- Facilitate client side filtering
+
+Notifications Messages are small pieces of information. MQTT[S] broker and clients are able to handle a very large number of messages. It that sense, receiving, potentially, too many messages is not a problem. However, downloading data, depending on the size of the data might be slower and less efficient. If, for a particular dataset, the geometry information available in the notification message is not sufficient to allow client-side filtering before download, it is suggested to provide additional information in the `properties` part of the notification message so that users can decide _before_ downloading if this particular file is useful for them.
+For example, and for very large datasets, such as NWP output, for each run of the model, the data will be split in many files to avoid extremely large files. To inform the user of the data in each file, a data producer can add, in the notification message:
+
+```
+"properties": {
+  ...
+  "filter": {
+    "steps": "0h-24h",
+    "parameters": "SP1"
+  }
+  ...
+}
+```
+
+This is in accordance with the specification of the WIS2 Notification Message (Chapter 7.1.17 of the standard) and can help users in only downloading the data they need. Those filtering mechanisms should be described in the documentation attached to the dataset and provided as part of the metadata record.
+The `filter` above is only an example and each data producer is invited to define and document this additional client side filtering, if useful for this dataset.
+
+As explained above, and reusing this example, adding `steps` and `parameters` as locally defined topic hierarchy level is forbidden.

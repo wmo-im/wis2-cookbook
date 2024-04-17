@@ -1,0 +1,28 @@
+name: Test WIS2 Cookbook
+
+on:
+  pull_request:
+    paths:
+      - '**.adoc'   
+      
+env:
+  FILE_BASENAME: wis2-cookbook-DRAFT
+
+jobs:
+  build-wis2-cookbook:
+    name: Test documentation build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -y \
+          && sudo apt-get install -y pandoc \
+          && sudo gem install asciidoctor asciidoctor-pdf
+      - name: checkout repository
+        uses: actions/checkout@v3
+      - name: build documentation
+        run: |
+          cd cookbook \
+          && asciidoctor --trace -o /tmp/wis2-cookbook/cookbook/${FILE_BASENAME}.html index.adoc \
+          && asciidoctor -a allow-uri-read --trace --backend docbook --out-file - index.adoc | pandoc --from docbook --to docx --output /tmp/wis2-cookbook/cookbook/${FILE_BASENAME}.docx \
+          && asciidoctor -a allow-uri-read --trace -r asciidoctor-pdf --trace -b pdf -o /tmp/wis2-cookbook/cookbook/${FILE_BASENAME}.pdf index.adoc

@@ -1,0 +1,5 @@
+.asciidoctor/
+cookbook/*.docx
+cookbook/*.html
+cookbook/*.pdf
+cookbook/images/**.bkp
