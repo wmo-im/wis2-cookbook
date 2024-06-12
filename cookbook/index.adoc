@@ -35,8 +35,8 @@ toc::[]
 
 include::sections/introduction.adoc[]
 
-include::sections/data-consumers/index.adoc[]
+include::sections/data-consumers.adoc[]
 
-include::sections/data-publishers/index.adoc[]
+include::sections/data-publishers.adoc[]
 
-include::sections/global-service-operators/*.adoc[]
+include::sections/global-service-operators.adoc[]
