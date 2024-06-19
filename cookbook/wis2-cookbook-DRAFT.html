@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.22">
+<meta name="generator" content="Asciidoctor 2.0.23">
 <meta name="copyright" content="Copyright © 2024 World Meteorological Organization (WMO)">
 <title>WIS2 Cookbook</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">World Meteorological Organization</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2024-04-17</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2024-06-19</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 2024-04-16</p></td>
@@ -484,7 +484,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#_recipes_for_data_consumers">2. Recipes for data consumers</a></li>
-<li><a href="#_recipes_for_data_publishers">3. Recipes for data publishers</a></li>
+<li><a href="#_recipes_for_data_publishers">3. Recipes for data publishers</a>
+<ul class="sectlevel2">
+<li><a href="#_validate_a_wis2_notification_message">3.1. Validate a WIS2 Notification Message</a></li>
+</ul>
+</li>
+<li><a href="#_recipes_for_global_service_operators">4. Recipes for Global Service operators</a></li>
 </ul>
 </div>
 <div style="page-break-after: always;"></div>
@@ -498,6 +503,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>In conjunction with the Manual on the WMO Information System volume II (WMO-No. 1060) (Manual on WIS volume II: WIS 2.0), the present Guide to the WMO Information System volume II (Guide to WIS volume II: WIS 2.0) is designed to ensure adequate uniformity and standardization in the data, information and communication practices, procedures and specifications employed by Members of the World Meteorological Organization (WMO) in the operation of the WMO Information System WIS 2.0 as it supports the mission of the Organization. The Manual on WIS contains standard and recommended practices, procedures and specifications. The Guide to WIS contains additional information concerning practices, procedures, and specifications that Members are invited to follow or implement in establishing and conducting their arrangements in compliance with the WMO Technical Regulations and in developing meteorological and hydrological services.</p>
 </div>
+<div class="paragraph">
+<p>This cookbook provides various code snippets, recipes and workflow examples in support of WIS2 requirements.  This cookbook is a working document; contributions are encouraged and can be added via <a href="https://github.com/wmo-im/wis2-cookbook">GitHub</a>.</p>
+</div>
 </div>
 </div>
 </div>
@@ -510,9 +518,50 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_recipes_for_data_publishers"><a class="anchor" href="#_recipes_for_data_publishers"></a>3. Recipes for data publishers</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_validate_a_wis2_notification_message"><a class="anchor" href="#_validate_a_wis2_notification_message"></a>3.1. Validate a WIS2 Notification Message</h3>
 <div class="paragraph">
-<p>Unresolved directive in index.adoc - include::sections/global-service-operators/*.adoc[]</p>
+<p>A <a href="https://wmo-im.github.io/wis2-notification-message">WIS2 Notification Message</a> provides a <a href="http://schemas.wmo.int/wnm">JSON Schema</a> which can be used by any progreamming language that supports JSON and JSON Schema validation.</p>
 </div>
+<div class="listingblock">
+<div class="title">Using Python and check-jsonschema</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"># install check-jsonschema Python Package from the Python Package Index (PyPI)
+pip3 install check-jsonschema
+
+# download WNM schema
+curl -O http://schemas.wmo.int/wnm/1.0.0/schemas/wis2-notification-message-bundled.json
+
+# run schema validation
+check-jsonschema --schemafile wis2-notification-message-bundled.json /path/to/my/wnm.json</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <a href="https://github.com/wmo-im/pywis-pubsub">pywis-pubsub</a> tool provides a test suite to validate a message against the WNM specification requirements, as well as a Python API for application integration.  Consult the pywis-pubsub README on GitHub for more information/examples.</p>
+</div>
+<div class="listingblock">
+<div class="title">Using pywis-pubsub</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash"># install pywis-pubsub
+pip3 install pywis-pubsub
+
+# sync WIS2 notification schema
+pywis-pubsub schema sync
+
+# validate WNM against abstract test suite (file on disk)
+pywis-pubsub ets validate /path/to/file.json
+
+# validate WNM against abstract test suite (URL)
+pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_recipes_for_global_service_operators"><a class="anchor" href="#_recipes_for_global_service_operators"></a>4. Recipes for Global Service operators</h2>
+<div class="sectionbody">
+
 </div>
 </div>
 </div>
@@ -527,7 +576,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-04-17 12:45:07 UTC
+Last updated 2024-06-19 10:57:43 UTC
 </div>
 </div>
 </body>
