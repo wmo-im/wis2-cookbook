@@ -1,7 +1,0 @@
-=== Generate a WCMP2 discovery metadata record
-
-TODO
-
-==== References and links
-
-TODO
