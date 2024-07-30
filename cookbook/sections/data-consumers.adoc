@@ -8,22 +8,22 @@ The GDC can be searched via the `/collections/wis2-discovery-metadata/items` end
 
 **NOTE**: examples below are not URL encoded for clarity / readability, but should be when interacting with the GDC.
 
-=== Spatial queries
+==== Spatial queries
 
 - search for metadata records of data in Canada: `bbox=-142,42.-52,84`
 
-=== Temporal queries
+==== Temporal queries
 
 - search for metadata records updated since 29 July 2024: `datetime=2024-07-29/..`
 - search for metadata records updated before 29 July 2024: `datetime=../2024-07-29`
 - search for metadata records updated on 29 July 2024: `datetime=2024-07-29`
 
-=== Equality queries
+==== Equality queries
 
 - search for metadata records whose title contains the terms hourly observations: `title=hourly observations`
 - search for metadata records whose title contains the terms hourly or observations: `title=hourly | observations`
 
-=== Freetext search
+==== Freetext search
 
 - search metadata records for temperature: `q=temperature`
 - search metadata records for GRIB2 data: `q=GRIB2`
@@ -31,12 +31,12 @@ The GDC can be searched via the `/collections/wis2-discovery-metadata/items` end
 - search for either GRIB data or data in Europe with subscriptions to the Météo-France Global Broker: `q=(\*GRIB* OR \*Europe*) AND \*globalbroker*`
 - search for data from Belize with MQTT subscription capabilitiesi: `q="cache/a/wis2/bz-nms"`
 
-=== Sorting
+==== Sorting
 
 - sort search results by title, ascending: `sortby=title`
 - sort search results by title, descending: `sortby=-title`
 
-=== Paging
+==== Paging
 
 - present search results 1-10: `limit=10`
 - present search results 11-20: `limit=10&offset=10`
