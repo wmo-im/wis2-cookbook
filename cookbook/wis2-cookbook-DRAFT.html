@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">World Meteorological Organization</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2024-06-19</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2024-07-30</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 2024-04-16</p></td>
@@ -483,7 +483,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_purpose">1.1. Purpose</a></li>
 </ul>
 </li>
-<li><a href="#_recipes_for_data_consumers">2. Recipes for data consumers</a></li>
+<li><a href="#_recipes_for_data_consumers">2. Recipes for data consumers</a>
+<ul class="sectlevel2">
+<li><a href="#_search_the_global_discovery_catalogue">2.1. Search the Global Discovery Catalogue</a></li>
+<li><a href="#_spatial_queries">2.2. Spatial queries</a></li>
+<li><a href="#_temporal_queries">2.3. Temporal queries</a></li>
+<li><a href="#_equality_queries">2.4. Equality queries</a></li>
+<li><a href="#_freetext_search">2.5. Freetext search</a></li>
+<li><a href="#_sorting">2.6. Sorting</a></li>
+<li><a href="#_paging">2.7. Paging</a></li>
+</ul>
+</li>
 <li><a href="#_recipes_for_data_publishers">3. Recipes for data publishers</a>
 <ul class="sectlevel2">
 <li><a href="#_validate_a_wis2_notification_message">3.1. Validate a WIS2 Notification Message</a></li>
@@ -512,7 +522,108 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_recipes_for_data_consumers"><a class="anchor" href="#_recipes_for_data_consumers"></a>2. Recipes for data consumers</h2>
 <div class="sectionbody">
-
+<div class="sect2">
+<h3 id="_search_the_global_discovery_catalogue"><a class="anchor" href="#_search_the_global_discovery_catalogue"></a>2.1. Search the Global Discovery Catalogue</h3>
+<div class="paragraph">
+<p>The <a href="https://wmo-im.github.io/wis2-guide/guide/wis2-guide-DRAFT.html#_2_4_4_global_discovery_catalogue">Global Discovery Catalogue (GDC)</a> allows for a wide range of query predicates to search for data in WIS2 as per the OGC API - Records - Part 1: Core specification.</p>
+</div>
+<div class="paragraph">
+<p>The GDC can be searched via the <code>/collections/wis2-discovery-metadata/items</code> endpoint.  This endpoint provides a number query parameters as described in the examples below.</p>
+</div>
+<div class="paragraph">
+<p><strong>NOTE</strong>: examples below are not URL encoded for clarity / readability, but should be when interacting with the GDC.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_spatial_queries"><a class="anchor" href="#_spatial_queries"></a>2.2. Spatial queries</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>search for metadata records of data in Canada: <code>bbox=-142,42.-52,84</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_temporal_queries"><a class="anchor" href="#_temporal_queries"></a>2.3. Temporal queries</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>search for metadata records updated since 29 July 2024: <code>datetime=2024-07-29/..</code></p>
+</li>
+<li>
+<p>search for metadata records updated before 29 July 2024: <code>datetime=../2024-07-29</code></p>
+</li>
+<li>
+<p>search for metadata records updated on 29 July 2024: <code>datetime=2024-07-29</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_equality_queries"><a class="anchor" href="#_equality_queries"></a>2.4. Equality queries</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>search for metadata records whose title contains the terms hourly observations: <code>title=hourly observations</code></p>
+</li>
+<li>
+<p>search for metadata records whose title contains the terms hourly or observations: <code>title=hourly | observations</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_freetext_search"><a class="anchor" href="#_freetext_search"></a>2.5. Freetext search</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>search metadata records for temperature: <code>q=temperature</code></p>
+</li>
+<li>
+<p>search metadata records for GRIB2 data: <code>q=GRIB2</code></p>
+</li>
+<li>
+<p>search metadata records for any GRIB data: <code>q=*GRIB*</code></p>
+</li>
+<li>
+<p>search for either GRIB data or data in Europe with subscriptions to the Météo-France Global Broker: <code>q=(*GRIB* OR *Europe*) AND *globalbroker*</code></p>
+</li>
+<li>
+<p>search for data from Belize with MQTT subscription capabilitiesi: <code>q="cache/a/wis2/bz-nms"</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sorting"><a class="anchor" href="#_sorting"></a>2.6. Sorting</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>sort search results by title, ascending: <code>sortby=title</code></p>
+</li>
+<li>
+<p>sort search results by title, descending: <code>sortby=-title</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_paging"><a class="anchor" href="#_paging"></a>2.7. Paging</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>present search results 1-10: <code>limit=10</code></p>
+</li>
+<li>
+<p>present search results 11-20: <code>limit=10&amp;offset=10</code></p>
+</li>
+<li>
+<p>limit to 3 search results: <code>limit=3</code></p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -576,7 +687,7 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-06-19 10:57:43 UTC
+Last updated 2024-07-30 15:08:27 UTC
 </div>
 </div>
 </body>
