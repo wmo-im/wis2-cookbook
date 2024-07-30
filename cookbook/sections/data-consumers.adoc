@@ -2,7 +2,7 @@
 
 === Search the Global Discovery Catalogue
 
-The [Global Discovery Catalogue (GDC)](https://wmo-im.github.io/wis2-guide/guide/wis2-guide-DRAFT.html#_2_4_4_global_discovery_catalogue) allows for a wide range of query predicates to search for data in WIS2 as per the OGC API - Records - Part 1: Core specification.
+The https://wmo-im.github.io/wis2-guide/guide/wis2-guide-DRAFT.html#_2_4_4_global_discovery_catalogue[Global Discovery Catalogue (GDC)] allows for a wide range of query predicates to search for data in WIS2 as per the OGC API - Records - Part 1: Core specification.
 
 The GDC can be searched via the `/collections/wis2-discovery-metadata/items` endpoint.  This endpoint provides a number query parameters as described in the examples below.
 
