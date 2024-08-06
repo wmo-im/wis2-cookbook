@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">World Meteorological Organization</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2024-07-30</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2024-08-06</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 2024-04-16</p></td>
@@ -500,6 +500,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_recipes_for_data_publishers">3. Recipes for data publishers</a>
 <ul class="sectlevel2">
 <li><a href="#_validate_a_wis2_notification_message">3.1. Validate a WIS2 Notification Message</a></li>
+<li><a href="#_publish_a_wis2_notification_message_with_access_control">3.2. Publish a WIS2 Notification Message with access control</a></li>
 </ul>
 </li>
 <li><a href="#_recipes_for_global_service_operators">4. Recipes for Global Service operators</a></li>
@@ -635,7 +636,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_validate_a_wis2_notification_message"><a class="anchor" href="#_validate_a_wis2_notification_message"></a>3.1. Validate a WIS2 Notification Message</h3>
 <div class="paragraph">
-<p>A <a href="https://wmo-im.github.io/wis2-notification-message">WIS2 Notification Message</a> provides a <a href="http://schemas.wmo.int/wnm">JSON Schema</a> which can be used by any progreamming language that supports JSON and JSON Schema validation.</p>
+<p>A <a href="https://wmo-im.github.io/wis2-notification-message">WIS2 Notification Message</a> provides a <a href="http://schemas.wmo.int/wnm">JSON Schema</a> which can be used by any programming language that supports JSON and JSON Schema validation.</p>
 </div>
 <div class="listingblock">
 <div class="title">Using Python and check-jsonschema</div>
@@ -670,6 +671,65 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_publish_a_wis2_notification_message_with_access_control"><a class="anchor" href="#_publish_a_wis2_notification_message_with_access_control"></a>3.2. Publish a WIS2 Notification Message with access control</h3>
+<div class="paragraph">
+<p>Recommended data in WIS2 may be open or access controlled.  For data publication with access control implications, WNM provides a <code>security</code> object as part a link object.  The <code>security</code> object is defined using <a href="https://swagger.io/specification/#security-scheme-object">OpenAPI Security Scheme definitions</a>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Access control using HTTP Basic authentication</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "href": "https://example.org/my/protected/data/nwp/12/003/20240805120000-air-temp-500.grib2",
+  "rel": "canonical",
+  "type": "application/grib2",
+  "security": {
+    "default": {
+      "type": "http",
+      "scheme": "basic",
+      "description": "Please contact us for access information"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Access control using an API key</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "rel": "canonical",
+      "type": "application/geo+json",
+      "href": "https://example.org/my/protected/data/nwp/12/003/20240805120000-air-temp-500.grib2",
+      "security": {
+        "default": {
+          "type": "apiKey",
+          "name": "api-key",
+          "in": "query",
+          "description": "Please see https://example.org/contact-us for more information"
+        }
+      }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the child propery under <code>security</code> (<code>default</code> in the examples above) can be any text or label.  We use <code>default</code> here as a convention</p>
+</li>
+<li>
+<p>the <code>security.default.name</code> is the name of the API key parameter as defined by your API service</p>
+</li>
+<li>
+<p>only properties defined in the OpenAPI Security Scheme defintion are allowed.  Any additional properties will invalidate the WNM</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Of course, always ensure your WNM is valid (see <a href="#_validate_a_wis2_notification_message">Validate a WIS2 Notification Message</a> for more information).</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -690,7 +750,7 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-07-30 16:48:16 UTC
+Last updated 2024-08-06 14:58:16 UTC
 </div>
 </div>
 </body>
