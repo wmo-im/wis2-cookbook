@@ -2,7 +2,7 @@
 
 === Validate a WIS2 Notification Message
 
-A https://wmo-im.github.io/wis2-notification-message[WIS2 Notification Message] provides a http://schemas.wmo.int/wnm[JSON Schema] which can be used by any progreamming language that supports JSON and JSON Schema validation.
+A https://wmo-im.github.io/wis2-notification-message[WIS2 Notification Message] provides a http://schemas.wmo.int/wnm[JSON Schema] which can be used by any programming language that supports JSON and JSON Schema validation.
 
 .Using Python and check-jsonschema
 [source,bash]
@@ -34,3 +34,49 @@ pywis-pubsub ets validate /path/to/file.json
 # validate WNM against abstract test suite (URL)
 pywis-pubsub ets validate https://example.org/path/to/file.json
 ----
+
+=== Publish a WIS2 Notification Message with access control
+
+Recommended data in WIS2 may be open or access controlled.  For data publication with access control implications, WNM provides a `security` object as part a link object.  The `security` object is defined using https://swagger.io/specification/#security-scheme-object[OpenAPI Security Scheme definitions].
+
+.Access control using HTTP Basic authentication
+[source,json]
+----
+{
+  "href": "https://example.org/my/protected/data/20240806114226Z-air-temp.grib2",
+  "rel": "canonical",
+  "type": "application/grib2",
+  "security": {
+    "default": {
+      "type": "http",
+      "scheme": "basic",
+      "description": "Please contact us for access information"
+    }
+  }
+}
+----
+
+.Access control using an API key
+[source,json]
+----
+{
+  "rel": "canonical",
+      "type": "application/geo+json",
+      "href": "https://example.org/my/protected/data/20240806114226Z-air-temp.grib2",
+      "security": {
+        "default": {
+          "type": "apiKey",
+          "name": "api-key",
+          "in": "query",
+          "description": "Please see https://example.org/contact-us for more information"
+        }
+      }
+----
+
+Note:
+
+* the child propery under `security` (`default` in the examples above) can be any text or label.  We use `default` here as a convention
+* the `security.default.name` is the name of the API key parameter as defined by your API service
+* only properties defined in the OpenAPI Security Scheme defintion are allowed.  Any additional properties will invalidate the WNM
+
+Of course, always ensure your WNM is valid (see <<Validate a WIS2 Notification Message>> for more information).
