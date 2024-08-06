@@ -43,7 +43,7 @@ Recommended data in WIS2 may be open or access controlled.  For data publication
 [source,json]
 ----
 {
-  "href": "https://example.org/my/protected/data/20240806114226Z-air-temp.grib2",
+  "href": "https://example.org/my/protected/data/nwp/12/003/20240805120000-air-temp-500.grib2",
   "rel": "canonical",
   "type": "application/grib2",
   "security": {
@@ -62,7 +62,7 @@ Recommended data in WIS2 may be open or access controlled.  For data publication
 {
   "rel": "canonical",
       "type": "application/geo+json",
-      "href": "https://example.org/my/protected/data/20240806114226Z-air-temp.grib2",
+      "href": "https://example.org/my/protected/data/nwp/12/003/20240805120000-air-temp-500.grib2",
       "security": {
         "default": {
           "type": "apiKey",
