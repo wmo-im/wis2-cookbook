@@ -80,3 +80,43 @@ Note:
 * only properties defined in the OpenAPI Security Scheme defintion are allowed.  Any additional properties will invalidate the WNM
 
 Of course, always ensure your WNM is valid (see <<Validate a WIS2 Notification Message>> for more information).
+
+=== Validate a WMO Core Metadata Profile record
+
+The [pywcmp](https://github.com/wmo-im/pywcmp) tool provides a test suite to validate a message against the WCMP2 specification requirements, as well as a Python API for application integration.  Consult the pywcmp README on GitHub for more information/examples.
+
+.Using pywcmp
+[source,bash]
+----
+# install pywcmp
+pip3 install pywcmp
+
+# sync WCMP2 schemas and codelists
+pywis-pubsub bundle sync
+
+# validate WCMP2 against abstract test suite (file on disk)
+pywcmp ets validate /path/to/file.json
+
+# validate WCMP2 against abstract test suite (URL)
+pywcmp ets validate https://example.org/path/to/file.json
+----
+
+A WCMP2 record can also be validated using pywcmp "as a service" using the Canadian WIS2 Global Discovery Catalogue, which provides an online validator:
+
+- Navigate to https://wis2-gdc.weather.gc.ca/openapi?f=html
+- Navigate to section *pywcmp-wis2-wcmp2-ets*, endpoint `/processes/pywcmp-wis2-wcmp2-ets/execution` (POST)
+- Click "Try it out"
+- In the section "Mandatory execute request JSON", paste the WCMP2 JSON inside the `record` object
+
+.WIS2 GDC online validator, request
+image::images/data-publishers-wcmp2-validate-request.png[WIS2 GDC online validator, request]
+
+- Click "Execute"
+
+.WIS2 GDC online validator, response
+image::images/data-publishers-wcmp2-validate-response.png[WIS2 GDC online validator, response]
+
+A response will be provided with validation results.
+
+
+
