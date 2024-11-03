@@ -43,9 +43,9 @@ Recommended data in WIS2 may be open or access controlled.  For data publication
 [source,json]
 ----
 {
-  "href": "https://example.org/my/protected/data/nwp/12/003/20240805120000-air-temp-500.grib2",
   "rel": "canonical",
   "type": "application/grib2",
+  "href": "https://example.org/my/protected/data/nwp/12/003/20240805120000-air-temp-500.grib2",
   "security": {
     "default": {
       "type": "http",
@@ -61,16 +61,17 @@ Recommended data in WIS2 may be open or access controlled.  For data publication
 ----
 {
   "rel": "canonical",
-      "type": "application/geo+json",
-      "href": "https://example.org/my/protected/data/nwp/12/003/20240805120000-air-temp-500.grib2",
-      "security": {
-        "default": {
-          "type": "apiKey",
-          "name": "api-key",
-          "in": "query",
-          "description": "Please see https://example.org/contact-us for more information"
-        }
-      }
+  "type": "application/geo+json",
+  "href": "https://example.org/my/protected/data/nwp/12/003/20240805120000-air-temp-500.grib2",
+  "security": {
+    "default": {
+      "type": "apiKey",
+      "name": "api-key",
+      "in": "query",
+      "description": "Please see https://example.org/contact-us for more information"
+    }
+  }
+}
 ----
 
 Note:
