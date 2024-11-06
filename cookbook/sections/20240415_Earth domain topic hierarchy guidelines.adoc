@@ -111,7 +111,7 @@ For example, and for very large datasets, such as NWP output, for each run of th
 ```
 "properties": {
   ...
-  "steps": "0h-24h",
+  "steps": "00-06",
   "parameters": "SP1",
   ...
 }
