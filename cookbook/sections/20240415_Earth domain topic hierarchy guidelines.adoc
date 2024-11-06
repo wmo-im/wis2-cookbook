@@ -111,15 +111,13 @@ For example, and for very large datasets, such as NWP output, for each run of th
 ```
 "properties": {
   ...
-  "filter": {
-    "steps": "0h-24h",
-    "parameters": "SP1"
-  }
+  "steps": "0h-24h",
+  "parameters": "SP1",
   ...
 }
 ```
 
 This is in accordance with the specification of the WIS2 Notification Message (Chapter 7.1.17 of the standard) and can help users in only downloading the data they need. Those filtering mechanisms should be described in the documentation attached to the dataset and provided as part of the metadata record.
-The `filter` above is only an example and each data producer is invited to define and document this additional client side filtering, if useful for this dataset.
+The `steps` and `parameters`above are only examplee and each data producer is invited to define and document in the WCMP2 record for this dataset this additional client side filtering, if useful for this data.
 
 As explained above, and reusing this example, adding `steps` and `parameters` as locally defined topic hierarchy level is forbidden.
