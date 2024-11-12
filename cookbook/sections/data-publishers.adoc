@@ -140,7 +140,7 @@ A typical MQTT link in a WCMP2 document is defined as follows:
   "type" : "application/geo+json",
   "title": "WIS2 notification service",
   "href" : "mqtts://example.org",
-  "channel": "cache/a/wis2/ca-eccc-msc/data/core/weather/surface-based-observations"
+  "channel": "cache/a/wis2/ca-eccc-msc/data/core/weather/surface-based-observations/synop"
 }
 ----
 
@@ -152,7 +152,7 @@ data consumer is only interested in a certain subset of the data granules being 
 - surface weather observations from a certain station, or
 - numerical weather prediction forecast data for a certain timestep or weather parameter
 
-To implement this behaviour, add additional additional properties to both WCMP2 and WNM as follows:
+To implement this behaviour, add additional properties to both WCMP2 and WNM as follows:
 
 ==== Example: Surface weather observations
 
@@ -164,7 +164,7 @@ To implement this behaviour, add additional additional properties to both WCMP2 
   "type" : "application/geo+json",
   "title": "Real-time notifications",
   "href" : "mqtts://globalbroker.meteo.fr:8883",
-  "channel": "cache/a/wis2/ca-eccc-msc/data/core/weather/surface-based-observations",
+  "channel": "cache/a/wis2/ca-eccc-msc/data/core/weather/surface-based-observations/synop",
   "properties": {
     "wigos_station_identifier": {
        "type": "string",
