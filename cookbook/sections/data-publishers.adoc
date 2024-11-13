@@ -231,7 +231,7 @@ When implemented by a data producer, a data consumer can:
 
 A data producer would extend WCMP2 and WNM as follows:
 
-- WCMP2: add a link `properties` object for MQTT links, where each key of the link `properties` object is a https://json-schema.org/understanding-json-schema/reference/object#properties[JSON Schema property definition].
+- WCMP2: add a link `properties` object for MQTT links, where each key of the link `properties` object is a https://json-schema.org/understanding-json-schema/reference/object#properties[JSON Schema property definition]
 - WNM: add additional properties (key: value pairs) in the `properties` object as desired
 
 When implemented by a data producer, a data consumer can:
