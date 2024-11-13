@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">World Meteorological Organization</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2024-11-06</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2024-11-13</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 2024-04-16</p></td>
@@ -502,6 +502,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_validate_a_wis2_notification_message">3.1. Validate a WIS2 Notification Message</a></li>
 <li><a href="#_publish_a_wis2_notification_message_with_access_control">3.2. Publish a WIS2 Notification Message with access control</a></li>
 <li><a href="#_validate_a_wmo_core_metadata_profile_record">3.3. Validate a WMO Core Metadata Profile record</a></li>
+<li><a href="#_advertise_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm">3.4. Advertise client side filters for data subscriptions in WCMP2 and WNM</a>
+<ul class="sectlevel3">
+<li><a href="#_example_surface_weather_observations">3.4.1. Example: Surface weather observations</a></li>
+<li><a href="#_example_numerical_weather_prediction_based_forecast">3.4.2. Example: Numerical weather prediction based forecast</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_recipes_for_global_service_operators">4. Recipes for Global Service operators</a></li>
@@ -795,6 +801,239 @@ pywcmp ets validate https://example.org/path/to/file.json</code></pre>
 <p>A response will be provided with validation results.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_advertise_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm"><a class="anchor" href="#_advertise_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm"></a>3.4. Advertise client side filters for data subscriptions in WCMP2 and WNM</h3>
+<div class="paragraph">
+<p>A key concept of a WCMP2 record is "actionable links"; this means being able to access a dataset or data granule
+without any further interactions.  For real-time data, a WCMP2 record provides linkages to the WIS2 Global Broker
+via the MQTT protocol.  At its core, MQTT has two key components:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>topic: the topic to subscribe to</p>
+</li>
+<li>
+<p>message payload: the message provided as part of a notification to a given topic</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>WIS2 defines the WIS2 Topic Hierarchy (WTH) and WIS2 Notification Message (WNM) standards which provide a standards-based
+GeoJSON payload/message.</p>
+</div>
+<div class="paragraph">
+<p>A typical MQTT link in a WCMP2 document is defined as follows:</p>
+</div>
+<div class="listingblock">
+<div class="title">Typical WCMP2 MQTT link</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "rel"  : "items",
+  "type" : "application/geo+json",
+  "title": "WIS2 notification service",
+  "href" : "mqtts://example.org",
+  "channel": "cache/a/wis2/ca-eccc-msc/data/core/weather/surface-based-observations/synop"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Given WCMP2, WTH and WNM, a user can subscribe to topics related to data of interest for download and access.</p>
+</div>
+<div class="paragraph">
+<p>In some cases, a dataset may be organized in a manner which requires additional further "filtering" such that a
+data consumer is only interested in a certain subset of the data granules being advertised by a given WNM.  Some examples include (but are not limited to), where a data consumer may be only be interested in:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>surface weather observations from a certain station, or</p>
+</li>
+<li>
+<p>numerical weather prediction forecast data for a certain timestep or weather parameter</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To implement this behaviour, add additional properties to both WCMP2 and WNM as follows:</p>
+</div>
+<div class="sect3">
+<h4 id="_example_surface_weather_observations"><a class="anchor" href="#_example_surface_weather_observations"></a>3.4.1. Example: Surface weather observations</h4>
+<div class="listingblock">
+<div class="title">Surface weather observations: WCMP2 MQTT link with additional properties</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "rel"  : "items",
+  "type" : "application/geo+json",
+  "title": "Real-time notifications",
+  "href" : "mqtts://globalbroker.meteo.fr:8883",
+  "channel": "cache/a/wis2/ca-eccc-msc/data/core/weather/surface-based-observations/synop",
+  "properties": {
+    "wigos_station_identifier": {
+       "type": "string",
+       "title": "WIGOS station identifier"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Surface weather observations: WNM additional properties</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "properties": {
+    "wigos_station_identifier": "0-20000-0-71628"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When implemented by a data producer, a data consumer can:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>subscribe to real-time notifications to the given topic</p>
+</li>
+<li>
+<p>perform client side filtering by against all incoming WNMs with <code>properties.wigos_station_identifier = "0-20000-0-71628"</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_example_numerical_weather_prediction_based_forecast"><a class="anchor" href="#_example_numerical_weather_prediction_based_forecast"></a>3.4.2. Example: Numerical weather prediction based forecast</h4>
+<div class="listingblock">
+<div class="title">Numerical weather prediction: WCMP2 MQTT link with additional properties</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "rel"  : "items",
+  "type" : "application/geo+json",
+  "title": "Real-time notifications",
+  "href" : "mqtts://globalbroker.meteo.fr:8883",
+  "channel": "origin/a/wis2/ca-eccc-msc/data/core/weather/prediction/forecast/medium-range/deterministic/global",
+  "properties": {
+    "model_run": {
+       "type": "string",
+       "title": "Model run",
+       "enum": [
+           "00",
+           "12"
+        ],
+        "example": "00"
+    },
+    "forecast_hour": {
+       "type": "string",
+       "title": "Forecast hour",
+        "example": "004"
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Numerical weather prediction: WNM additional properties</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "properties": {
+    "model_run": "00",
+    "forecast_hour": "004"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A data producer would extend WCMP2 and WNM as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>WCMP2: add a link <code>properties</code> object for MQTT links, where each key of the link <code>properties</code> object is a <a href="https://json-schema.org/understanding-json-schema/reference/object#properties">JSON Schema property definition</a>.</p>
+</li>
+<li>
+<p>WNM: add additional properties (key: value pairs) in the <code>properties</code> object as desired</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When implemented by a data producer, a data consumer can:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>subscribe to real-time notifications to the given topic</p>
+</li>
+<li>
+<p>perform client side filtering against all incoming WNMs with <code>properties.model_run = "00" and properties.forecast_hour = "004"</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A sample Python script can be found below.  The script connects to the Météo-France Global Broker, subscribed to weather notifications
+from Environment and Climate Change Canada, Meteorological Service of Canada.  The script then performs client side filtering by
+evaluating (for each WNM) the <code>properties.wigos_station_identifier</code> value to match a particular station (<code>0-20000-0-71628</code>).</p>
+</div>
+<div class="listingblock">
+<div class="title">Sample Python script to perform client side filtering</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">import json
+from paho.mqtt import client as mqtt_client
+
+broker = 'globalbroker.meteo.fr'
+port = 8883
+username = 'everyone'
+password = 'everyone'
+topic = 'cache/a/wis2/ca-eccc-msc/data/core/weather/surface-based-observations/synop'
+
+wsi_to_filter = '0-20000-0-71628'
+
+
+def connect_mqtt() -&gt; mqtt_client:
+    def on_connect(client, userdata, flags, reason_code, properties):
+        if reason_code == 0:
+            print(f'Connected to {broker}')
+        else:
+            print(f'Failed to connect: {reason_code}')
+
+    def on_log(client, userdata, level, message):
+        print("LOG:", message)
+
+    client = mqtt_client.Client(mqtt_client.CallbackAPIVersion.VERSION2,
+                                client_id='s123')
+    client.username_pw_set(username, password)
+    client.on_connect = on_connect
+    client.on_log = on_log
+    client.tls_set(tls_version=2)
+    client.connect(broker, port)
+
+    return client
+
+
+def subscribe(client: mqtt_client):
+    def on_message(client, userdata, message):
+        message_dict = json.loads(message.payload.decode())
+
+        print('Performing client side filtering')
+        wsi = message_dict['properties'].get('wigos_station_identifier')
+
+        if wsi != wsi_to_filter:
+            print(f'Topic: {message.topic}')
+            print(f'Payload: {message.payload.decode()}')
+
+    client.subscribe(topic)
+    client.on_message = on_message
+
+
+def run():
+    client = connect_mqtt()
+    subscribe(client)
+    client.loop_forever()
+
+
+if __name__ == '__main__':
+    run()</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -815,7 +1054,7 @@ pywcmp ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-11-06 07:53:27 UTC
+Last updated 2024-11-13 06:57:18 UTC
 </div>
 </div>
 </body>
