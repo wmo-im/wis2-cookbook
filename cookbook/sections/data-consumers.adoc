@@ -10,7 +10,7 @@ The GDC can be searched via the `/collections/wis2-discovery-metadata/items` end
 
 ==== Spatial queries
 
-- search for metadata records of data in Canada: `bbox=-142,42.-52,84`
+- search for metadata records of data in Canada: `bbox=-142,42,-52,84`
 
 ==== Temporal queries
 
