@@ -12,6 +12,13 @@ The GDC can be searched via the `/collections/wis2-discovery-metadata/items` end
 
 - search for metadata records of data in Canada: `bbox=-142,42,-52,84`
 
+Note that the format of `bbox` is comma-separated values in the following order:
+
+- minimum longitude
+- minimum latitude
+- maximum longitude
+- maximum latitude
+
 ==== Temporal queries
 
 - search for metadata records updated since 29 July 2024: `datetime=2024-07-29/..`
@@ -28,8 +35,9 @@ The GDC can be searched via the `/collections/wis2-discovery-metadata/items` end
 - search metadata records for temperature: `q=temperature`
 - search metadata records for GRIB2 data: `q=GRIB2`
 - search metadata records for any GRIB data: `q=\*GRIB*`
+- search metadata records for any GRIB data in Germany: `q=\*GRIB* AND germany`
 - search for either GRIB data or data in Europe with subscriptions to the Météo-France Global Broker: `q=(\*GRIB* OR \*Europe*) AND \*globalbroker*`
-- search for data from Belize with MQTT subscription capabilitiesi: `q="cache/a/wis2/bz-nms"`
+- search for data from Belize with MQTT subscription capabilities: `q="cache/a/wis2/bz-nms"`
 
 ==== Sorting
 
