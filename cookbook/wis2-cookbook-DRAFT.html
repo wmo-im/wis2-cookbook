@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">World Meteorological Organization</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2024-11-26</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2024-12-21</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 2024-04-16</p></td>
@@ -553,6 +553,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Note that the format of <code>bbox</code> is comma-separated values in the following order:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>minimum longitude</p>
+</li>
+<li>
+<p>minimum latitude</p>
+</li>
+<li>
+<p>maximum longitude</p>
+</li>
+<li>
+<p>maximum latitude</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect3">
 <h4 id="_temporal_queries"><a class="anchor" href="#_temporal_queries"></a>2.1.2. Temporal queries</h4>
@@ -597,10 +616,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>search metadata records for any GRIB data: <code>q=*GRIB*</code></p>
 </li>
 <li>
+<p>search metadata records for any GRIB data in Germany: <code>q=*GRIB* AND germany</code></p>
+</li>
+<li>
 <p>search for either GRIB data or data in Europe with subscriptions to the Météo-France Global Broker: <code>q=(*GRIB* OR *Europe*) AND *globalbroker*</code></p>
 </li>
 <li>
-<p>search for data from Belize with MQTT subscription capabilitiesi: <code>q="cache/a/wis2/bz-nms"</code></p>
+<p>search for data from Belize with MQTT subscription capabilities: <code>q="cache/a/wis2/bz-nms"</code></p>
 </li>
 </ul>
 </div>
@@ -1054,7 +1076,7 @@ if __name__ == '__main__':
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-11-26 10:50:19 UTC
+Last updated 2024-12-21 12:33:27 UTC
 </div>
 </div>
 </body>
