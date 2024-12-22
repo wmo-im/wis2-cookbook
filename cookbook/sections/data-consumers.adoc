@@ -29,6 +29,7 @@ Note that the format of `bbox` is comma-separated values in the following order:
 
 - search for metadata records whose title contains the terms hourly observations: `title=hourly observations`
 - search for metadata records whose title contains the terms hourly or observations: `title=hourly | observations`
+- search for metadata records for a specific contact organization `contacts.organization=Direction Generale de la Météorologie`
 
 ==== Freetext search
 
