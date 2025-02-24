@@ -4,3 +4,11 @@
 In conjunction with the Manual on the WMO Information System volume II (WMO-No. 1060) (Manual on WIS volume II: WIS 2.0), the present Guide to the WMO Information System volume II (Guide to WIS volume II: WIS 2.0) is designed to ensure adequate uniformity and standardization in the data, information and communication practices, procedures and specifications employed by Members of the World Meteorological Organization (WMO) in the operation of the WMO Information System WIS 2.0 as it supports the mission of the Organization. The Manual on WIS contains standard and recommended practices, procedures and specifications. The Guide to WIS contains additional information concerning practices, procedures, and specifications that Members are invited to follow or implement in establishing and conducting their arrangements in compliance with the WMO Technical Regulations and in developing meteorological and hydrological services.
 
 This cookbook provides various code snippets, recipes and workflow examples in support of WIS2 requirements.  This cookbook is a working document; contributions are encouraged and can be added via https://github.com/wmo-im/wis2-cookbook[GitHub].
+
+=== Key documents
+
+WIS2 Manuals and Guides can be found at the following locations:
+
+* https://library.wmo.int/idurl/4/68731[Manual on the WMO Information System]
+* https://library.wmo.int/idurl/4/69130[Guide to the WMO Information System Volume II - WMO Information System 2.0]
+* https://library.wmo.int/idurl/4/69050[Provisions for the Transition from the WMO Information System (WIS) 1.0 and Global Telecommunication System to WIS 2.0]
