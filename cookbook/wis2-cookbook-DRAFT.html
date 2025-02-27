@@ -498,6 +498,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_paging">2.1.6. Paging</a></li>
 </ul>
 </li>
+<li><a href="#_finding_data_subscription_services_from_the_global_discovery_catalogue">2.2. Finding data subscription services from the Global Discovery Catalogue</a></li>
 </ul>
 </li>
 <li><a href="#_recipes_for_data_publishers">3. Recipes for data publishers</a>
@@ -539,7 +540,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_search_the_global_discovery_catalogue"><a class="anchor" href="#_search_the_global_discovery_catalogue"></a>2.1. Search the Global Discovery Catalogue</h3>
 <div class="paragraph">
-<p>The <a href="https://wmo-im.github.io/wis2-guide/guide/wis2-guide-DRAFT.html#_2_4_4_global_discovery_catalogue">Global Discovery Catalogue (GDC)</a> allows for a wide range of query predicates to search for data in WIS2 as per the OGC API - Records - Part 1: Core specification.</p>
+<p>The <a href="https://wmo-im.github.io/wis2-guide/guide/wis2-guide-APPROVED.html#_2_4_4_global_discovery_catalogue">Global Discovery Catalogue (GDC)</a> allows for a wide range of query predicates to search for data in WIS2 as per the OGC API - Records - Part 1: Core specification.</p>
 </div>
 <div class="paragraph">
 <p>The GDC can be searched via the <code>/collections/wis2-discovery-metadata/items</code> endpoint.  This endpoint provides a number query parameters as described in the examples below.</p>
@@ -661,6 +662,65 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_finding_data_subscription_services_from_the_global_discovery_catalogue"><a class="anchor" href="#_finding_data_subscription_services_from_the_global_discovery_catalogue"></a>2.2. Finding data subscription services from the Global Discovery Catalogue</h3>
+<div class="paragraph">
+<p>The <a href="https://wmo-im.github.io/wis2-guide/guide/wis2-guide-DRAFT.html#_2_4_4_global_discovery_catalogue">Global Discovery Catalogue (GDC)</a> contains both real-time and non real-time data.  The <a href="https://wmo-im.github.io/wcmp2/standard/wcmp2-STABLE.html">WMO Core Metadata Profile (WCMP2)</a> allows for description of real-time data via its <a href="https://wmo-im.github.io/wcmp2/standard/wcmp2-STABLE.html#_1_19_links_and_distribution_information">distribution information</a>, which data publishers use to describe and define connectivity and subscription information for a given dataset.</p>
+</div>
+<div class="paragraph">
+<p>A typical WCMP2 distribution link for data subscriptions can be found below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+    "rel": "items",
+    "href": "mqtts://everyone:everyone@globalbroker.meteo.fr:8883",
+    "channel": "origin/a/wis2/ca-eccc-msc/data/core/hydrology",
+    "type": "application/geo+json",
+    "title": "Data notifications"
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>channel</code> property represents WIS2 topic which can be used to subscribe to the <code>href</code> property (i.e. the MQTT address) of the Global Broker (GB).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Programatically, a GDC client can query the catalogue and filter the results for real-time subscriptions in the following manner:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">import requests
+
+response = requests.get('https://wis2-gdc.weather.gc.ca/collections/wis2-discovery-metadata/items').json()
+
+
+def is_wis2_subscription_link(link) -&gt; bool:
+    if (link['href'].startswith('mqtt') and
+            link.get('channel', '').startswith(('origin/a/wis2', 'cache/a/wis2'))):
+        return True
+
+
+for feature in response['features']:
+    for link in feature['links']:
+        if is_wis2_subscription_link(link):
+            print('WIS2 subscription link')</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Using the <code>href</code> and <code>channel</code> properties of a matching link object, a client can connect and subscribe to data notifications for a given dataset.</p>
 </div>
 </div>
 </div>
@@ -1082,7 +1142,7 @@ if __name__ == '__main__':
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-02-27 12:33:12 UTC
+Last updated 2025-02-27 19:03:18 UTC
 </div>
 </div>
 </body>
