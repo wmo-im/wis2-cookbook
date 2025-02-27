@@ -93,7 +93,7 @@ The [pywcmp](https://github.com/wmo-im/pywcmp) tool provides a test suite to val
 pip3 install pywcmp
 
 # sync WCMP2 schemas and codelists
-pywis-pubsub bundle sync
+pywcmp bundle sync
 
 # validate WCMP2 against abstract test suite (file on disk)
 pywcmp ets validate /path/to/file.json
