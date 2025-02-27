@@ -40,4 +40,6 @@ include::sections/data-consumers.adoc[]
 
 include::sections/data-publishers.adoc[]
 
+include::sections/earth-system-discipline-domain-experts.adoc[]
+
 include::sections/global-service-operators.adoc[]
