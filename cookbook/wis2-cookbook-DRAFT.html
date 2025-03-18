@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">World Meteorological Organization</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2025-02-27</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2025-03-18</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 2024-04-16</p></td>
@@ -736,7 +736,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="paragraph">
-<p>Programatically, a GDC client can query the catalogue and filter the results for real-time subscriptions in the following manner:</p>
+<p>Programmatically, a GDC client can query the catalogue and filter the results for real-time subscriptions in the following manner:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -850,13 +850,13 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>the child propery under <code>security</code> (<code>default</code> in the examples above) can be any text or label.  We use <code>default</code> here as a convention</p>
+<p>the child property under <code>security</code> (<code>default</code> in the examples above) can be any text or label.  We use <code>default</code> here as a convention</p>
 </li>
 <li>
 <p>the <code>security.default.name</code> is the name of the API key parameter as defined by your API service</p>
 </li>
 <li>
-<p>only properties defined in the OpenAPI Security Scheme defintion are allowed.  Any additional properties will invalidate the WNM</p>
+<p>only properties defined in the OpenAPI Security Scheme definition are allowed.  Any additional properties will invalidate the WNM</p>
 </li>
 </ul>
 </div>
@@ -1173,11 +1173,19 @@ if __name__ == '__main__':
 <div class="paragraph">
 <p>Core topics are defined in the first 7 levels and address all Earth system disciplines in a consistent manner.</p>
 </div>
-<div class="paragraph">
+<div class="ulist">
 <div class="title">Core topic examples:</div>
-<p><strong>cache/a/wis2/ma-marocmeteo/core/data/weather</strong>
-<strong>origin/a/wis2/de-dwd/core/data/ocean</strong>
-*cache/a/wis2/jp-jma/core/data/weather</p>
+<ul>
+<li>
+<p><code>cache/a/wis2/ma-marocmeteo/core/data/weather</code></p>
+</li>
+<li>
+<p><code>origin/a/wis2/de-dwd/core/data/ocean</code></p>
+</li>
+<li>
+<p><code>cache/a/wis2/jp-jma/core/data/weather</code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>The Earth system disciplines <a href="https://codes.wmo.int/wis/topic-hierarchy/_earth-system-discipline">defined</a> by WTH are as follows:</p>
@@ -1208,7 +1216,7 @@ if __name__ == '__main__':
 </ul>
 </div>
 <div class="paragraph">
-<p>Topics within earch Earth system discipline are then defined by domain experts, reviewed, approved, and published by WMO.</p>
+<p>Topics within each Earth system discipline are then defined by domain experts, reviewed, approved, and published by WMO.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1231,7 +1239,7 @@ if __name__ == '__main__':
 <p>users will receive a notification when a new synop is made available from <strong>any</strong> centre-id publishing message on WIS2.  The <code>+</code> character is a single level wildcard for MQTT subscription.</p>
 </div>
 <div class="paragraph">
-<p>A usder can also choose to subscribe to:</p>
+<p>A user can also choose to subscribe to:</p>
 </div>
 <div class="paragraph">
 <p><code>cache/a/wis2/de-dwd/core/data/weather/#</code></p>
@@ -1346,13 +1354,13 @@ if __name__ == '__main__':
 <p>Each level in the WIS2 Topic Hierarchy should be seen as a "logical" group (as the Earth system disciplines <code>weather</code>, <code>ocean</code>&#8230;&#8203; or like <code>synop</code> for <code>surface-based-observations</code>).</p>
 </div>
 <div class="paragraph">
-<p>Then, and considering that wildcard subscription (using <code>+`and `#</code> as described above), are "expensive" to manage for the brokers.</p>
+<p>Then, and considering that wildcard subscription (using <code>+</code> and <code>#</code> as described above), are "expensive" to manage for the brokers.</p>
 </div>
 <div class="paragraph">
 <p>For example, a topic hierarchy resulting in users subscribing to:</p>
 </div>
 <div class="paragraph">
-<p><code>cache/a/wis2//core/data/ocean//some//thing//else/#</code></p>
+<p><code>cache/a/wis2/+/core/data/ocean/+/some/+/thing/+/else/#</code></p>
 </div>
 <div class="paragraph">
 <p>should be avoided. A subscription to the following topic:</p>
@@ -1370,7 +1378,7 @@ if __name__ == '__main__':
 <p>If most users end up subscribing to:</p>
 </div>
 <div class="paragraph">
-<p><code>cache/a/wis2//core/data/ocean//thing/+/#</code></p>
+<p><code>cache/a/wis2/+/core/data/ocean/+/thing/+/#</code></p>
 </div>
 <div class="paragraph">
 <p>then, the Topic Hierarchy could be reconsidered, so that the above subscription can be replaced by:</p>
@@ -1385,7 +1393,7 @@ if __name__ == '__main__':
 <p><strong>Facilitate client side filtering</strong></p>
 </div>
 <div class="paragraph">
-<p>Notification messages are small pieces of information.  MQTT[S] broker and clients are able to handle a very large number of messages.  In that sense, receiving, potentially, too many messages is not a problem. However, downloading data, depending on the size of the data might be slower and less efficient.  If, for a particular dataset, the geometry information available in the notification message is not sufficient to allow client-side filtering before download, it is suggested to provide additional information in the <code>properties</code> object of the notification message so that users can decide <em>before</em> downloading if the data in this particular messsage is useful for them.</p>
+<p>Notification messages are small pieces of information.  MQTT[S] broker and clients are able to handle a very large number of messages.  In that sense, receiving, potentially, too many messages is not a problem. However, downloading data, depending on the size of the data might be slower and less efficient.  If, for a particular dataset, the geometry information available in the notification message is not sufficient to allow client-side filtering before download, it is suggested to provide additional information in the <code>properties</code> object of the notification message so that users can decide <em>before</em> downloading if the data in this particular message is useful for them.</p>
 </div>
 <div class="paragraph">
 <p>See <a href="#_advertise_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm">Advertise client side filters for data subscriptions in WCMP2 and WNM</a> for more information on client side filtering</p>
@@ -1410,11 +1418,19 @@ if __name__ == '__main__':
 <div class="paragraph">
 <p>Core topics are defined in the first 7 levels and address all Earth system disciplines in a consistent manner.</p>
 </div>
-<div class="paragraph">
+<div class="ulist">
 <div class="title">Core topic examples:</div>
-<p><strong>cache/a/wis2/ma-marocmeteo/core/data/weather</strong>
-<strong>origin/a/wis2/de-dwd/core/data/ocean</strong>
-*cache/a/wis2/jp-jma/core/data/weather</p>
+<ul>
+<li>
+<p><code>cache/a/wis2/ma-marocmeteo/core/data/weather</code></p>
+</li>
+<li>
+<p><code>origin/a/wis2/de-dwd/core/data/ocean</code></p>
+</li>
+<li>
+<p><code>cache/a/wis2/jp-jma/core/data/weather</code></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>The Earth system disciplines <a href="https://codes.wmo.int/wis/topic-hierarchy/_earth-system-discipline">defined</a> by WTH are as follows:</p>
@@ -1445,7 +1461,7 @@ if __name__ == '__main__':
 </ul>
 </div>
 <div class="paragraph">
-<p>Topics within earch Earth system discipline are then defined by domain experts, reviewed, approved, and published by WMO.</p>
+<p>Topics within each Earth system discipline are then defined by domain experts, reviewed, approved, and published by WMO.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1468,7 +1484,7 @@ if __name__ == '__main__':
 <p>users will receive a notification when a new synop is made available from <strong>any</strong> centre-id publishing message on WIS2.  The <code>+</code> character is a single level wildcard for MQTT subscription.</p>
 </div>
 <div class="paragraph">
-<p>A usder can also choose to subscribe to:</p>
+<p>A user can also choose to subscribe to:</p>
 </div>
 <div class="paragraph">
 <p><code>cache/a/wis2/de-dwd/core/data/weather/#</code></p>
@@ -1589,7 +1605,7 @@ if __name__ == '__main__':
 <p>For example, a topic hierarchy resulting in users subscribing to:</p>
 </div>
 <div class="paragraph">
-<p><code>cache/a/wis2//core/data/ocean//some//thing//else/#</code></p>
+<p><code>cache/a/wis2/+/core/data/ocean/+/some/+/thing/+/else/#</code></p>
 </div>
 <div class="paragraph">
 <p>should be avoided. A subscription to the following topic:</p>
@@ -1607,7 +1623,7 @@ if __name__ == '__main__':
 <p>If most users end up subscribing to:</p>
 </div>
 <div class="paragraph">
-<p><code>cache/a/wis2//core/data/ocean//thing/+/#</code></p>
+<p><code>cache/a/wis2/+/core/data/ocean/+/thing/+/#</code></p>
 </div>
 <div class="paragraph">
 <p>then, the Topic Hierarchy could be reconsidered, so that the above subscription can be replaced by:</p>
@@ -1649,7 +1665,7 @@ if __name__ == '__main__':
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-02-27 19:35:21 UTC
+Last updated 2025-03-18 13:09:14 UTC
 </div>
 </div>
 </body>
