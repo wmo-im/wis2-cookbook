@@ -227,6 +227,7 @@ When implemented by a data producer, a data consumer can:
   "properties": {
     "model_run": "00",
     "forecast_hour": "004"
+  }
 }
 ----
 
