@@ -181,6 +181,7 @@ To implement this behaviour, add additional properties to both WCMP2 and WNM as 
 {
   "properties": {
     "wigos_station_identifier": "0-20000-0-71628"
+  }
 }
 ----
 
