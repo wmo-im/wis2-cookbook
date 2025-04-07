@@ -98,12 +98,20 @@ To provide an HTTP 204 link, there a couple of options:
 
 **Option 1: configure your web server to provide an endpoint that always returns 204**:
 
+.Nginx example configuration
 [source,console]
 ----
 # always return HTTP 204 when accessing /no-content-here
 location /no-content-here/ {
   return 204;
 }
+----
+
+.Apache example configuration
+[source,console]
+----
+# always return HTTP 204 when accessing /no-content-here
+Redirect 204 no-content-here
 ----
 
 which then would result in the link object as follows:
