@@ -1,6 +1,6 @@
 == Recipes for data consumers
 
-=== Search the Global Discovery Catalogue
+=== Searching the Global Discovery Catalogue
 
 The https://wmo-im.github.io/wis2-guide/guide/wis2-guide-APPROVED.html#_2_4_4_global_discovery_catalogue[Global Discovery Catalogue (GDC)] allows for a wide range of query predicates to search for data in WIS2 as per the OGC API - Records - Part 1: Core specification.
 
