@@ -84,14 +84,16 @@ Of course, always ensure your WNM is valid (see <<Validate a WIS2 Notification M
 
 === Publishing a WIS2 Notification Message with embedded data
 
-A https://wmo-im.github.io/wis2-notification-message[WIS2 Notification Message] provides the ability to embed data as part of a message (see the https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_15_properties_content[Properties / Content] section of the specification).  A data publisher may wish to provide embedded data for direct access, thereby skipping the need for accessing the data via the notification link (see the https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_16_links[Links] section of the specification).  A data publisher also may not wish to manage or publish the data link to infrastructure to an HTTP or FTP server.
+A https://wmo-im.github.io/wis2-notification-message[WIS2 Notification Message] provides the ability to embed data as part of a message (see the https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_15_properties_content[Properties / Content] section of the specification).
 
-The WIS2 Notification Message requires at least one link object for access to data via HTTP, HTTPS, FTP, or SFTP.  In the context of core data, WIS2 Global Cache services use the link object to download data for resilient data access by WIS2 data consumers.
+Providing embedded data for direct access offers users access to the data without the need for downloading the file via the notification link (see the https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_16_links[Links] section of the specification).
 
-For of publishing embedded core data:
+In some cases, a data publisher also may not wish to manage or publish the data link to infrastructure to an HTTP or FTP server.
+
+When the data publisher decides to use the embedded data feature without the need of implementing an actionable link providing access to the same data, the data publisher will:
 
 - use `properties.content` object to provide the data
-- use `cache=False` to instruct WIS2 Global Cache Services to not cache the data
+- use `properties.cache=false` to instruct WIS2 Global Cache Services to not cache the data
 - provide a link object whose `href` results in HTTP 204 (No Content)
 
 To provide an HTTP 204 link, there a couple of options:
@@ -119,7 +121,8 @@ which then would result in the link object as follows:
 [source,json]
 ----
 {
-    "href": "https://example.org/no-content-here"
+    "href": "https://example.org/no-content-here",
+    "rel": "canonical"
 }
 ----
 
@@ -128,11 +131,12 @@ which then would result in the link object as follows:
 [source,json]
 ----
 {
-    "href": "https://http.codes/204"
+    "href": "https://http.codes/204",
+    "rel": "canonical"
 }
 ----
 
-.Embedded data example for core data:
+.Embedded data example:
 [source,json]
 ----
 {
@@ -166,7 +170,8 @@ which then would result in the link object as follows:
     },
     "links": [
         {
-            "href": "https://http.codes/204"
+            "href": "https://http.codes/204",
+            "rel": "canonical"
         }
     ]
 }
