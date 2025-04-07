@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">World Meteorological Organization</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2025-03-31</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2025-04-07</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 2024-04-16</p></td>
@@ -489,7 +489,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_recipes_for_data_consumers">2. Recipes for data consumers</a>
 <ul class="sectlevel2">
-<li><a href="#_search_the_global_discovery_catalogue">2.1. Search the Global Discovery Catalogue</a>
+<li><a href="#_searching_the_global_discovery_catalogue">2.1. Searching the Global Discovery Catalogue</a>
 <ul class="sectlevel3">
 <li><a href="#_spatial_queries">2.1.1. Spatial queries</a></li>
 <li><a href="#_temporal_queries">2.1.2. Temporal queries</a></li>
@@ -504,31 +504,26 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_recipes_for_data_publishers">3. Recipes for data publishers</a>
 <ul class="sectlevel2">
-<li><a href="#_validate_a_wis2_notification_message">3.1. Validate a WIS2 Notification Message</a></li>
-<li><a href="#_publish_a_wis2_notification_message_with_access_control">3.2. Publish a WIS2 Notification Message with access control</a></li>
-<li><a href="#_validate_a_wmo_core_metadata_profile_record">3.3. Validate a WMO Core Metadata Profile record</a></li>
-<li><a href="#_advertise_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm">3.4. Advertise client side filters for data subscriptions in WCMP2 and WNM</a>
+<li><a href="#_validating_a_wis2_notification_message">3.1. Validating a WIS2 Notification Message</a></li>
+<li><a href="#_publishing_a_wis2_notification_message_with_access_control">3.2. Publishing a WIS2 Notification Message with access control</a></li>
+<li><a href="#_publishing_a_wis2_notification_message_with_embedded_data">3.3. Publishing a WIS2 Notification Message with embedded data</a></li>
+<li><a href="#_publishing_a_wis2_notification_message_for_resource_deletion">3.4. Publishing a WIS2 Notification Message for resource deletion</a></li>
+<li><a href="#_validating_a_wmo_core_metadata_profile_record">3.5. Validating a WMO Core Metadata Profile record</a></li>
+<li><a href="#_advertising_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm">3.6. Advertising client side filters for data subscriptions in WCMP2 and WNM</a>
 <ul class="sectlevel3">
-<li><a href="#_example_surface_weather_observations">3.4.1. Example: Surface weather observations</a></li>
-<li><a href="#_example_numerical_weather_prediction_based_forecast">3.4.2. Example: Numerical weather prediction based forecast</a></li>
-</ul>
-</li>
-<li><a href="#_defining_and_proposing_topic_for_wmo_earth_system_disciplines">3.5. Defining and proposing topic for WMO Earth system disciplines</a>
-<ul class="sectlevel3">
-<li><a href="#_core_levels">3.5.1. Core levels</a></li>
-<li><a href="#_additional_earth_domain_specific_topics_levels">3.5.2. Additional Earth domain specific topics levels</a></li>
-<li><a href="#_dos_and_donts_when_defining_earth_system_discipline_topics">3.5.3. Dos and don&#8217;ts when defining Earth system discipline topics</a></li>
+<li><a href="#_example_surface_weather_observations">3.6.1. Example: Surface weather observations</a></li>
+<li><a href="#_example_numerical_weather_prediction_based_forecast">3.6.2. Example: Numerical weather prediction based forecast</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="#_recipes_for_earth_system_discipline_domain_experts">4. Recipes for Earth system discipline domain experts</a>
 <ul class="sectlevel2">
-<li><a href="#_defining_and_proposing_topic_for_wmo_earth_system_disciplines_2">4.1. Defining and proposing topic for WMO Earth system disciplines</a>
+<li><a href="#_defining_and_proposing_topic_for_wmo_earth_system_disciplines">4.1. Defining and proposing topic for WMO Earth system disciplines</a>
 <ul class="sectlevel3">
-<li><a href="#_core_levels_2">4.1.1. Core levels</a></li>
-<li><a href="#_additional_earth_domain_specific_topics_levels_2">4.1.2. Additional Earth domain specific topics levels</a></li>
-<li><a href="#_dos_and_donts_when_defining_earth_system_discipline_topics_2">4.1.3. Dos and don&#8217;ts when defining Earth system discipline topics</a></li>
+<li><a href="#_core_levels">4.1.1. Core levels</a></li>
+<li><a href="#_additional_earth_domain_specific_topics_levels">4.1.2. Additional Earth domain specific topics levels</a></li>
+<li><a href="#_dos_and_donts_when_defining_earth_system_discipline_topics">4.1.3. Dos and don&#8217;ts when defining Earth system discipline topics</a></li>
 </ul>
 </li>
 </ul>
@@ -576,7 +571,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_recipes_for_data_consumers"><a class="anchor" href="#_recipes_for_data_consumers"></a>2. Recipes for data consumers</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_search_the_global_discovery_catalogue"><a class="anchor" href="#_search_the_global_discovery_catalogue"></a>2.1. Search the Global Discovery Catalogue</h3>
+<h3 id="_searching_the_global_discovery_catalogue"><a class="anchor" href="#_searching_the_global_discovery_catalogue"></a>2.1. Searching the Global Discovery Catalogue</h3>
 <div class="paragraph">
 <p>The <a href="https://wmo-im.github.io/wis2-guide/guide/wis2-guide-APPROVED.html#_2_4_4_global_discovery_catalogue">Global Discovery Catalogue (GDC)</a> allows for a wide range of query predicates to search for data in WIS2 as per the OGC API - Records - Part 1: Core specification.</p>
 </div>
@@ -767,7 +762,7 @@ for feature in response['features']:
 <h2 id="_recipes_for_data_publishers"><a class="anchor" href="#_recipes_for_data_publishers"></a>3. Recipes for data publishers</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_validate_a_wis2_notification_message"><a class="anchor" href="#_validate_a_wis2_notification_message"></a>3.1. Validate a WIS2 Notification Message</h3>
+<h3 id="_validating_a_wis2_notification_message"><a class="anchor" href="#_validating_a_wis2_notification_message"></a>3.1. Validating a WIS2 Notification Message</h3>
 <div class="paragraph">
 <p>A <a href="https://wmo-im.github.io/wis2-notification-message">WIS2 Notification Message</a> provides a <a href="http://schemas.wmo.int/wnm">JSON Schema</a> which can be used by any programming language that supports JSON and JSON Schema validation.</p>
 </div>
@@ -785,7 +780,7 @@ check-jsonschema --schemafile wis2-notification-message-bundled.json /path/to/my
 </div>
 </div>
 <div class="paragraph">
-<p>The <a href="https://github.com/wmo-im/pywis-pubsub">pywis-pubsub</a> tool provides a test suite to validate a message against the WNM specification requirements, as well as a Python API for application integration.  Consult the pywis-pubsub README on GitHub for more information/examples.</p>
+<p>The <a href="https://github.com/World-Meteorological-Organization/pywis-pubsub">pywis-pubsub</a> tool provides a test suite to validate a message against the WNM specification requirements, as well as a Python API for application integration.  Consult the pywis-pubsub README on GitHub for more information/examples.</p>
 </div>
 <div class="listingblock">
 <div class="title">Using pywis-pubsub</div>
@@ -805,7 +800,7 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_publish_a_wis2_notification_message_with_access_control"><a class="anchor" href="#_publish_a_wis2_notification_message_with_access_control"></a>3.2. Publish a WIS2 Notification Message with access control</h3>
+<h3 id="_publishing_a_wis2_notification_message_with_access_control"><a class="anchor" href="#_publishing_a_wis2_notification_message_with_access_control"></a>3.2. Publishing a WIS2 Notification Message with access control</h3>
 <div class="paragraph">
 <p>Recommended data in WIS2 may be open or access controlled.  For data publication with access control implications, WNM provides a <code>security</code> object as part a link object.  The <code>security</code> object is defined using <a href="https://swagger.io/specification/#security-scheme-object">OpenAPI Security Scheme definitions</a>.</p>
 </div>
@@ -861,13 +856,177 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 </ul>
 </div>
 <div class="paragraph">
-<p>Of course, always ensure your WNM is valid (see <a href="#_validate_a_wis2_notification_message">Validate a WIS2 Notification Message</a> for more information).</p>
+<p>Of course, always ensure your WNM is valid (see <a href="#Validate a WIS2 Notification Message">[Validate a WIS2 Notification Message]</a> for more information).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_validate_a_wmo_core_metadata_profile_record"><a class="anchor" href="#_validate_a_wmo_core_metadata_profile_record"></a>3.3. Validate a WMO Core Metadata Profile record</h3>
+<h3 id="_publishing_a_wis2_notification_message_with_embedded_data"><a class="anchor" href="#_publishing_a_wis2_notification_message_with_embedded_data"></a>3.3. Publishing a WIS2 Notification Message with embedded data</h3>
 <div class="paragraph">
-<p>The [pywcmp](<a href="https://github.com/wmo-im/pywcmp" class="bare">https://github.com/wmo-im/pywcmp</a>) tool provides a test suite to validate a message against the WCMP2 specification requirements, as well as a Python API for application integration.  Consult the pywcmp README on GitHub for more information/examples.</p>
+<p>A <a href="https://wmo-im.github.io/wis2-notification-message">WIS2 Notification Message</a> provides the ability to embed data as part of a message (see the <a href="https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_15_properties_content">Properties / Content</a> section of the specification).</p>
+</div>
+<div class="paragraph">
+<p>Providing embedded data for direct access offers users access to the data without the need for downloading the file via the notification link (see the <a href="https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_16_links">Links</a> section of the specification).</p>
+</div>
+<div class="paragraph">
+<p>In some cases, a data publisher also may not wish to manage or publish the data link to infrastructure to an HTTP or FTP server.</p>
+</div>
+<div class="paragraph">
+<p>When the data publisher decides to use the embedded data feature without the need of implementing an actionable link providing access to the same data, the data publisher will:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>use <code>properties.content</code> object to provide the data</p>
+</li>
+<li>
+<p>use <code>properties.cache=false</code> to instruct WIS2 Global Cache Services to not cache the data</p>
+</li>
+<li>
+<p>provide a link object whose <code>href</code> results in HTTP 204 (No Content)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To provide an HTTP 204 link, there a couple of options:</p>
+</div>
+<div class="paragraph">
+<p><strong>Option 1: configure your web server to provide an endpoint that always returns 204</strong>:</p>
+</div>
+<div class="listingblock">
+<div class="title">Nginx example configuration</div>
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console"># always return HTTP 204 when accessing /no-content-here
+location /no-content-here/ {
+  return 204;
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Apache example configuration</div>
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console"># always return HTTP 204 when accessing /no-content-here
+Redirect 204 no-content-here</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>which then would result in the link object as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+    "href": "https://example.org/no-content-here",
+    "rel": "canonical"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Option 2: use a service that provides HTTP responses as a service</strong>.  One such service is the <a href="https://http.codes">HTTP Response API</a>, which then would result in the link object as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+    "href": "https://http.codes/204",
+    "rel": "canonical"
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Embedded data example:</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+    "id": "31e9d66a-cd83-4174-9429-b932f1abe1be",
+    "conformsTo": [
+        "http://wis.wmo.int/spec/wnm/1/conf/core"
+    ],
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            6.146255135536194,
+            46.223296618227444
+        ]
+    },
+    "properties": {
+        "pubtime": "2022-03-20T04:50:18Z",
+        "datetime": "2022-03-20T04:45:00Z",
+        "integrity": {
+            "method": "sha512",
+            "value": "A2KNxvks...S8qfSCw=="
+        },
+        "cache": false,
+        "data_id": "dataset/123/data-granule/UANT01_CWAO_200445___15103.bufr4",
+        "metadata_id": "urn:wmo:md:ca-eccc-msc:observations.swob",
+        "content": {
+            "encoding": "utf-8",
+            "value": "encoded bytes from the file",
+            "size": 457
+        }
+    },
+    "links": [
+        {
+            "href": "https://http.codes/204",
+            "rel": "canonical"
+        }
+    ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For cases of publishing recommended data, the same approaches/example can be used, without the need to set <code>properties.cache</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_publishing_a_wis2_notification_message_for_resource_deletion"><a class="anchor" href="#_publishing_a_wis2_notification_message_for_resource_deletion"></a>3.4. Publishing a WIS2 Notification Message for resource deletion</h3>
+<div class="paragraph">
+<p>A <a href="https://wmo-im.github.io/wis2-notification-message">WIS2 Notification Message</a> provides the ability to publish notifications for new, updated or deleted data and metadata (see the <a href="https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_16_links">Links</a> section of the specification).</p>
+</div>
+<div class="paragraph">
+<p>Similar to the <a href="#_publishing_a_wis2_notification_message_with_embedded_data">embedded data Recipe</a>, for data or metadata deletions (core or recommended data), a data publisher may not wish to manage or publish the data or metadata link to infrastructure to an HTTP or FTP server.</p>
+</div>
+<div class="paragraph">
+<p>In this case, a similar strategy can be used to provide an HTTP 204 No Content link, as per the <a href="#_publishing_a_wis2_notification_message_with_embedded_data">embedded data Recipe</a>, along with setting <code>rel=deletion</code> in the link object.</p>
+</div>
+<div class="listingblock">
+<div class="title">Resource deletion example:</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+    "id": "31e9d66a-cd83-4174-9429-b932f1abe1be",
+    "conformsTo": [
+        "http://wis.wmo.int/spec/wnm/1/conf/core"
+    ],
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            6.146255135536194,
+            46.223296618227444
+        ]
+    },
+    "properties": {
+        "pubtime": "2022-03-20T04:50:18Z",
+        "datetime": "2022-03-20T04:45:00Z",
+        "integrity": {
+            "method": "sha512",
+            "value": "A2KNxvks...S8qfSCw=="
+        },
+        "cache": false,
+        "data_id": "dataset/123/data-granule/UANT01_CWAO_200445___15103.bufr4",
+        "metadata_id": "urn:wmo:md:ca-eccc-msc:observations.swob",
+    },
+    "links": [
+        {
+            "href": "https://http.codes/204",
+            "rel": "deletion"
+        }
+    ]
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_validating_a_wmo_core_metadata_profile_record"><a class="anchor" href="#_validating_a_wmo_core_metadata_profile_record"></a>3.5. Validating a WMO Core Metadata Profile record</h3>
+<div class="paragraph">
+<p>The <a href="https://github.com/World-Meteorological-Organization/pywcmp">pywcmp</a> tool provides a test suite to validate a message against the WCMP2 specification requirements, as well as a Python API for application integration.  Consult the pywcmp README on GitHub for more information/examples.</p>
 </div>
 <div class="listingblock">
 <div class="title">Using pywcmp</div>
@@ -928,7 +1087,7 @@ pywcmp ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_advertise_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm"><a class="anchor" href="#_advertise_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm"></a>3.4. Advertise client side filters for data subscriptions in WCMP2 and WNM</h3>
+<h3 id="_advertising_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm"><a class="anchor" href="#_advertising_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm"></a>3.6. Advertising client side filters for data subscriptions in WCMP2 and WNM</h3>
 <div class="paragraph">
 <p>A key concept of a WCMP2 record is "actionable links"; this means being able to access a dataset or data granule
 without any further interactions.  For real-time data, a WCMP2 record provides linkages to the WIS2 Global Broker
@@ -984,7 +1143,7 @@ data consumer is only interested in a certain subset of the data granules being 
 <p>To implement this behaviour, add additional properties to both WCMP2 and WNM as follows:</p>
 </div>
 <div class="sect3">
-<h4 id="_example_surface_weather_observations"><a class="anchor" href="#_example_surface_weather_observations"></a>3.4.1. Example: Surface weather observations</h4>
+<h4 id="_example_surface_weather_observations"><a class="anchor" href="#_example_surface_weather_observations"></a>3.6.1. Example: Surface weather observations</h4>
 <div class="listingblock">
 <div class="title">Surface weather observations: WCMP2 MQTT link with additional properties</div>
 <div class="content">
@@ -1028,7 +1187,7 @@ data consumer is only interested in a certain subset of the data granules being 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_example_numerical_weather_prediction_based_forecast"><a class="anchor" href="#_example_numerical_weather_prediction_based_forecast"></a>3.4.2. Example: Numerical weather prediction based forecast</h4>
+<h4 id="_example_numerical_weather_prediction_based_forecast"><a class="anchor" href="#_example_numerical_weather_prediction_based_forecast"></a>3.6.2. Example: Numerical weather prediction based forecast</h4>
 <div class="listingblock">
 <div class="title">Numerical weather prediction: WCMP2 MQTT link with additional properties</div>
 <div class="content">
@@ -1162,253 +1321,13 @@ if __name__ == '__main__':
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_defining_and_proposing_topic_for_wmo_earth_system_disciplines"><a class="anchor" href="#_defining_and_proposing_topic_for_wmo_earth_system_disciplines"></a>3.5. Defining and proposing topic for WMO Earth system disciplines</h3>
-<div class="paragraph">
-<p>The <a href="https://wmo-im.github.io/wis2-topic-hierarchy/standard/wis2-topic-hierarchy-STABLE.html">WIS2 Topic Hierarchy</a> describes the topic structure and levels to be used when publishing WIS2 notification messages.</p>
-</div>
-<div class="paragraph">
-<p>The purpose of this document is to provide guidelines to domain experts so that the Topic Hierarchy definition is consistent and useful to address the needs of WIS2 users.</p>
-</div>
-<div class="sect3">
-<h4 id="_core_levels"><a class="anchor" href="#_core_levels"></a>3.5.1. Core levels</h4>
-<div class="paragraph">
-<p>Core topics are defined in the first 7 levels and address all Earth system disciplines in a consistent manner.</p>
-</div>
-<div class="ulist">
-<div class="title">Core topic examples:</div>
-<ul>
-<li>
-<p><code>cache/a/wis2/ma-marocmeteo/core/data/weather</code></p>
-</li>
-<li>
-<p><code>origin/a/wis2/de-dwd/core/data/ocean</code></p>
-</li>
-<li>
-<p><code>cache/a/wis2/jp-jma/core/data/weather</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The Earth system disciplines <a href="https://codes.wmo.int/wis/topic-hierarchy/_earth-system-discipline">defined</a> by WTH are as follows:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>atmospheric-composition</code></p>
-</li>
-<li>
-<p><code>climate</code></p>
-</li>
-<li>
-<p><code>cryosphere</code></p>
-</li>
-<li>
-<p><code>hydrology</code></p>
-</li>
-<li>
-<p><code>ocean</code></p>
-</li>
-<li>
-<p><code>space-weather</code></p>
-</li>
-<li>
-<p><code>weather</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Topics within each Earth system discipline are then defined by domain experts, reviewed, approved, and published by WMO.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_additional_earth_domain_specific_topics_levels"><a class="anchor" href="#_additional_earth_domain_specific_topics_levels"></a>3.5.2. Additional Earth domain specific topics levels</h4>
-<div class="sect4">
-<h5 id="_what_is_the_use_of_the_topic_hierarchy"><a class="anchor" href="#_what_is_the_use_of_the_topic_hierarchy"></a>3.5.2.1. What is the use of the Topic Hierarchy ?</h5>
-<div class="paragraph">
-<p>The definition of the Topic Hierarchy is heavily linked to the use of Publish-Subscribe (Pub/Sub) protocols, here MQTT[S], in WIS2. Users, when subscribing to the Global Broker, can decide which notification messages they wish to receive.</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_mqtt_wildcards"><a class="anchor" href="#_mqtt_wildcards"></a>3.5.2.2. MQTT wildcards</h5>
-<div class="paragraph">
-<p>For example, connecting to a Global Broker and subscribing to:</p>
-</div>
-<div class="paragraph">
-<p><code>cache/a/wis2/+/core/data/weather/surface-weather-observation/synop</code></p>
-</div>
-<div class="paragraph">
-<p>users will receive a notification when a new synop is made available from <strong>any</strong> centre-id publishing message on WIS2.  The <code>+</code> character is a single level wildcard for MQTT subscription.</p>
-</div>
-<div class="paragraph">
-<p>A user can also choose to subscribe to:</p>
-</div>
-<div class="paragraph">
-<p><code>cache/a/wis2/de-dwd/core/data/weather/#</code></p>
-</div>
-<div class="paragraph">
-<p>In this case, users will receive notification messages from the <code>de-dwd</code> centre-id for <strong>all</strong> weather data.  The <code>#</code> character is a multiple level wildcard for MQTT subscription, and can only be used at the end of a topic subscription.</p>
-</div>
-<div class="paragraph">
-<p>By using <code>+</code> and <code>#</code> (the two defined wildcards in the MQTT[S] protocol), users can extend their subscription and receive all messages they need.</p>
-</div>
-<div class="paragraph">
-<p>The purpose of additional topic hierarchy levels is to allow users to get the messages they need and to be more specific in their request.</p>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_dos_and_donts_when_defining_earth_system_discipline_topics"><a class="anchor" href="#_dos_and_donts_when_defining_earth_system_discipline_topics"></a>3.5.3. Dos and don&#8217;ts when defining Earth system discipline topics</h4>
-<div class="paragraph">
-<p><strong>Define only a <em>small number</em> of additional levels</strong></p>
-</div>
-<div class="paragraph">
-<p>According the the MQTT[S] protocol specification, the accepted length of a given topic is more than 65kB.  This means that the number of levels can be extremely large.  However, as explained in <a href="https://www.emqx.com/en/blog/advanced-features-of-mqtt-topics" class="bare">https://www.emqx.com/en/blog/advanced-features-of-mqtt-topics</a>:</p>
-</div>
-<div class="paragraph">
-<p><em>Try not to use more topic levels “just because I can”. For example, <code>my-home/room1/data</code> is a better choice than <code>my/home/room1/data</code>.</em></p>
-</div>
-<div class="paragraph">
-<p>By default, some MQTT brokers are configured to accept a maximum of 10 levels. This can be changed in the configuration of the broker, however, this limit shows that a usable, practical topic structure should not be too deep (i.e. with a large number of levels).</p>
-</div>
-<div class="paragraph">
-<p>For WIS2, and considering the various Earth system disciplines, a limit of <strong>4</strong> sublevels seems appropriate.</p>
-</div>
-<div class="paragraph">
-<p><strong>Do not use the topic as a metadata record</strong></p>
-</div>
-<div class="paragraph">
-<p>When defining the topic, experts must focus on the needs of users.  The purpose of the WIS2 Topic Hierarchy is <strong>not</strong> to describe as precisely as possible what data users will obtain if they decide to subscribe and then download.  Rather, it is <em>only</em> to provide a filtering mechanism so that users will not be flooded by WIS2 Notification Messages that may not be useful for them.</p>
-</div>
-<div class="paragraph">
-<p>In WIS2, all datasets <strong>must</strong> be described using the <a href="https://wmo-im.github.io/wcmp2/standard/wcmp2-STABLE.html">WMO Core Metadata Profile version 2(WCMP2)</a>.  Users will be able to discover the data they need by searching the WIS2 catalogue using (via search engines, directly, or from portals and applications).  The topic hierarchy information will be part of the metadata record for data which provides real-time notifications of publication.</p>
-</div>
-<div class="paragraph">
-<p>*Do not allow locally defined sublevels outside the <code>experimental</code> topic</p>
-</div>
-<div class="paragraph">
-<p>Each Earth system discipline provides an <code>experimental</code> topic.  For example, for <code>weather</code>, the first additional levels in the domain topic hierarchy are:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Name</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Description</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>advisories-warnings</code></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Advisories and warnings</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>aviation</code></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Aviation</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>prediction</code></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Data sets produced by quantitative algorithms, such as numerical or statistical prediction models, describing the past, present and future meteorological states</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>space-based-observations</code></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Space based observations</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>surface-based-observations</code></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Surface based observations</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>experimental</code></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Experimental topics</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>As the name suggests, <code>experimental</code> allows for defining additional topics for tests and experiments.  This is not meant to be used for operational data exchange.  It should only be used for testing purposes.</p>
-</div>
-<div class="paragraph">
-<p>With the exclusion of the <code>experimental</code> topic level, the topic Hierarchy must be <em>fully</em> defined for each Earth system discipline.</p>
-</div>
-<div class="paragraph">
-<p>In some situations, it might be tempting for a data producer to use additional topic levels to restrict even more the number of messages received by the users.</p>
-</div>
-<div class="paragraph">
-<p>This is <strong>forbidden</strong>.</p>
-</div>
-<div class="paragraph">
-<p>In each Earth system discipline community, all WIS Centres will be able to use the entire topic hierarchy of the domain if they provide data corresponding to each topic. A WIS Centre will not be allowed to add additional sublevels or undefined level within the Topic Hierarchy for its own needs.</p>
-</div>
-<div class="paragraph">
-<p>Modification of the Topic Hierarchy will be possible by using the WMO fast-track approval process.</p>
-</div>
-<div class="paragraph">
-<p><strong>Consider users needs and prevent complex wildcard subscriptions</strong></p>
-</div>
-<div class="paragraph">
-<p>The purpose of the WIS2 Topic Hierarchy is to inform users about the availability of new data. In WIS2, obtaining data will start, in most cases, by configuring one or more subscription to topics, as defined in the associated WCMP2 discovery metadata records, so that users will receive notifications when new data is available.</p>
-</div>
-<div class="paragraph">
-<p>The Topic Hierarchy should be defined so that users will not need to configure a very large number of different subscriptions to get the data they are interested in.</p>
-</div>
-<div class="paragraph">
-<p>Each level in the WIS2 Topic Hierarchy should be seen as a "logical" group (as the Earth system disciplines <code>weather</code>, <code>ocean</code>&#8230;&#8203; or like <code>synop</code> for <code>surface-based-observations</code>).</p>
-</div>
-<div class="paragraph">
-<p>Then, and considering that wildcard subscription (using <code>+</code> and <code>#</code> as described above), are "expensive" to manage for the brokers.</p>
-</div>
-<div class="paragraph">
-<p>For example, a topic hierarchy resulting in users subscribing to:</p>
-</div>
-<div class="paragraph">
-<p><code>cache/a/wis2/+/core/data/ocean/+/some/+/thing/+/else/#</code></p>
-</div>
-<div class="paragraph">
-<p>should be avoided. A subscription to the following topic:</p>
-</div>
-<div class="paragraph">
-<p><code>cache/a/wis2/+/core/data/ocean/some/thing/else/#</code></p>
-</div>
-<div class="paragraph">
-<p>is much more effective for both the client and the broker side.</p>
-</div>
-<div class="paragraph">
-<p>If it is likely that most users will use wildcards for particular topic levels, then, either removing that level altogether, of moving that level a the end of the topic hierarchy is also more efficient for clients and producers.</p>
-</div>
-<div class="paragraph">
-<p>If most users end up subscribing to:</p>
-</div>
-<div class="paragraph">
-<p><code>cache/a/wis2/+/core/data/ocean/+/thing/+/#</code></p>
-</div>
-<div class="paragraph">
-<p>then, the Topic Hierarchy could be reconsidered, so that the above subscription can be replaced by:</p>
-</div>
-<div class="paragraph">
-<p><code>cache/a/wis2/+/core/data/ocean/thing/#</code></p>
-</div>
-<div class="paragraph">
-<p>Reordering the levels of topics and potentially reducing the number of sublevels makes the topic hierarchy simpler and more efficient.</p>
-</div>
-<div class="paragraph">
-<p><strong>Facilitate client side filtering</strong></p>
-</div>
-<div class="paragraph">
-<p>Notification messages are small pieces of information.  MQTT[S] broker and clients are able to handle a very large number of messages.  In that sense, receiving, potentially, too many messages is not a problem. However, downloading data, depending on the size of the data might be slower and less efficient.  If, for a particular dataset, the geometry information available in the notification message is not sufficient to allow client-side filtering before download, it is suggested to provide additional information in the <code>properties</code> object of the notification message so that users can decide <em>before</em> downloading if the data in this particular message is useful for them.</p>
-</div>
-<div class="paragraph">
-<p>See <a href="#_advertise_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm">Advertise client side filters for data subscriptions in WCMP2 and WNM</a> for more information on client side filtering</p>
-</div>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_recipes_for_earth_system_discipline_domain_experts"><a class="anchor" href="#_recipes_for_earth_system_discipline_domain_experts"></a>4. Recipes for Earth system discipline domain experts</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_defining_and_proposing_topic_for_wmo_earth_system_disciplines_2"><a class="anchor" href="#_defining_and_proposing_topic_for_wmo_earth_system_disciplines_2"></a>4.1. Defining and proposing topic for WMO Earth system disciplines</h3>
+<h3 id="_defining_and_proposing_topic_for_wmo_earth_system_disciplines"><a class="anchor" href="#_defining_and_proposing_topic_for_wmo_earth_system_disciplines"></a>4.1. Defining and proposing topic for WMO Earth system disciplines</h3>
 <div class="paragraph">
 <p>The <a href="https://wmo-im.github.io/wis2-topic-hierarchy/standard/wis2-topic-hierarchy-STABLE.html">WIS2 Topic Hierarchy</a> describes the topic structure and levels to be used when publishing WIS2 notification messages.</p>
 </div>
@@ -1416,7 +1335,7 @@ if __name__ == '__main__':
 <p>The purpose of this document is to provide guidelines to domain experts so that the Topic Hierarchy definition is consistent and useful to address the needs of WIS2 users.</p>
 </div>
 <div class="sect3">
-<h4 id="_core_levels_2"><a class="anchor" href="#_core_levels_2"></a>4.1.1. Core levels</h4>
+<h4 id="_core_levels"><a class="anchor" href="#_core_levels"></a>4.1.1. Core levels</h4>
 <div class="paragraph">
 <p>Core topics are defined in the first 7 levels and address all Earth system disciplines in a consistent manner.</p>
 </div>
@@ -1467,15 +1386,15 @@ if __name__ == '__main__':
 </div>
 </div>
 <div class="sect3">
-<h4 id="_additional_earth_domain_specific_topics_levels_2"><a class="anchor" href="#_additional_earth_domain_specific_topics_levels_2"></a>4.1.2. Additional Earth domain specific topics levels</h4>
+<h4 id="_additional_earth_domain_specific_topics_levels"><a class="anchor" href="#_additional_earth_domain_specific_topics_levels"></a>4.1.2. Additional Earth domain specific topics levels</h4>
 <div class="sect4">
-<h5 id="_what_is_the_use_of_the_topic_hierarchy_2"><a class="anchor" href="#_what_is_the_use_of_the_topic_hierarchy_2"></a>4.1.2.1. What is the use of the Topic Hierarchy ?</h5>
+<h5 id="_what_is_the_use_of_the_topic_hierarchy"><a class="anchor" href="#_what_is_the_use_of_the_topic_hierarchy"></a>4.1.2.1. What is the use of the Topic Hierarchy ?</h5>
 <div class="paragraph">
 <p>The definition of the Topic Hierarchy is heavily linked to the use of Publish-Subscribe (Pub/Sub) protocols, here MQTT[S], in WIS2. Users, when subscribing to the Global Broker, can decide which notification messages they wish to receive.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_mqtt_wildcards_2"><a class="anchor" href="#_mqtt_wildcards_2"></a>4.1.2.2. MQTT wildcards</h5>
+<h5 id="_mqtt_wildcards"><a class="anchor" href="#_mqtt_wildcards"></a>4.1.2.2. MQTT wildcards</h5>
 <div class="paragraph">
 <p>For example, connecting to a Global Broker and subscribing to:</p>
 </div>
@@ -1503,7 +1422,7 @@ if __name__ == '__main__':
 </div>
 </div>
 <div class="sect3">
-<h4 id="_dos_and_donts_when_defining_earth_system_discipline_topics_2"><a class="anchor" href="#_dos_and_donts_when_defining_earth_system_discipline_topics_2"></a>4.1.3. Dos and don&#8217;ts when defining Earth system discipline topics</h4>
+<h4 id="_dos_and_donts_when_defining_earth_system_discipline_topics"><a class="anchor" href="#_dos_and_donts_when_defining_earth_system_discipline_topics"></a>4.1.3. Dos and don&#8217;ts when defining Earth system discipline topics</h4>
 <div class="paragraph">
 <p><strong>Define only a <em>small number</em> of additional levels</strong></p>
 </div>
@@ -1643,7 +1562,7 @@ if __name__ == '__main__':
 <p>Notification messages are small pieces of information.  MQTT[S] broker and clients are able to handle a very large number of messages.  In that sense, receiving, potentially, too many messages is not a problem. However, downloading data, depending on the size of the data might be slower and less efficient.  If, for a particular dataset, the geometry information available in the notification message is not sufficient to allow client-side filtering before download, it is suggested to provide additional information in the <code>properties</code> object of the notification message so that users can decide <em>before</em> downloading if the data in this particular messsage is useful for them.</p>
 </div>
 <div class="paragraph">
-<p>See <a href="#_advertise_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm">Advertise client side filters for data subscriptions in WCMP2 and WNM</a> for more information on client side filtering</p>
+<p>See <a href="#_advertise_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm">[_advertise_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm]</a> for more information on client side filtering</p>
 </div>
 </div>
 </div>
@@ -1667,7 +1586,7 @@ if __name__ == '__main__':
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-03-31 15:39:42 UTC
+Last updated 2025-04-07 18:01:33 UTC
 </div>
 </div>
 </body>
