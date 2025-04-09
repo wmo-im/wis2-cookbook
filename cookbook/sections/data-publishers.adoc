@@ -90,7 +90,7 @@ Providing embedded data for offers users the ability to access the data without 
 
 In some cases, a data publisher also prefer not to publish the corresponding actionable link to infrastructure (e.g. an HTTP or FTP server).
 
-When the data publisher decides to not publish an actionable link, but use the embedded data feature, the data publisher will:
+When the data publisher decides to not publish an actionable link and to rely exclusively on the embedded data feature, the data publisher will:
 
 - use `properties.content` object to provide the data
 - use `properties.cache=false` to instruct WIS2 Global Cache Services to not cache the data  (note: `properties.cache` is not required for recommended data, since recommended data is not cached by WIS2 Global Caches)
