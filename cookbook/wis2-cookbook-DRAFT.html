@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">World Meteorological Organization</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2025-04-07</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2025-04-22</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 2024-04-16</p></td>
@@ -862,16 +862,16 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 <div class="sect2">
 <h3 id="_publishing_a_wis2_notification_message_with_embedded_data"><a class="anchor" href="#_publishing_a_wis2_notification_message_with_embedded_data"></a>3.3. Publishing a WIS2 Notification Message with embedded data</h3>
 <div class="paragraph">
-<p>A <a href="https://wmo-im.github.io/wis2-notification-message">WIS2 Notification Message</a> provides the ability to embed data as part of a message (see the <a href="https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_15_properties_content">Properties / Content</a> section of the specification).</p>
+<p>A <a href="https://wmo-im.github.io/wis2-notification-message">WIS2 Notification Message</a> provides the ability to embed data as part of a notification (see the <a href="https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_15_properties_content">Properties / Content</a> section of the specification).</p>
 </div>
 <div class="paragraph">
-<p>Providing embedded data for direct access offers users access to the data without the need for downloading the file via the notification link (see the <a href="https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_16_links">Links</a> section of the specification).</p>
+<p>Providing embedded data for offers users the ability to access the data without the need to execute the additional step of downloading the data via the actionable link (see the <a href="https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_16_links">Links</a> section of the specification).</p>
 </div>
 <div class="paragraph">
-<p>In some cases, a data publisher also may not wish to manage or publish the data link to infrastructure to an HTTP or FTP server.</p>
+<p>In some cases, a data publisher also prefer not to publish the corresponding actionable link to infrastructure (e.g. an HTTP or FTP server).</p>
 </div>
 <div class="paragraph">
-<p>When the data publisher decides to use the embedded data feature without the need of implementing an actionable link providing access to the same data, the data publisher will:</p>
+<p>When the data publisher decides to not publish an actionable link and to rely exclusively on the embedded data feature, the data publisher will:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -879,7 +879,7 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 <p>use <code>properties.content</code> object to provide the data</p>
 </li>
 <li>
-<p>use <code>properties.cache=false</code> to instruct WIS2 Global Cache Services to not cache the data</p>
+<p>use <code>properties.cache=false</code> to instruct WIS2 Global Cache Services to not cache the data  (note: <code>properties.cache</code> is not required for recommended data, since recommended data is not cached by WIS2 Global Caches)</p>
 </li>
 <li>
 <p>provide a link object whose <code>href</code> results in HTTP 204 (No Content)</p>
@@ -1586,7 +1586,7 @@ if __name__ == '__main__':
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-04-07 18:01:33 UTC
+Last updated 2025-04-22 20:07:17 UTC
 </div>
 </div>
 </body>
