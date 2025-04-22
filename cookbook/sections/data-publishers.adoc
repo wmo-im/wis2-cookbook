@@ -84,16 +84,16 @@ Of course, always ensure your WNM is valid (see <<Validate a WIS2 Notification M
 
 === Publishing a WIS2 Notification Message with embedded data
 
-A https://wmo-im.github.io/wis2-notification-message[WIS2 Notification Message] provides the ability to embed data as part of a message (see the https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_15_properties_content[Properties / Content] section of the specification).
+A https://wmo-im.github.io/wis2-notification-message[WIS2 Notification Message] provides the ability to embed data as part of a notification (see the https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_15_properties_content[Properties / Content] section of the specification).
 
-Providing embedded data for direct access offers users access to the data without the need for downloading the file via the notification link (see the https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_16_links[Links] section of the specification).
+Providing embedded data for offers users the ability to access the data without the need to execute the additional step of downloading the data via the actionable link (see the https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_16_links[Links] section of the specification).
 
-In some cases, a data publisher also may not wish to manage or publish the data link to infrastructure to an HTTP or FTP server.
+In some cases, a data publisher also prefer not to publish the corresponding actionable link to infrastructure (e.g. an HTTP or FTP server).
 
-When the data publisher decides to use the embedded data feature without the need of implementing an actionable link providing access to the same data, the data publisher will:
+When the data publisher decides to not publish an actionable link and to rely exclusively on the embedded data feature, the data publisher will:
 
 - use `properties.content` object to provide the data
-- use `properties.cache=false` to instruct WIS2 Global Cache Services to not cache the data
+- use `properties.cache=false` to instruct WIS2 Global Cache Services to not cache the data  (note: `properties.cache` is not required for recommended data, since recommended data is not cached by WIS2 Global Caches)
 - provide a link object whose `href` results in HTTP 204 (No Content)
 
 To provide an HTTP 204 link, there a couple of options:
