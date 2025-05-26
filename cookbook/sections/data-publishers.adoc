@@ -212,7 +212,7 @@ In this case, a similar strategy can be used to provide an HTTP 204 No Content l
         },
         "cache": false,
         "data_id": "dataset/123/data-granule/UANT01_CWAO_200445___15103.bufr4",
-        "metadata_id": "urn:wmo:md:ca-eccc-msc:observations.swob",
+        "metadata_id": "urn:wmo:md:ca-eccc-msc:observations.swob"
     },
     "links": [
         {
