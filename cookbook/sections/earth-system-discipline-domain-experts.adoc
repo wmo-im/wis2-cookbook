@@ -143,3 +143,65 @@ Reordering the levels of topics and potentially reducing the number of sublevels
 Notification messages are small pieces of information.  MQTT[S] broker and clients are able to handle a very large number of messages.  In that sense, receiving, potentially, too many messages is not a problem. However, downloading data, depending on the size of the data might be slower and less efficient.  If, for a particular dataset, the geometry information available in the notification message is not sufficient to allow client-side filtering before download, it is suggested to provide additional information in the `properties` object of the notification message so that users can decide _before_ downloading if the data in this particular messsage is useful for them.
 
 See <<_advertise_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm>> for more information on client side filtering
+
+=== WCMP2 Extensions: creating Earth system discipline domain specific profiles of WCMP2
+
+https://docs.ogc.org/is/20-004r1/20-004r1.html#clause-record-core[OGC API - Records - Part 1: Core: Requirements Class: Record Core] allows for extension and profiling of the metadata content model.  In this context, WCMP2 itself is a domain profile, as WMO's discovery metadata standard for all Earth system disciplines.
+
+As part of WIS2, Earth system discipline domain experts may choose to extend and profile WCMP2 to meet their specific needs.  Typical examples of where extensions can be useful include, but are not limited to:
+
+- further constraining specific WCMP2 properties (e.g. based on a controlled vocabulary)
+- enforcing optional WCMP2 properties to be required
+- adding new/additional properties/elements to a WCMP2 record
+
+Profiling WCMP2 can enable domain communities achieve deeper interoperability (or tighter coupling) to meet their needs.  For example, an NWP profile of WCMP2 may drive a user-focused NWP portal which leverages domain specific properties of a WCMP2 record for more meaningful search results and assessment for use.
+
+==== Considerations for creating a WCMP2 Extension
+
+Before creating an extension, domain experts need to give thought on the following aspects:
+
+- gap analysis in WCMP2: can existing WCMP2 properties be used?
+- use cases: consider how the additional properties (or constraints on existing) would be used (as a queryable, returnable, etc.)
+- sustainability: while developing a WCMP2 extension can be worthwhile metadata modelling exercise, ensure that there is a team in place to help maintain the extension over time.  This means having clear ownership of a WCMP2 extension that is subject to ongoing review, and supporting user questions, issues, enhancements and bug fixes
+
+==== How to create a WCMP2 Extension
+
+WCMP2 extensions can be defined on https://github.com/wmo-im/wcmp2-extensions[WMO's GitHub repository for WCMP2 Extensions].  Domains can identify and propose extensions as GitHub issues and Pull Requests, which are reviewed by https://github.com/wmo-im/tt-wismd[WMO TT-WISMD]:
+
+The following elements are required for any WCMP2 extension:
+
+* directory on GitHub repository, containing:
+** examples (directory `examples/`): a directory of example WCMP2 records exemplifying the extension
+** JSON Schema (directory `schema/`): a directory of the JSON Schema definition the extension, encoded as YAML.  The JSON Schema definition should either refer to controlled vocabularies from existing online vocabularies or define inline as `enum` lists
+** README (file `README.md`): the WCMP2 Extension Specification, which includes:
+*** owner: clear, unambiguous ownership identification of the Extension
+*** prefix: prefix for all defined elements (i.e. `hydro:`, `nwp:`, etc.)
+*** conformance: URI for conformance identification and usage in WCMP2 documents (`conformsTo` member)
+*** maturity: level of maturity guideline for usage
+*** definitions: specification of additional elements and their requirements (required/optional)
+
+.Example directory structure
+[source,bash]
+----
+|__hydro
+|____README.md
+|____schema
+| |____hydro-schema.yaml
+|____examples
+| |____example1.json
+| |____example2.json
+----
+=== Differences in WCMP2 records with Extensions
+
+A WCMP2 record with a defined extension per above would provide the following in `conformsTo`:
+
+.Example of identifying additional conformance for a WCMP2 Extension
+[source,json]
+----
+"conformsTo": [
+    "http://wis.wmo.int/spec/wcmp/2/conf/core",
+    "https://wmo-im.github.io/wcmp2-extensions/hydro"  # TODO: clarify how to best identify
+]
+----
+
+This will allow a WCMP2 parser to detect additional conformance to a given Extension and validate accordingly (in addition to validating WCMP2 Core).
