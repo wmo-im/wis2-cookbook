@@ -484,9 +484,9 @@ Manual on the WMO Information System, Volume II - WMO Information System 2.0
 
 ====== System Context
 
-The WIS 2.0 Node will be available to receive data from the upstream data production system, and to serve these data via the internet to the WIS 2.0 environment.
+The WIS 2.0 Node will be available to receive data from the upstream data production system, and to serve these data via the Internet to the WIS 2.0 environment.
 
-The WIS 2.0 Node will be available to receive metadata and to serve these metadata via the internet to the WIS 2.0 environment.
+The WIS 2.0 Node will be available to receive metadata and to serve these metadata via the Internet to the WIS 2.0 environment.
 
 WIS 2.0 Global Brokers will subscribe to the WIS 2.0 Node, and will receive publication messages when data and metadata become available.
 
@@ -502,13 +502,12 @@ WIS 2.0 Global Brokers will subscribe to the WIS 2.0 Node, and will receive publ
 
 . Remaining core data and recommended data to WIS 2.0 end users
 
-[[WIS 2,0 Node context diagram]]
 .WIS 2.0 Node context diagram
-image::wis2node-context-diagram.jpg[WIS 2.0 Node context diagram, width=400, height=300]
+image::images/wis2node-context-diagram.jpg[WIS 2.0 Node context diagram, width=800]
 
 ====== External Interfaces
 
-As identified in the context diagram <<IDEF0 Context Diagram>>, the WIS 2.0 Node will have external interfaces with WIS 2.0 Global Brokers, and WIS 2.0 Global Caches. In each case, the communications will be via the internet.
+As identified in the context diagram above, the WIS 2.0 Node will have external interfaces with WIS 2.0 Global Brokers, and WIS 2.0 Global Caches. In each case, the communications will be via the Internet.
 
 The Global Brokers will subscribe to the MQTT broker on the Node. This will be done using the standard MQTT secure port, 8883.
 
@@ -522,7 +521,7 @@ The WIS 2.0 Node will be compliant with the Manual on WMO Information System Vol
 
 ===== User requirements
 
-The purpose of the WIS 2.0 Node (hereafter, referred to as the Node) is to be available to receive data from the production system, and to serve these data via the internet to the WIS 2.0 environment.
+The purpose of the WIS 2.0 Node (hereafter, referred to as the Node) is to be available to receive data from the production system, and to serve these data via the Internet to the WIS 2.0 environment.
 
 In order to reach this target, the following high-level user requirements need to be fulfilled:
 
@@ -536,7 +535,7 @@ The WIS 2.0 Node shall include an MQTT broker, using MQTT 5.0 (hereafter, referr
 
 *_USR-0150_*
 
-The Broker included in the Node shall be accessible via MQTT protocol over the internet.
+The Broker included in the Node shall be accessible via MQTT protocol over the Internet.
 
 *_USR-0201_*
 
@@ -576,19 +575,19 @@ The MQTT topic used in notification messages shall not be configured to retain m
 
 *_USR-0401_*
 
-The Node shall provide access to core data via HTTP over the internet.
+The Node shall provide access to core data via HTTP over the Internet.
 
 *_USR-0450_*
 
-The Node shall provide access to recommended data via HTTP over the internet, subject to appropriate access control.
+The Node shall provide access to recommended data via HTTP over the Internet, subject to appropriate access control.
 
 *_USR-0500_*
 
-The Node shall provide access to core data via HTTPS over the internet.
+The Node shall provide access to core data via HTTPS over the Internet.
 
 *_USR-0550_*
 
-The Node shall provide access to recommended data via HTTPS over the internet, subject to appropriate access control.
+The Node shall provide access to recommended data via HTTPS over the Internet, subject to appropriate access control.
 
 *_USR-0601_*
 
