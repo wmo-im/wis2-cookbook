@@ -227,7 +227,7 @@ In this case, a similar strategy can be used to provide an HTTP 204 No Content l
 
 The https://github.com/World-Meteorological-Organization/pywcmp[pywcmp] tool provides a test suite to validate a message against the WCMP2 specification requirements, as well as a Python API for application integration.  Consult the pywcmp README on GitHub for more information/examples.
 
-.Using pywcmp
+.Using pywcmp for WCMP2 validation
 [source,bash]
 ----
 # install pywcmp
@@ -243,15 +243,20 @@ pywcmp ets validate /path/to/file.json
 pywcmp ets validate https://example.org/path/to/file.json
 ----
 
-A WCMP2 record can also be validated using pywcmp "as a service" using the Canadian WIS2 Global Discovery Catalogue, which provides an online validator:
+A WCMP2 record can also be validated using pywcmp "as a service" using the Canadian and German WIS2 Global Discovery Catalogues, which provide an online validator:
 
-- Navigate to https://wis2-gdc.weather.gc.ca/openapi?f=html
+- Navigate to https://wis2-gdc.weather.gc.ca/openapi?f=html or https://wis2.dwd.de/gdc/openapi?f=html
 - Navigate to section *pywcmp-wis2-wcmp2-ets*, endpoint `/processes/pywcmp-wis2-wcmp2-ets/execution` (POST)
 - Click "Try it out"
 - In the section "Mandatory execute request JSON", paste the WCMP2 JSON inside the `record` object
 
-.WIS2 GDC online validator, request
-image::images/data-publishers-wcmp2-validate-request.png[WIS2 GDC online validator, request]
+.WIS2 GDC online validator, request via WCMP2 copy/paste
+image::images/data-publishers-wcmp2-validate-request-copy-paste.png[WIS2 GDC online validator, request via WCMP2 copy/paste]
+
+Alternatively, the validator service also accepts a URL (if the WCMP2 record is online):
+
+.WIS2 GDC online validator, request via WCMP2 URL
+image::images/data-publishers-wcmp2-validate-request-url.png[WIS2 GDC online validator, request via WCMP2 URL]
 
 - Click "Execute"
 
@@ -259,6 +264,46 @@ image::images/data-publishers-wcmp2-validate-request.png[WIS2 GDC online validat
 image::images/data-publishers-wcmp2-validate-response.png[WIS2 GDC online validator, response]
 
 A response will be provided with validation results.
+
+The WCMP2 standard also has https://wmo-im.github.io/wcmp2/kpi/wcmp2-kpi-DRAFT.html[(draft) Key Performance Indicators] that provide quality assessment in support of continuous improvement of WCMP2 records.  pywcmp additionally implements these KPIs using a similar workflow.
+
+.Using pywcmp for WCMP2 quality assessment
+[source,bash]
+----
+# validate WCMP2 against abstract test suite (file on disk)
+pywcmp kpi validate /path/to/file.json
+
+# validate WCMP2 against abstract test suite (URL)
+pywcmp kpi validate https://example.org/path/to/file.json
+----
+
+The KPI check performs actions such as checking for healthy/working links and acronym checks, length of titles and more.  Note that the KPI results do not affect WCMP2 compliance but are suggestions on how to improve your WCMP2 record for better discoverability and use.
+
+The Canadian and German WIS2 Global Discovery Catalogues also provide this functionality online in a similar fashion as the validator.:
+
+.WIS2 GDC quality assessment checker, request via WCMP2 URL
+image::images/data-publishers-wcmp2-quality-assess-request-url.png[WIS2 GDC quality assessment checker, request via WCMP2 URL]
+
+.WIS2 GDC quality assessment checker, response
+image::images/data-publishers-wcmp2-quality-assess-response.png[WIS2 GDC online quality assessment checker, response]
+
+A response will be provided with quality assessment results (in a similar format to the validation report).
+
+=== Subscribing to GDC reports of WCMP2 validation and quality assessment
+
+When a WIS2 Node publishes a WCMP2 record, GDCs perform validaation according to the WCMP2 https://wmo-im.github.io/wcmp2/standard/wcmp2-STABLE.html#_conformance_class_abstract_test_suite_normative[Abstract Test Suite]).  If the record is compliant, a GDC will ingest and publish the record.  In addition, a GDC may provide additional quality assessment testing based on the https://wmo-im.github.io/wcmp2/kpi/wcmp2-kpi-DRAFT.html[(draft) WCMP2 Key Performance Indicators (KPIs)].
+
+GDC reports are made available as part of the https://wmo-im.github.io/wis2-monitoring-events/standard/wis2-monitoring-events-DRAFT.html[(draft) WIS2 Monitoring Events specification (WME)] and can be found by subscribing to a Global Broker using the topic `monitor/a/wis2/GDC_CENTRE_ID/WIS2NODE_CENTRE_ID`, where:
+
+* `GDC_CENTRE_ID` is the centre identifier of a given GDC
+* `WIS2NODE_CENTRE_ID` is the centre identifier of a given WIS2 Node
+
+For example, to subscribe to Canada GDC reports on WCMP2 records published by Japan Meteorological Agency (JMA), one would subscribe to the topic `monitor/a/wis2/ca-eccc-msc-global-discovery-catalogue/jp-jma`.
+
+Message payloads are based on WME Message Encoding (WMEM), with a `data` payload of the WCMP2 ETS/KPI reports.
+
+.WIS2 subscription to GDC reports of WCMP2 validation and quality assessment
+image::images/data-publishers-monitor-gdc-wcmp2-reports.png[WIS2 subscription to GDC reports of WCMP2 validation and quality assessment]
 
 === Advertising client side filters for data subscriptions in WCMP2 and WNM
 
