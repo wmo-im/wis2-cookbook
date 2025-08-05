@@ -3,7 +3,7 @@
 
 In conjunction with the Manual on the WMO Information System volume II (WMO-No. 1060) (Manual on WIS volume II: WIS 2.0), the present Guide to the WMO Information System volume II (Guide to WIS volume II: WIS 2.0) is designed to ensure adequate uniformity and standardization in the data, information and communication practices, procedures and specifications employed by Members of the World Meteorological Organization (WMO) in the operation of the WMO Information System WIS 2.0 as it supports the mission of the Organization. The Manual on WIS contains standard and recommended practices, procedures and specifications. The Guide to WIS contains additional information concerning practices, procedures, and specifications that Members are invited to follow or implement in establishing and conducting their arrangements in compliance with the WMO Technical Regulations and in developing meteorological and hydrological services.
 
-This cookbook provides various code snippets, recipes and workflow examples in support of WIS2 requirements.  This cookbook is a working document; contributions are encouraged and can be added via https://github.com/wmo-im/wis2-cookbook[GitHub].
+This cookbook provides various code snippets, recipes and workflow examples in support of WIS2 requirements.
 
 === Key documents
 
@@ -12,3 +12,17 @@ WIS2 Manuals and Guides can be found at the following locations:
 * https://library.wmo.int/idurl/4/68731[Manual on the WMO Information System]
 * https://library.wmo.int/idurl/4/69130[Guide to the WMO Information System Volume II - WMO Information System 2.0]
 * https://library.wmo.int/idurl/4/69050[Provisions for the Transition from the WMO Information System (WIS) 1.0 and Global Telecommunication System to WIS 2.0]
+
+=== Publication and contribution
+
+Updates to this cookbook will be published twice per year - in March and October.
+
+All "recipes" published in this cookbook have been reviewed by experts from the INFCOM Standing Committee on Information Management and Technology (SC-IMT). Publication of a new release is approved by the Chair of SC-IMT. 
+
+[NOTE]
+====
+The WIS2 Cookbook is not regulatory material and does not follow the approval and publication process for the WIS2 Manual and Guide.  
+====
+
+The WIS2 community are invited to provide feedback on the "recipes" in this Cookbook and also to propose new recipes. Contributions should be made by raising issues in the https://github.com/wmo-im/wis2-cookbook/issues[wmo-im/wis2-cookbook GitHub repository]. Experts from SC-IMT will review suggestions with the aim to incorporate them into the next release of the WIS2 Cookbook.
+
