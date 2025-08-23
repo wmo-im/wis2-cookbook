@@ -247,6 +247,105 @@ The above status is defined by https://www.iso.org/standard/80874.html[ISO 19115
 
 Another aspect to consider reviewing all links in the WCMP2 record (``links`` object).  For example, MQTT links can be removed, and any links which no longer provide the data can also be removed.  If the data is retired and has alternative access mechanisms (email, web form), these links can be added to the record.
 
+=== Publishing a WMO Core Metadata Profile record for historical data
+
+WIS2 and WCMP2 have been designed to support both real-time and historical data.  While real-time data publishing in WIS2 typically includes real-time data notifications, archive data may or may not require data notifications, depending on how often the dataset is disseminated and/or updated.
+
+==== Temporal aspects
+
+Of critical importance is describing the temporal nature of the archive.  Some examples:
+
+.Describing the temporal nature of an archive in WCMP2 which contains various temporal granularities
+[source,json]
+----
+"time": {
+    "interval": [
+        "1850-01-01",
+        ".."
+    ]
+}
+----
+
+.Describing the temporal nature of an archive in WCMP2 which has a single temporal granularity (i.e. continuously updated on a daily basis)
+[source,json]
+----
+"time": {
+    "interval": [
+        "1850-01-01",
+        ".."
+    ],
+    "resolution": "P1D"
+}
+----
+
+.Describing the temporal nature of an archive in WCMP2 which is not updated
+[source,json]
+----
+"time": {
+    "interval": [
+        "1850-01-01",
+        "2025-08-19"
+    ],
+    "resolution": "P1D"
+}
+----
+
+==== Distribution and notification aspects
+
+The way in which a historical archive is disseminated can result in a few different possibilities in WCMP2 and WIS2 data notifications.
+
+===== Publishing links of an archive in WCMP2 whose updates are not disseminated as data granules
+
+WIS2 Notifications promote "actionable links" when describing data updates via MQTT.  In some cases, a historical archive may be updated without
+publishing data granule level updates.  For example, if an archive is updated every 90 days, and updates are published into the existing archive
+without the ability to advertise one WIS2 Notification per data granule update, then publishing via MQTT is not a suitable mechanism for real-time
+decision support systems and downstream applications.  In this case, clearly describing the temporal nature of the archive as well as a link which
+clearly defines an archive (via the ``rel=archives`` link relation) is recommended:
+
+.Publishing an archive link in WCMP2
+[source,json]
+----
+{
+    "rel": "archives",
+    "href": "https://example.org/hydrometric-archive",
+    "type": "text/html",
+    "title": "Hydrometric archive database download",
+    "distribution": {
+        "availableFormats": [
+            {
+                "name": "SQLite3"
+            },
+            {
+                "name": "Microsoft Access"
+            }
+        ]
+    }
+}
+----
+
+===== Publishing links via updates into an existing archive
+
+If a historical archives does publish data granules (i.e. if a daily climate archive is updated daily and each
+day's update can be defined with an actionable link, then an MQTT link is also recommended.
+
+.Publishing archive and MQTT links in WCMP2 with data granule updates
+[source,json]
+----
+{
+    "rel": "archives",
+    "href": "https://example.org/daily-climate-observations",
+    "type": "text/csv",
+    "title": "Raw data download (CSV files)"
+},
+{
+    "rel": "items",
+    "href": "mqtts://example.org",
+    "channel": "origin/a/wis2/ca-eccc-msc/data/core/climate/surface-based-observations/daily",
+    "type": "application/geo+json",
+    "title": "Data notifications of daily updates"
+}
+----
+
 === Validating a WMO Core Metadata Profile record
 
 The https://github.com/World-Meteorological-Organization/pywcmp[pywcmp] tool provides a test suite to validate a message against the WCMP2 specification requirements, as well as a Python API for application integration.  Consult the pywcmp README on GitHub for more information/examples.
@@ -702,4 +801,3 @@ Note: More information on the function and implementation of a WIS Node is provi
 3.6.3.1 Each WIS Node shall contribute to monitoring the performance of WIS.
 
 3.6.3.2 See also 4.7 (WIS-TechSpec-6: Managing operations of the WIS).
-
