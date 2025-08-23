@@ -223,7 +223,7 @@ In this case, a similar strategy can be used to provide an HTTP 204 No Content l
 }
 ----
 
-=== Providing or updating a WMO Core Metadata Profile record for retired data
+=== Publishing a WMO Core Metadata Profile record for retired data
 
 The primary target for WCMP2 records is for real-time or archive data discovery, access and visualization, with the understanding that a dataset (and its associated discovery metadata) is properly managed and kept up to date.  In certain cases, datasets may become unavailable; this could mean that the dataset lifecycle has reached end of life, and/or no longer maintained.
 
