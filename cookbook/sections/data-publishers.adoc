@@ -231,6 +231,7 @@ An "end of life" or retired dataset should be independent from its description. 
 
 To describe a retired dataset in WCMP2, one can use the ``properties.status`` object as per below:
 
+.Describing a retired dataset in WCMP2
 [source,json]
 ----
 "properties": {
