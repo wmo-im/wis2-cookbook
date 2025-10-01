@@ -223,6 +223,30 @@ In this case, a similar strategy can be used to provide an HTTP 204 No Content l
 }
 ----
 
+=== Publishing a WMO Core Metadata Profile record for retired data
+
+The primary target for WCMP2 records is for real-time or archive data discovery, access and visualization, with the understanding that a dataset (and its associated discovery metadata) is properly managed and kept up to date.  In certain cases, datasets may become unavailable; this could mean that the dataset lifecycle has reached end of life, and/or no longer maintained.
+
+An "end of life" or retired dataset should be independent from its description.  That is, even if a dataset is retired, there is value in having discovery metadata for these datasets, and so the WCMP2 record associated with it should not be deleted from the WIS2 Global Discovery Catalogues.  The FAIR Data Principles (A2) also state that metradata should persist even the data are no longer sustained footnote:[https://www.go-fair.org/fair-principles/a2-metadata-accessible-even-data-no-longer-available/].
+
+To describe a retired dataset in WCMP2, one can use the ``properties.status`` object as per below:
+
+.Describing a retired dataset in WCMP2
+[source,json]
+----
+"properties": {
+  "status": {
+    "id": "retired",
+    "title": "Retired",
+    "url": "https://standards.iso.org/iso/19115/-3/mcc/1.0/codelists.xml#MD_ProgressCode_retired"
+  }
+}
+----
+
+The above status is defined by https://www.iso.org/standard/80874.html[ISO 19115-3] as "_item is no longer recommended for use. It has not been superseded by another item_" footnote:[https://standards.iso.org/iso/19115/-3/mcc/1.0/codelists.html].
+
+Another aspect to consider reviewing all links in the WCMP2 record (``links`` object).  For example, MQTT links can be removed, and any links which no longer provide the data can also be removed.  If the data is retired and has alternative access mechanisms (email, web form), these links can be added to the record.
+
 === Validating a WMO Core Metadata Profile record
 
 The https://github.com/World-Meteorological-Organization/pywcmp[pywcmp] tool provides a test suite to validate a message against the WCMP2 specification requirements, as well as a Python API for application integration.  Consult the pywcmp README on GitHub for more information/examples.
