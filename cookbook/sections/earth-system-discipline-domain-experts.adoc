@@ -172,7 +172,7 @@ The following elements are required for any WCMP2 extension:
 
 * directory on GitHub repository, containing:
 ** examples (directory `examples/`): a directory of example WCMP2 records exemplifying the extension
-** JSON Schema (directory `schema/`): a directory of the JSON Schema definition the extension, encoded as YAML.  The JSON Schema definition should either refer to controlled vocabularies from existing online vocabularies or define inline as `enum` lists
+** JSON Schema (directory `schema/`): a directory of the JSON Schema definition for the extension, encoded as YAML.  The JSON Schema definition should either refer to controlled vocabularies from existing online vocabularies or define inline as `enum` lists
 ** README (file `README.md`): the WCMP2 Extension Specification, which includes:
 *** owner: clear, unambiguous ownership identification of the Extension
 *** prefix: prefix for all defined elements (i.e. `hydro:`, `nwp:`, etc.)
