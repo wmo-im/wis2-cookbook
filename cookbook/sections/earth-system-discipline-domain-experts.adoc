@@ -152,7 +152,7 @@ As part of WIS2, Earth system discipline domain experts may choose to extend and
 
 - further constraining specific WCMP2 properties (e.g. based on a controlled vocabulary)
 - enforcing optional WCMP2 properties to be required
-- adding new/additional properties/elements to a WCMP2 record
+- adding new or additional properties to a WCMP2 record
 
 Profiling WCMP2 can enable domain communities achieve deeper interoperability (or tighter coupling) to meet their needs.  For example, an NWP profile of WCMP2 may drive a user-focused NWP portal which leverages domain specific properties of a WCMP2 record for more meaningful search results and assessment for use.
 
