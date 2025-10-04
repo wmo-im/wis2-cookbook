@@ -86,7 +86,7 @@ Of course, always ensure your WNM is valid (see <<Validate a WIS2 Notification M
 
 A https://wmo-im.github.io/wis2-notification-message[WIS2 Notification Message] provides the ability to embed data as part of a notification (see the https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_15_properties_content[Properties / Content] section of the specification).
 
-Providing embedded data for offers users the ability to access the data without the need to execute the additional step of downloading the data via the actionable link (see the https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_16_links[Links] section of the specification).
+Providing embedded data offers users the ability to access the data without the need to execute the additional step of downloading the data via the actionable link (see the https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_16_links[Links] section of the specification).
 
 In some cases, a data publisher also prefer not to publish the corresponding actionable link to infrastructure (e.g. an HTTP or FTP server).
 
@@ -315,19 +315,19 @@ A response will be provided with quality assessment results (in a similar format
 
 === Subscribing to GDC reports of WCMP2 validation and quality assessment
 
-When a WIS2 Node publishes a WCMP2 record, GDCs perform validaation according to the WCMP2 https://wmo-im.github.io/wcmp2/standard/wcmp2-STABLE.html#_conformance_class_abstract_test_suite_normative[Abstract Test Suite]).  If the record is compliant, a GDC will ingest and publish the record.  In addition, a GDC may provide additional quality assessment testing based on the https://wmo-im.github.io/wcmp2/kpi/wcmp2-kpi-DRAFT.html[(draft) WCMP2 Key Performance Indicators (KPIs)].
+When a WIS2 Node publishes a WCMP2 record, GDCs perform validation according to the WCMP2 https://wmo-im.github.io/wcmp2/standard/wcmp2-STABLE.html#_conformance_class_abstract_test_suite_normative[Abstract Test Suite]).  If the record is compliant, a GDC will ingest and publish the record.  In addition, a GDC may provide additional quality assessment testing based on the https://wmo-im.github.io/wcmp2/kpi/wcmp2-kpi-DRAFT.html[(draft) WCMP2 Key Performance Indicators (KPIs)].
 
-GDC reports are made available as part of the https://wmo-im.github.io/wis2-monitoring-events/standard/wis2-monitoring-events-DRAFT.html[(draft) WIS2 Monitoring Events specification (WME)] and can be found by subscribing to a Global Broker using the topic `monitor/a/wis2/GDC_CENTRE_ID/WIS2NODE_CENTRE_ID`, where:
+GDC reports are made available as part of the https://wmo-im.github.io/wis2-monitoring-events/standard/wis2-monitoring-events-DRAFT.html[(draft) WIS2 Monitoring Events specification (WME)] and can be found by subscribing to a Global Broker using the topic `monitor/a/wis2/CENTRE_ID`, where:
 
-* `GDC_CENTRE_ID` is the centre identifier of a given GDC
-* `WIS2NODE_CENTRE_ID` is the centre identifier of a given WIS2 Node
+* `CENTRE_ID` is the centre identifier of the subject of the message
 
-For example, to subscribe to Canada GDC reports on WCMP2 records published by Japan Meteorological Agency (JMA), one would subscribe to the topic `monitor/a/wis2/ca-eccc-msc-global-discovery-catalogue/jp-jma`.
+For example, to subscribe to GDC reports on WCMP2 records published by Japan Meteorological Agency (JMA), one would subscribe to the topic `monitor/a/wis2/jp-jma`.
 
 Message payloads are based on WME Message Encoding (WMEM), with a `data` payload of the WCMP2 ETS/KPI reports.
 
-.WIS2 subscription to GDC reports of WCMP2 validation and quality assessment
-image::images/data-publishers-monitor-gdc-wcmp2-reports.png[WIS2 subscription to GDC reports of WCMP2 validation and quality assessment]
+// TODO: fix image once WME topic structure is updated and implemented
+// .WIS2 subscription to GDC reports of WCMP2 validation and quality assessment
+// image::images/data-publishers-monitor-gdc-wcmp2-reports.png[WIS2 subscription to GDC reports of WCMP2 validation and quality assessment]
 
 === Advertising client side filters for data subscriptions in WCMP2 and WNM
 
