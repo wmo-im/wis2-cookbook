@@ -191,6 +191,9 @@ The following elements are required for any WCMP2 extension:
 | |____example1.json
 | |____example2.json
 ----
+
+An example extension can be found at https://github.com/wmo-im/wcmp2-extensions/tree/main/example.
+
 === Differences in WCMP2 records with Extensions
 
 A WCMP2 record with a defined extension per above would provide the following in `conformsTo`:
