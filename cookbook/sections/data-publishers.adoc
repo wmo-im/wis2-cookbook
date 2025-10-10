@@ -11,7 +11,7 @@ A https://wmo-im.github.io/wis2-notification-message[WIS2 Notification Message] 
 pip3 install check-jsonschema
 
 # download WNM schema
-curl -O http://schemas.wmo.int/wnm/1.0.0/schemas/wis2-notification-message-bundled.json
+curl -O http://schemas.wmo.int/wnm/1.1.0/schemas/wis2-notification-message-bundled.json
 
 # run schema validation
 check-jsonschema --schemafile wis2-notification-message-bundled.json /path/to/my/wnm.json
