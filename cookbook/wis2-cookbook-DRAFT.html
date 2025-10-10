@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">World Meteorological Organization</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2025-10-05</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2025-10-10</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 0.1.0</p></td>
@@ -534,6 +534,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_dos_and_donts_when_defining_earth_system_discipline_topics">4.1.3. Dos and don&#8217;ts when defining Earth system discipline topics</a></li>
 </ul>
 </li>
+<li><a href="#_wcmp2_extensions_creating_earth_system_discipline_domain_specific_profiles_of_wcmp2">4.2. WCMP2 Extensions: creating Earth system discipline domain specific profiles of WCMP2</a>
+<ul class="sectlevel3">
+<li><a href="#_considerations_for_creating_a_wcmp2_extension">4.2.1. Considerations for creating a WCMP2 Extension</a></li>
+<li><a href="#_how_to_create_a_wcmp2_extension">4.2.2. How to create a WCMP2 Extension</a></li>
+</ul>
+</li>
+<li><a href="#_differences_in_wcmp2_records_with_extensions">4.3. Differences in WCMP2 records with Extensions</a></li>
 </ul>
 </li>
 <li><a href="#_recipes_for_global_service_operators">5. Recipes for Global Service operators</a></li>
@@ -2016,6 +2023,131 @@ if __name__ == '__main__':
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_wcmp2_extensions_creating_earth_system_discipline_domain_specific_profiles_of_wcmp2"><a class="anchor" href="#_wcmp2_extensions_creating_earth_system_discipline_domain_specific_profiles_of_wcmp2"></a>4.2. WCMP2 Extensions: creating Earth system discipline domain specific profiles of WCMP2</h3>
+<div class="paragraph">
+<p><a href="https://docs.ogc.org/is/20-004r1/20-004r1.html#clause-record-core">OGC API - Records - Part 1: Core: Requirements Class: Record Core</a> allows for extension and profiling of the metadata content model.  In this context, WCMP2 itself is a domain profile, as WMO&#8217;s discovery metadata standard for all Earth system disciplines.</p>
+</div>
+<div class="paragraph">
+<p>As part of WIS2, Earth system discipline domain experts may choose to extend and profile WCMP2 to meet their specific needs.  Typical examples of where extensions can be useful include, but are not limited to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>further constraining specific WCMP2 properties (e.g. based on a controlled vocabulary)</p>
+</li>
+<li>
+<p>enforcing optional WCMP2 properties to be required</p>
+</li>
+<li>
+<p>adding new or additional properties to a WCMP2 record</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Profiling WCMP2 can enable domain communities achieve deeper interoperability (or tighter coupling) to meet their needs.  For example, an NWP profile of WCMP2 may drive a user-focused NWP portal which leverages domain specific properties of a WCMP2 record for more meaningful search results and assessment for use.</p>
+</div>
+<div class="sect3">
+<h4 id="_considerations_for_creating_a_wcmp2_extension"><a class="anchor" href="#_considerations_for_creating_a_wcmp2_extension"></a>4.2.1. Considerations for creating a WCMP2 Extension</h4>
+<div class="paragraph">
+<p>Before creating an extension, domain experts need to give thought on the following aspects:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>gap analysis in WCMP2: can existing WCMP2 properties be used?</p>
+</li>
+<li>
+<p>use cases: consider how the additional properties (or constraints on existing) would be used (as a queryable, returnable, etc.)</p>
+</li>
+<li>
+<p>sustainability: while developing a WCMP2 extension can be worthwhile metadata modelling exercise, ensure that there is a team in place to help maintain the extension over time.  This means having clear ownership of a WCMP2 extension that is subject to ongoing review, and supporting user questions, issues, enhancements and bug fixes</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_how_to_create_a_wcmp2_extension"><a class="anchor" href="#_how_to_create_a_wcmp2_extension"></a>4.2.2. How to create a WCMP2 Extension</h4>
+<div class="paragraph">
+<p>WCMP2 extensions can be defined on <a href="https://github.com/wmo-im/wcmp2-extensions">WMO&#8217;s GitHub repository for WCMP2 Extensions</a>.  Domains can identify and propose extensions as GitHub issues and Pull Requests, which are reviewed by <a href="https://github.com/wmo-im/tt-wismd">WMO TT-WISMD</a>:</p>
+</div>
+<div class="paragraph">
+<p>The following elements are required for any WCMP2 extension:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>directory on GitHub repository, containing:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>examples (directory <code>examples/</code>): a directory of example WCMP2 records exemplifying the extension</p>
+</li>
+<li>
+<p>JSON Schema (directory <code>schema/</code>): a directory of the JSON Schema definition for the extension, encoded as YAML.  The JSON Schema definition should either refer to controlled vocabularies from existing online vocabularies or define inline as <code>enum</code> lists</p>
+</li>
+<li>
+<p>README (file <code>README.md</code>): the WCMP2 Extension Specification, which includes:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>owner: clear, unambiguous ownership identification of the Extension</p>
+</li>
+<li>
+<p>prefix: prefix for all defined elements (i.e. <code>hydro:</code>, <code>nwp:</code>, etc.)</p>
+</li>
+<li>
+<p>conformance: URI for conformance identification and usage in WCMP2 documents (<code>conformsTo</code> member)</p>
+</li>
+<li>
+<p>maturity: level of maturity guideline for usage</p>
+</li>
+<li>
+<p>definitions: specification of additional elements and their requirements (required/optional)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Example directory structure</div>
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">|__hydro
+|____README.md
+|____schema
+| |____hydro-schema.yaml
+|____examples
+| |____example1.json
+| |____example2.json</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An example extension can be found at <a href="https://github.com/wmo-im/wcmp2-extensions/tree/main/example" class="bare">https://github.com/wmo-im/wcmp2-extensions/tree/main/example</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_differences_in_wcmp2_records_with_extensions"><a class="anchor" href="#_differences_in_wcmp2_records_with_extensions"></a>4.3. Differences in WCMP2 records with Extensions</h3>
+<div class="paragraph">
+<p>A WCMP2 record with a defined extension per above would provide the following in <code>conformsTo</code>:</p>
+</div>
+<div class="listingblock">
+<div class="title">Example of identifying additional conformance for a WCMP2 Extension</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">"conformsTo": [
+    "http://wis.wmo.int/spec/wcmp/2/conf/core",
+    "https://wmo-im.github.io/wcmp2-extensions/hydro"  # TODO: clarify how to best identify
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will allow a WCMP2 parser to detect additional conformance to a given Extension and validate accordingly (in addition to validating WCMP2 Core).</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -2042,7 +2174,7 @@ if __name__ == '__main__':
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-10-05 14:09:52 UTC
+Last updated 2025-10-10 22:14:30 UTC
 </div>
 </div>
 </body>
