@@ -365,7 +365,7 @@ Data on WIS2 requires discovery metadata (WCMP2).  For data publishers of histor
 * No-code WCMP2 generation / publishing: using GitHub, a data publisher can manage metadata and trigger WCMP2 generation and publication via MQTT using GitHub Actions.  This https://github.com/wmo-cop/wis2node-metadata-mgmt[GitHub repository] provides a GitOps style workflow for easy management of metadata records as YAML configurations using https://geopython.github.io/pygeometa[pygeometa] "Metadata Control Files (MCF)".  As MCF files are updated, GitHub Actions are triggered to generate WCMP2 records and publish them to a pre-defined MQTT broker that is connected to WIS2.  Note that MCF files are simply a compact and abstract approach to manage metadata.  A data publisher can also manage WCMP2 directly and publish to a pre-defined MQTT broker in the same manner (as demonstrated by the https://github.com/ECCC-MSC/msc-wis2node/tree/gh-pages[ECCC/MSC WIS2 Node implementation]).
 * GISC collaboration: a GISC can support its Area of Responsibility (AoR) by managing the entire metadata publication process, or enable metadata publishing to its MQTT broker to help Members.
 
-Note that the above optinos are not exhaustive, and additinal approaches may be implemented to meet data/metadata publishing requirements of WIS2.
+Note that the above options are not exhaustive, and additional approaches may be implemented to meet data/metadata publishing requirements of WIS2.
 
 === Validating a WMO Core Metadata Profile record
 
