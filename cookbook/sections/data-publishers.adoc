@@ -636,6 +636,45 @@ if __name__ == '__main__':
     run()
 ----
 
+=== Best practices for publishing stations based Observed data
+
+The WMO Unified Data Policy document defines :  
+. Core Weather Surface-based data: Observations provided by the Global Basic Observing Network (GBON) and other observational data, as specified in the Manual on the WMO Integrated Global Observing System (WMO-No. 1160);
+. Recommended Weather Surface-based data: All available observations provided by the Regional Basic Observing Network (RBON), which is further specified in the Manual on the WMO Integrated Global Observing System (WMO-No. 1160);
+. Core Climate observational data:
+(a) Measurements provided by the GCOS Upper-Air Network (GUAN) and GCOS Surface Network (GSN) stations (see also 1.1.1 (a));
+(b) Climate data as defined in the Manual on High-quality Global Data Management Framework for Climate (WMO-No. 1238);
+(c) Essential Climate Variables (ECVs) as defined by the Global Climate Observing System (GCOS) in the Manual on the WMO Integrated Global Observing Syste(WMO-No. 1160) to the extent that the Member holds the data in a digital archive;
+. etc...
+
+Typically all this data will be published in BUFR format as specified in the Manual on Codes (WMO-No. 306). The Manual on the Global Telecommunication System (WMO-No 386) mandates the provision of the data as "bulletin" (multiple observational data grouped into a single BUFR file). 
+It is considered that with modern telecommunication protocols, the "bulletin" approach is not any more required. Therefore, in the WIS 2.0 context, the "bulletin" approach is deprecated and observational data should be provided as individual BUFR.
+
+In addition, the `geometry` in the WIS 2.0 Notification Message should include the coordinates of the location of the observational data:
+
+[source,json]
+----
+  "geometry": {
+    "coordinates": [
+      -87.42188,
+      44.83941,
+      712
+    ],
+    "type": "Point"
+  },
+----
+
+And to allow client side filtering, and when the WIGOS Station Identifier exists for the observational data, the WIS 2.0 Notification Message should include `properties.wigos_station_identifier` :
+
+[source,json]
+----
+{
+  "properties": {
+    "wigos_station_identifier": "0-20000-0-71628"
+  }
+}
+----
+
 === Providing a requirements specification for a WIS 2.0 Node
 
 The below recipe provides user requirements specifications for the implementation of a WIS 2.0 Node.
