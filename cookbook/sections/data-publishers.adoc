@@ -2,7 +2,7 @@
 
 === Validating a WIS2 Notification Message
 
-A https://wmo-im.github.io/wis2-notification-message[WIS2 Notification Message] provides a http://schemas.wmo.int/wnm[JSON Schema] which can be used by any programming language that supports JSON and JSON Schema validation.
+A https://wmo-im.github.io/wis2-notification-message[WIS2 Notification Message] provides a http://schemas.wmo.int/wnm[JSON Schema] which can be used by any programming language that supports JSON and JSON Schema validation.n
 
 .Using Python and check-jsonschema
 [source,bash]
@@ -636,35 +636,39 @@ if __name__ == '__main__':
     run()
 ----
 
-=== Best practices for publishing stations based Observed data
+=== Best practices for publishing station based observational data
 
-The WMO Unified Data Policy document defines :  
-. Core Weather Surface-based data: Observations provided by the Global Basic Observing Network (GBON) and other observational data, as specified in the Manual on the WMO Integrated Global Observing System (WMO-No. 1160);
-. Recommended Weather Surface-based data: All available observations provided by the Regional Basic Observing Network (RBON), which is further specified in the Manual on the WMO Integrated Global Observing System (WMO-No. 1160);
-. Core Climate observational data:
-(a) Measurements provided by the GCOS Upper-Air Network (GUAN) and GCOS Surface Network (GSN) stations (see also 1.1.1 (a));
-(b) Climate data as defined in the Manual on High-quality Global Data Management Framework for Climate (WMO-No. 1238);
-(c) Essential Climate Variables (ECVs) as defined by the Global Climate Observing System (GCOS) in the Manual on the WMO Integrated Global Observing Syste(WMO-No. 1160) to the extent that the Member holds the data in a digital archive;
-. etc...
+The WMO Unified Data Policy defines the following data types:
 
-Typically all this data will be published in BUFR format as specified in the Manual on Codes (WMO-No. 306). The Manual on the Global Telecommunication System (WMO-No 386) mandates the provision of the data as "bulletin" (multiple observational data grouped into a single BUFR file). 
-It is considered that with modern telecommunication protocols, the "bulletin" approach is not any more required. Therefore, in the WIS 2.0 context, the "bulletin" approach is deprecated and observational data should be provided as individual BUFR.
+* Core Weather Surface-based data: observations provided by the Global Basic Observing Network (GBON) and other observational data, as specified in the Manual on the WMO Integrated Global Observing System (WMO-No. 1160);
+* Recommended Weather Surface-based data: all available observations provided by the Regional Basic Observing Network (RBON), which is further specified in the Manual on the WMO Integrated Global Observing System (WMO-No. 1160);
+* Core Climate observational data
+** Measurements provided by the Global Climate Observing System (GCOS) Upper-Air Network (GUAN) and GCOS Surface Network (GSN) stations (see also 1.1.1 (a));
+** Climate data as defined in the Manual on High-quality Global Data Management Framework for Climate (WMO-No. 1238);
+** Essential Climate Variables (ECVs) as defined by the GCOS in the Manual on the WMO Integrated Global Observing System (WMO-No. 1160) to the extent that the Member holds the data in a digital archive
 
-In addition, the `geometry` in the WIS 2.0 Notification Message should include the coordinates of the location of the observational data:
+Typically, observational data is published using BUFR as the representation/format, as specified in the Manual on Codes (WMO-No. 306). The Manual on the Global Telecommunication System (WMO-No 386) mandates the provision of the data as a "bulletin" (multiple observational data grouped into a single BUFR file).
+
+It is considered that with modern telecommunication protocols, the "bulletin" approach is no longer required. Therefore, in the WIS 2.0 context, the "bulletin" approach is deprecated and observational data should be provided as individual BUFR files without grouping.
+
+As publishing data to WIS 2.0 requires the WIS 2.0 Notificiation Message (WNM), the following aspects should be included when publishing observational data.
+
+==== Geometry
+
+WNM requires a `geometry` property, which allows for expressing the location of a data granule (in this case a BUFR file) as follows:
 
 [source,json]
 ----
+{
   "geometry": {
-    "coordinates": [
-      -87.42188,
-      44.83941,
-      712
-    ],
-    "type": "Point"
-  },
+    "type": "Point",
+    "coordinates": [-87.42188, 44.83941, 712]
+}
 ----
 
-And to allow client side filtering, and when the WIGOS Station Identifier exists for the observational data, the WIS 2.0 Notification Message should include `properties.wigos_station_identifier` :
+Note that the order of the geometry coordinates are longitude, latitude and elevation.  In addition, when a geometry cannot be provided, `geometry` can be set to `null`.
+
+WNM allows for extensibility (i.e. adding additional properties) by design.  To enable client side filtering, and when the WIGOS Station Identifier (WSI) exists for observational data, a WNM should include `properties.wigos_station_identifier` as follows:
 
 [source,json]
 ----
@@ -674,6 +678,8 @@ And to allow client side filtering, and when the WIGOS Station Identifier exists
   }
 }
 ----
+
+By providing geometry and WIGOS station identifier in a WNM for observational data, this allows for users to assess and filter WIS 2.0 notifications using location and WSI as the filter criteria.
 
 === Providing a requirements specification for a WIS 2.0 Node
 
