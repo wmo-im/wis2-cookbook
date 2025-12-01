@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">World Meteorological Organization</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2025-11-14</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2025-12-01</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 0.1.0</p></td>
@@ -524,9 +524,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_example_numerical_weather_prediction_based_forecast">3.9.2. Example: Numerical weather prediction based forecast</a></li>
 </ul>
 </li>
-<li><a href="#_providing_a_requirements_specification_for_a_wis_2_0_node">3.10. Providing a requirements specification for a WIS 2.0 Node</a>
+<li><a href="#_best_practices_for_publishing_station_based_observational_data">3.10. Best practices for publishing station based observational data</a>
 <ul class="sectlevel3">
-<li><a href="#_wis_2_0_node_user_requirements_specifications">3.10.1. WIS 2.0 Node - User requirements specifications</a></li>
+<li><a href="#_geometry">3.10.1. Geometry</a></li>
+</ul>
+</li>
+<li><a href="#_providing_a_requirements_specification_for_a_wis_2_0_node">3.11. Providing a requirements specification for a WIS 2.0 Node</a>
+<ul class="sectlevel3">
+<li><a href="#_wis_2_0_node_user_requirements_specifications">3.11.1. WIS 2.0 Node - User requirements specifications</a></li>
 </ul>
 </li>
 </ul>
@@ -1615,14 +1620,88 @@ if __name__ == '__main__':
 </div>
 </div>
 <div class="sect2">
-<h3 id="_providing_a_requirements_specification_for_a_wis_2_0_node"><a class="anchor" href="#_providing_a_requirements_specification_for_a_wis_2_0_node"></a>3.10. Providing a requirements specification for a WIS 2.0 Node</h3>
+<h3 id="_best_practices_for_publishing_station_based_observational_data"><a class="anchor" href="#_best_practices_for_publishing_station_based_observational_data"></a>3.10. Best practices for publishing station based observational data</h3>
+<div class="paragraph">
+<p>The WMO Unified Data Policy defines the following data types:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Core Weather Surface-based data: observations provided by the Global Basic Observing Network (GBON) and other observational data, as specified in the Manual on the WMO Integrated Global Observing System (WMO-No. 1160);</p>
+</li>
+<li>
+<p>Recommended Weather Surface-based data: all available observations provided by the Regional Basic Observing Network (RBON), which is further specified in the Manual on the WMO Integrated Global Observing System (WMO-No. 1160);</p>
+</li>
+<li>
+<p>Core Climate observational data</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Measurements provided by the Global Climate Observing System (GCOS) Upper-Air Network (GUAN) and GCOS Surface Network (GSN) stations (see also 1.1.1 (a));</p>
+</li>
+<li>
+<p>Climate data as defined in the Manual on High-quality Global Data Management Framework for Climate (WMO-No. 1238);</p>
+</li>
+<li>
+<p>Essential Climate Variables (ECVs) as defined by the GCOS in the Manual on the WMO Integrated Global Observing System (WMO-No. 1160) to the extent that the Member holds the data in a digital archive</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Typically, observational data is published using BUFR as the representation/format, as specified in the Manual on Codes (WMO-No. 306). The Manual on the Global Telecommunication System (WMO-No 386) mandates the provision of the data as a "bulletin" (multiple observational data grouped into a single BUFR file).</p>
+</div>
+<div class="paragraph">
+<p>It is considered that with modern telecommunication protocols, the "bulletin" approach is no longer required. Therefore, in the WIS 2.0 context, the "bulletin" approach is deprecated and observational data should be provided as individual BUFR files without grouping.</p>
+</div>
+<div class="paragraph">
+<p>As publishing data to WIS 2.0 requires the WIS 2.0 Notificiation Message (WNM), the following aspects should be included when publishing observational data.</p>
+</div>
+<div class="sect3">
+<h4 id="_geometry"><a class="anchor" href="#_geometry"></a>3.10.1. Geometry</h4>
+<div class="paragraph">
+<p>WNM requires a <code>geometry</code> property, which allows for expressing the location of a data granule (in this case a BUFR file) as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "geometry": {
+    "type": "Point",
+    "coordinates": [-87.42188, 44.83941, 712]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that the order of the geometry coordinates are longitude, latitude and elevation.  In addition, when a geometry cannot be provided, <code>geometry</code> can be set to <code>null</code>.</p>
+</div>
+<div class="paragraph">
+<p>WNM allows for extensibility (i.e. adding additional properties) by design.  To enable client side filtering, and when the WIGOS Station Identifier (WSI) exists for observational data, a WNM should include <code>properties.wigos_station_identifier</code> as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "properties": {
+    "wigos_station_identifier": "0-20000-0-71628"
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By providing geometry and WIGOS station identifier in a WNM for observational data, this allows for users to assess and filter WIS 2.0 notifications using location and WSI as the filter criteria.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_providing_a_requirements_specification_for_a_wis_2_0_node"><a class="anchor" href="#_providing_a_requirements_specification_for_a_wis_2_0_node"></a>3.11. Providing a requirements specification for a WIS 2.0 Node</h3>
 <div class="paragraph">
 <p>The below recipe provides user requirements specifications for the implementation of a WIS 2.0 Node.</p>
 </div>
 <div class="sect3">
-<h4 id="_wis_2_0_node_user_requirements_specifications"><a class="anchor" href="#_wis_2_0_node_user_requirements_specifications"></a>3.10.1. WIS 2.0 Node - User requirements specifications</h4>
+<h4 id="_wis_2_0_node_user_requirements_specifications"><a class="anchor" href="#_wis_2_0_node_user_requirements_specifications"></a>3.11.1. WIS 2.0 Node - User requirements specifications</h4>
 <div class="sect4">
-<h5 id="_introduction_2"><a class="anchor" href="#_introduction_2"></a>3.10.1.1. Introduction</h5>
+<h5 id="_introduction_2"><a class="anchor" href="#_introduction_2"></a>3.11.1.1. Introduction</h5>
 <div class="sect5">
 <h6 id="_applicable_documents"><a class="anchor" href="#_applicable_documents"></a>Applicable Documents</h6>
 <table class="tableblock frame-all grid-all stretch">
@@ -1690,7 +1769,7 @@ if __name__ == '__main__':
 </div>
 </div>
 <div class="sect4">
-<h5 id="_system_overview"><a class="anchor" href="#_system_overview"></a>3.10.1.2. System overview</h5>
+<h5 id="_system_overview"><a class="anchor" href="#_system_overview"></a>3.11.1.2. System overview</h5>
 <div class="sect5">
 <h6 id="_system_context"><a class="anchor" href="#_system_context"></a>System Context</h6>
 <div class="paragraph">
@@ -1754,7 +1833,7 @@ if __name__ == '__main__':
 </div>
 </div>
 <div class="sect4">
-<h5 id="_user_requirements"><a class="anchor" href="#_user_requirements"></a>3.10.1.3. User requirements</h5>
+<h5 id="_user_requirements"><a class="anchor" href="#_user_requirements"></a>3.11.1.3. User requirements</h5>
 <div class="paragraph">
 <p>The purpose of the WIS 2.0 Node (hereafter, referred to as the Node) is to be available to receive data from the production system, and to serve these data via the Internet to the WIS 2.0 environment.</p>
 </div>
@@ -2322,7 +2401,7 @@ if __name__ == '__main__':
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-11-14 18:36:41 UTC
+Last updated 2025-12-01 00:07:42 UTC
 </div>
 </div>
 </body>
