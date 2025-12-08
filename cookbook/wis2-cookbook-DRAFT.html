@@ -514,6 +514,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_best_practices_for_publishing_station_based_observational_data">3.2. Best practices for publishing station based observational data</a>
 <ul class="sectlevel3">
 <li><a href="#_geometry">3.2.1. Geometry</a></li>
+<li><a href="#_client_side_filtering">3.2.2. Client Side Filtering</a></li>
 </ul>
 </li>
 <li><a href="#_providing_a_requirements_specification_for_a_wis_2_0_node">3.3. Providing a requirements specification for a WIS 2.0 Node</a>
@@ -1104,6 +1105,9 @@ if __name__ == '__main__':
 <div class="paragraph">
 <p>Note that the order of the geometry coordinates are longitude, latitude and elevation.  In addition, when a geometry cannot be provided, <code>geometry</code> can be set to <code>null</code>.</p>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_client_side_filtering"><a class="anchor" href="#_client_side_filtering"></a>3.2.2. Client Side Filtering</h4>
 <div class="paragraph">
 <p>WNM allows for extensibility (i.e. adding additional properties) by design.  To enable client side filtering, and when the WIGOS Station Identifier (WSI) exists for observational data, a WNM should include <code>properties.wigos_station_identifier</code> as follows:</p>
 </div>
@@ -2394,7 +2398,7 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-12-08 11:44:54 UTC
+Last updated 2025-12-08 11:48:33 UTC
 </div>
 </div>
 </body>
