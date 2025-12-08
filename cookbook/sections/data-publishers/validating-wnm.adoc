@@ -1,0 +1,34 @@
+=== Validating a WIS2 Notification Message
+
+A https://wmo-im.github.io/wis2-notification-message[WIS2 Notification Message] provides a http://schemas.wmo.int/wnm[JSON Schema] which can be used by any programming language that supports JSON and JSON Schema validation.
+
+.Using Python and check-jsonschema
+[source,bash]
+----
+# install check-jsonschema Python Package from the Python Package Index (PyPI)
+pip3 install check-jsonschema
+
+# download WNM schema
+curl -O http://schemas.wmo.int/wnm/1.1.0/schemas/wis2-notification-message-bundled.json
+
+# run schema validation
+check-jsonschema --schemafile wis2-notification-message-bundled.json /path/to/my/wnm.json
+----
+
+The https://github.com/World-Meteorological-Organization/pywis-pubsub[pywis-pubsub] tool provides a test suite to validate a message against the WNM specification requirements, as well as a Python API for application integration.  Consult the pywis-pubsub README on GitHub for more information/examples.
+
+.Using pywis-pubsub
+[source,bash]
+----
+# install pywis-pubsub
+pip3 install pywis-pubsub
+
+# sync WIS2 notification schema
+pywis-pubsub schema sync
+
+# validate WNM against abstract test suite (file on disk)
+pywis-pubsub ets validate /path/to/file.json
+
+# validate WNM against abstract test suite (URL)
+pywis-pubsub ets validate https://example.org/path/to/file.json
+----

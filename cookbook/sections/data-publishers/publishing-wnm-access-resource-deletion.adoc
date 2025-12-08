@@ -1,0 +1,43 @@
+=== Publishing a WIS2 Notification Message for resource deletion
+
+A https://wmo-im.github.io/wis2-notification-message[WIS2 Notification Message] provides the ability to publish notifications for new, updated or deleted data and metadata (see the https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_16_links[Links] section of the specification).
+
+Similar to the <<_publishing_a_wis2_notification_message_with_embedded_data,embedded data Recipe>>, for data or metadata deletions (core or recommended data), a data publisher may not wish to manage or publish the data or metadata link to infrastructure to an HTTP or FTP server.
+
+In this case, a similar strategy can be used to provide an HTTP 204 No Content link, as per the <<_publishing_a_wis2_notification_message_with_embedded_data,embedded data Recipe>>, along with setting `rel=deletion` in the link object.
+
+.Resource deletion example:
+[source,json]
+----
+{
+    "id": "31e9d66a-cd83-4174-9429-b932f1abe1be",
+    "conformsTo": [
+        "http://wis.wmo.int/spec/wnm/1/conf/core"
+    ],
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            6.146255135536194,
+            46.223296618227444
+        ]
+    },
+    "properties": {
+        "pubtime": "2022-03-20T04:50:18Z",
+        "datetime": "2022-03-20T04:45:00Z",
+        "integrity": {
+            "method": "sha512",
+            "value": "A2KNxvks...S8qfSCw=="
+        },
+        "cache": false,
+        "data_id": "dataset/123/data-granule/UANT01_CWAO_200445___15103.bufr4",
+        "metadata_id": "urn:wmo:md:ca-eccc-msc:observations.swob"
+    },
+    "links": [
+        {
+            "href": "https://http.codes/204",
+            "rel": "deletion"
+        }
+    ]
+}
+----

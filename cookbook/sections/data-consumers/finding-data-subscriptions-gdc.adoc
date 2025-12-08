@@ -1,0 +1,44 @@
+=== Finding data subscription services from the Global Discovery Catalogue
+
+The https://wmo-im.github.io/wis2-guide/guide/wis2-guide-DRAFT.html#_2_4_4_global_discovery_catalogue[Global Discovery Catalogue (GDC)] contains both real-time and non real-time data.  The https://wmo-im.github.io/wcmp2/standard/wcmp2-STABLE.html[WMO Core Metadata Profile (WCMP2)] allows for description of real-time data via its https://wmo-im.github.io/wcmp2/standard/wcmp2-STABLE.html#_1_19_links_and_distribution_information[distribution information], which data publishers use to describe and define connectivity and subscription information for a given dataset.
+
+A typical WCMP2 distribution link for data subscriptions can be found below:
+
+[source,json]
+----
+{
+    "rel": "items",
+    "href": "mqtts://everyone:everyone@globalbroker.meteo.fr:8883",
+    "channel": "origin/a/wis2/ca-eccc-msc/data/core/hydrology",
+    "type": "application/geo+json",
+    "title": "Data notifications"
+}
+----
+
+[NOTE]
+====
+The `channel` property represents WIS2 topic which can be used to subscribe to the `href` property (i.e. the MQTT address) of the Global Broker (GB).
+====
+
+Programmatically, a GDC client can query the catalogue and filter the results for real-time subscriptions in the following manner:
+
+[source,python]
+----
+import requests
+
+response = requests.get('https://wis2-gdc.weather.gc.ca/collections/wis2-discovery-metadata/items').json()
+
+
+def is_wis2_subscription_link(link) -> bool:
+    if (link['href'].startswith('mqtt') and 
+            link.get('channel', '').startswith(('origin/a/wis2', 'cache/a/wis2'))):
+        return True
+
+
+for feature in response['features']:
+    for link in feature['links']:
+        if is_wis2_subscription_link(link):
+            print('WIS2 subscription link')
+----
+
+Using the `href` and `channel` properties of a matching link object, a client can connect and subscribe to data notifications for a given dataset.

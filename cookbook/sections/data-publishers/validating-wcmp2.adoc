@@ -1,0 +1,65 @@
+=== Validating a WMO Core Metadata Profile record
+
+The https://github.com/World-Meteorological-Organization/pywcmp[pywcmp] tool provides a test suite to validate a message against the WCMP2 specification requirements, as well as a Python API for application integration.  Consult the pywcmp README on GitHub for more information/examples.
+
+.Using pywcmp for WCMP2 validation
+[source,bash]
+----
+# install pywcmp
+pip3 install pywcmp
+
+# sync WCMP2 schemas and codelists
+pywcmp bundle sync
+
+# validate WCMP2 against abstract test suite (file on disk)
+pywcmp ets validate /path/to/file.json
+
+# validate WCMP2 against abstract test suite (URL)
+pywcmp ets validate https://example.org/path/to/file.json
+----
+
+A WCMP2 record can also be validated using pywcmp "as a service" using the Canadian and German WIS2 Global Discovery Catalogues, which provide an online validator:
+
+- Navigate to https://wis2-gdc.weather.gc.ca/openapi?f=html or https://wis2.dwd.de/gdc/openapi?f=html
+- Navigate to section *pywcmp-wis2-wcmp2-ets*, endpoint `/processes/pywcmp-wis2-wcmp2-ets/execution` (POST)
+- Click "Try it out"
+- In the section "Mandatory execute request JSON", paste the WCMP2 JSON inside the `record` object
+
+.WIS2 GDC online validator, request via WCMP2 copy/paste
+image::images/data-publishers-wcmp2-validate-request-copy-paste.png[WIS2 GDC online validator, request via WCMP2 copy/paste]
+
+Alternatively, the validator service also accepts a URL (if the WCMP2 record is online):
+
+.WIS2 GDC online validator, request via WCMP2 URL
+image::images/data-publishers-wcmp2-validate-request-url.png[WIS2 GDC online validator, request via WCMP2 URL]
+
+- Click "Execute"
+
+.WIS2 GDC online validator, response
+image::images/data-publishers-wcmp2-validate-response.png[WIS2 GDC online validator, response]
+
+A response will be provided with validation results.
+
+The WCMP2 standard also has https://wmo-im.github.io/wcmp2/kpi/wcmp2-kpi-DRAFT.html[(draft) Key Performance Indicators] that provide quality assessment in support of continuous improvement of WCMP2 records.  pywcmp additionally implements these KPIs using a similar workflow.
+
+.Using pywcmp for WCMP2 quality assessment
+[source,bash]
+----
+# validate WCMP2 against abstract test suite (file on disk)
+pywcmp kpi validate /path/to/file.json
+
+# validate WCMP2 against abstract test suite (URL)
+pywcmp kpi validate https://example.org/path/to/file.json
+----
+
+The KPI check performs actions such as checking for healthy/working links and acronym checks, length of titles and more.  Note that the KPI results do not affect WCMP2 compliance but are suggestions on how to improve your WCMP2 record for better discoverability and use.
+
+The Canadian and German WIS2 Global Discovery Catalogues also provide this functionality online in a similar fashion as the validator.:
+
+.WIS2 GDC quality assessment checker, request via WCMP2 URL
+image::images/data-publishers-wcmp2-quality-assess-request-url.png[WIS2 GDC quality assessment checker, request via WCMP2 URL]
+
+.WIS2 GDC quality assessment checker, response
+image::images/data-publishers-wcmp2-quality-assess-response.png[WIS2 GDC online quality assessment checker, response]
+
+A response will be provided with quality assessment results (in a similar format to the validation report).
