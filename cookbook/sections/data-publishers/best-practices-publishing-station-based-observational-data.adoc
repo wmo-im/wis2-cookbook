@@ -30,6 +30,8 @@ WNM requires a `geometry` property, which allows for expressing the location of 
 
 Note that the order of the geometry coordinates are longitude, latitude and elevation.  In addition, when a geometry cannot be provided, `geometry` can be set to `null`.
 
+==== Client Side Filtering
+
 WNM allows for extensibility (i.e. adding additional properties) by design.  To enable client side filtering, and when the WIGOS Station Identifier (WSI) exists for observational data, a WNM should include `properties.wigos_station_identifier` as follows:
 
 [source,json]
