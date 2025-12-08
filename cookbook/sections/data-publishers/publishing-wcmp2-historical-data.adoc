@@ -1,0 +1,119 @@
+=== Publishing a WMO Core Metadata Profile record for historical data
+
+WIS2 and WCMP2 have been designed to support both real-time and historical data.  While real-time data publishing in WIS2 typically includes real-time data notifications, archive data may or may not require data notifications, depending on how often the dataset is disseminated and/or updated.
+
+==== Temporal aspects
+
+Of critical importance is describing the temporal nature of the archive.  Some examples:
+
+.Describing the temporal nature of an archive in WCMP2 which contains various temporal granularities
+[source,json]
+----
+"time": {
+    "interval": [
+        "1850-01-01",
+        ".."
+    ]
+}
+----
+
+.Describing the temporal nature of an archive in WCMP2 which has a single temporal granularity (i.e. continuously updated on a daily basis)
+[source,json]
+----
+"time": {
+    "interval": [
+        "1850-01-01",
+        ".."
+    ],
+    "resolution": "P1D"
+}
+----
+
+.Describing the temporal nature of an archive in WCMP2 which is not updated
+[source,json]
+----
+"time": {
+    "interval": [
+        "1850-01-01",
+        "2025-08-19"
+    ],
+    "resolution": "P1D"
+}
+----
+
+==== Distribution and notification aspects
+
+The way in which a historical archive is disseminated can result in a few different possibilities in WCMP2 and WIS2 data notifications.
+
+===== Publishing links of an archive in WCMP2 provided via an API
+
+Historical data made available via an Application Programming Interface (API) allows for data subsetting and reduction (i.e. extracting
+archive data based on space, time or other attributes), for users to focus on and work with only the part of the archive they are interested in.
+
+While WIS2 does not currently mandate specific APIs, useful APIs for data access include (but are not limited to):
+
+* https://ogcapi.ogc.org/edr[OGC API - Environmental Data Retrieval]: lightweight interfaces to query and access environmental data resources
+* https://github.com/radiantearth/stac-api-spec[SpatioTemporal Asset Catalog API]: an API to retrieve data granules
+
+Note: APIs may implement access control as required (see the https://wmo-im.github.io/wcmp2/standard/wcmp2-STABLE.html#_1_19_4_access_control[Access control section in WCMP2]).
+
+===== Publishing links of an archive in WCMP2 whose updates are not disseminated as data granules
+
+WIS2 Notifications promote "actionable links" when describing data updates via MQTT.  In some cases, a historical archive may be updated without
+publishing data granule level updates.  For example, if an archive is updated every 90 days, and updates are published into the existing archive
+without the ability to advertise one WIS2 Notification per data granule update, then publishing via MQTT is not a suitable mechanism for real-time
+decision support systems and downstream applications.  In this case, clearly describing the temporal nature of the archive as well as a link which
+clearly defines an archive (via the ``rel=archives`` link relation) is recommended:
+
+.Publishing an archive link in WCMP2
+[source,json]
+----
+{
+    "rel": "archives",
+    "href": "https://example.org/hydrometric-archive",
+    "type": "text/html",
+    "title": "Hydrometric archive database download",
+    "distribution": {
+        "availableFormats": [
+            {
+                "name": "SQLite3"
+            },
+            {
+                "name": "Microsoft Access"
+            }
+        ]
+    }
+}
+----
+
+===== Publishing links via updates into an existing archive
+
+If a historical archives does publish data granules (i.e. if a daily climate archive is updated daily and each
+day's update can be defined with an actionable link, then an MQTT link is also recommended.
+
+.Publishing archive and MQTT links in WCMP2 with data granule updates
+[source,json]
+----
+{
+    "rel": "archives",
+    "href": "https://example.org/daily-climate-observations",
+    "type": "text/csv",
+    "title": "Raw data download (CSV files)"
+},
+{
+    "rel": "items",
+    "href": "mqtts://example.org",
+    "channel": "origin/a/wis2/ca-eccc-msc/data/core/climate/surface-based-observations/daily",
+    "type": "application/geo+json",
+    "title": "Data notifications of daily updates"
+}
+----
+
+===== Publishing notifications of discovery metadata (WCMP2) considerations
+
+Data on WIS2 requires discovery metadata (WCMP2).  For data publishers of historical archive data without the required WIS2 Node broker (MQTT) capability, there exist some options to lower the barrier to publication:
+
+* No-code WCMP2 generation / publishing: using GitHub, a data publisher can manage metadata and trigger WCMP2 generation and publication via MQTT using GitHub Actions.  This https://github.com/wmo-cop/wis2node-metadata-mgmt[GitHub repository] provides a GitOps style workflow for easy management of metadata records as YAML configurations using https://geopython.github.io/pygeometa[pygeometa] "Metadata Control Files (MCF)".  As MCF files are updated, GitHub Actions are triggered to generate WCMP2 records and publish them to a pre-defined MQTT broker that is connected to WIS2.  Note that MCF files are simply a compact and abstract approach to manage metadata.  A data publisher can also manage WCMP2 directly and publish to a pre-defined MQTT broker in the same manner (as demonstrated by the https://github.com/ECCC-MSC/msc-wis2node/tree/gh-pages[ECCC/MSC WIS2 Node implementation]).
+* GISC collaboration: a GISC can support its Area of Responsibility (AoR) by managing the entire metadata publication process, or enable metadata publishing to its MQTT broker to help Members.
+
+Note that the above options are not exhaustive, and additional approaches may be implemented to meet data/metadata publishing requirements of WIS2.

@@ -1,0 +1,15 @@
+=== Subscribing to GDC reports of WCMP2 validation and quality assessment
+
+When a WIS2 Node publishes a WCMP2 record, GDCs perform validation according to the WCMP2 https://wmo-im.github.io/wcmp2/standard/wcmp2-STABLE.html#_conformance_class_abstract_test_suite_normative[Abstract Test Suite]).  If the record is compliant, a GDC will ingest and publish the record.  In addition, a GDC may provide additional quality assessment testing based on the https://wmo-im.github.io/wcmp2/kpi/wcmp2-kpi-DRAFT.html[(draft) WCMP2 Key Performance Indicators (KPIs)].
+
+GDC reports are made available as part of the https://wmo-im.github.io/wis2-monitoring-events/standard/wis2-monitoring-events-DRAFT.html[(draft) WIS2 Monitoring Events specification (WME)] and can be found by subscribing to a Global Broker using the topic `monitor/a/wis2/CENTRE_ID`, where:
+
+* `CENTRE_ID` is the centre identifier of the subject of the message
+
+For example, to subscribe to GDC reports on WCMP2 records published by Japan Meteorological Agency (JMA), one would subscribe to the topic `monitor/a/wis2/jp-jma`.
+
+Message payloads are based on WME Message Encoding (WMEM), with a `data` payload of the WCMP2 ETS/KPI reports.
+
+// TODO: fix image once WME topic structure is updated and implemented
+// .WIS2 subscription to GDC reports of WCMP2 validation and quality assessment
+// image::images/data-publishers-monitor-gdc-wcmp2-reports.png[WIS2 subscription to GDC reports of WCMP2 validation and quality assessment]

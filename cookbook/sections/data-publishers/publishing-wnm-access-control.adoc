@@ -1,0 +1,46 @@
+=== Publishing a WIS2 Notification Message with access control
+
+Recommended data in WIS2 may be open or access controlled.  For data publication with access control implications, WNM provides a `security` object as part a link object.  The `security` object is defined using https://swagger.io/specification/#security-scheme-object[OpenAPI Security Scheme definitions].
+
+.Access control using HTTP Basic authentication
+[source,json]
+----
+{
+  "rel": "canonical",
+  "type": "application/grib2",
+  "href": "https://example.org/my/protected/data/nwp/12/003/20240805120000-air-temp-500.grib2",
+  "security": {
+    "default": {
+      "type": "http",
+      "scheme": "basic",
+      "description": "Please contact us for access information"
+    }
+  }
+}
+----
+
+.Access control using an API key
+[source,json]
+----
+{
+  "rel": "canonical",
+  "type": "application/geo+json",
+  "href": "https://example.org/my/protected/data/nwp/12/003/20240805120000-air-temp-500.grib2",
+  "security": {
+    "default": {
+      "type": "apiKey",
+      "name": "api-key",
+      "in": "query",
+      "description": "Please see https://example.org/contact-us for more information"
+    }
+  }
+}
+----
+
+Note:
+
+* the child property under `security` (`default` in the examples above) can be any text or label.  We use `default` here as a convention
+* the `security.default.name` is the name of the API key parameter as defined by your API service
+* only properties defined in the OpenAPI Security Scheme definition are allowed.  Any additional properties will invalidate the WNM
+
+Of course, always ensure your WNM is valid (see <<Validate a WIS2 Notification Message>> for more information).

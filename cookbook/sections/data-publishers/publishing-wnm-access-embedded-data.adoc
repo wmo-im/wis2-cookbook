@@ -1,0 +1,96 @@
+=== Publishing a WIS2 Notification Message with embedded data
+
+A https://wmo-im.github.io/wis2-notification-message[WIS2 Notification Message] provides the ability to embed data as part of a notification (see the https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_15_properties_content[Properties / Content] section of the specification).
+
+Providing embedded data offers users the ability to access the data without the need to execute the additional step of downloading the data via the actionable link (see the https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_16_links[Links] section of the specification).
+
+In some cases, a data publisher also prefer not to publish the corresponding actionable link to infrastructure (e.g. an HTTP or FTP server).
+
+When the data publisher decides to not publish an actionable link and to rely exclusively on the embedded data feature, the data publisher will:
+
+- use `properties.content` object to provide the data
+- use `properties.cache=false` to instruct WIS2 Global Cache Services to not cache the data  (note: `properties.cache` is not required for recommended data, since recommended data is not cached by WIS2 Global Caches)
+- provide a link object whose `href` results in HTTP 204 (No Content)
+
+To provide an HTTP 204 link, there a couple of options:
+
+**Option 1: configure your web server to provide an endpoint that always returns 204**:
+
+.Nginx example configuration
+[source,console]
+----
+# always return HTTP 204 when accessing /no-content-here
+location /no-content-here/ {
+  return 204;
+}
+----
+
+.Apache example configuration
+[source,console]
+----
+# always return HTTP 204 when accessing /no-content-here
+Redirect 204 no-content-here
+----
+
+which then would result in the link object as follows:
+
+[source,json]
+----
+{
+    "href": "https://example.org/no-content-here",
+    "rel": "canonical"
+}
+----
+
+**Option 2: use a service that provides HTTP responses as a service**.  One such service is the https://http.codes[HTTP Response API], which then would result in the link object as follows:
+
+[source,json]
+----
+{
+    "href": "https://http.codes/204",
+    "rel": "canonical"
+}
+----
+
+.Embedded data example:
+[source,json]
+----
+{
+    "id": "31e9d66a-cd83-4174-9429-b932f1abe1be",
+    "conformsTo": [
+        "http://wis.wmo.int/spec/wnm/1/conf/core"
+    ],
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            6.146255135536194,
+            46.223296618227444
+        ]
+    },
+    "properties": {
+        "pubtime": "2022-03-20T04:50:18Z",
+        "datetime": "2022-03-20T04:45:00Z",
+        "integrity": {
+            "method": "sha512",
+            "value": "A2KNxvks...S8qfSCw=="
+        },
+        "cache": false,
+        "data_id": "dataset/123/data-granule/UANT01_CWAO_200445___15103.bufr4",
+        "metadata_id": "urn:wmo:md:ca-eccc-msc:observations.swob",
+        "content": {
+            "encoding": "utf-8",
+            "value": "encoded bytes from the file",
+            "size": 457
+        }
+    },
+    "links": [
+        {
+            "href": "https://http.codes/204",
+            "rel": "canonical"
+        }
+    ]
+}
+----
+
+For cases of publishing recommended data, the same approaches/example can be used, without the need to set `properties.cache`.

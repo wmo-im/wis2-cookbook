@@ -1,0 +1,5 @@
+== Recipes for Earth system discipline domain experts
+
+include::defining-proposing-topics.adoc[]
+
+include::wcmp2-extensions.adoc[]
