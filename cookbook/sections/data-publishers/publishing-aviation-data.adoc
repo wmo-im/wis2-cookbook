@@ -1,0 +1,65 @@
+=== Publishing aeronautical meteorology data on WIS2
+
+In addition to publishing aeronautical meteorology data via ICAO SWIM (as defined in the ICAO Procedures for Air Navigation Services - Information Management, Doc 10199), WIS2 may be used as a secondary mechanism to share this data.
+
+However, as per ICAO Annex 3 - Meteorological Service for International Air Navigation, aeronautical meteorology data may only be used for the purposes of international air navigation.
+
+If you choose to publish aeronautical meteorology data through WIS2 you must clearly state the restrictions on use of this data in the associated WCMP2 discovery metadata record.
+
+First, because aeronautical meteorology data is subject to usage restrictions the Recommended data policy applies, as described in the WMO Unified Data Policy, Resolution 1 (Cg-Ext(2021)).
+
+Second, state the data usage rights.
+
+Third, because we're using the Recommended data policy, you must provide a license for use of the dataset. This license must be published so that it can be referenced from a Link.
+
+.Example clauses in license for use of aeronautical meteorological data:
+----
+AERONAUTICAL METEOROLOGY DATA LICENSE
+
+  TERMS OF USE
+
+  This aeronautical meteorological data is provided under the following terms:
+
+    PERMITTED USE
+
+    This meteorological information is made available exclusively for the purposes of safety of air navigation.
+
+    RESTRICTIONS
+
+    Air Navigation Use Only: This data shall only be used for aviation-related purposes.
+
+    COMPLIANCE
+
+    Use of this data constitutes acceptance of these terms.
+----
+
+.Describing an aeronautical meteorology dataset:
+[source,json]
+----
+{
+    ...
+    "properties":{
+        "wmo:dataPolicy": "recommended",
+        "rights": "This information is freely disseminated for the purposes of safety of international air navigation. ICAO Annex 3",
+        ...
+    },
+    "links": [{
+        "rel": "license",
+        "href": "https://example.org/license",
+        "type": "text/html",
+        "title": "Aeronautical Meteorological Data License"
+    }],
+    ...
+}
+----  
+
+WIS2 Notification Messages indicating the availability of aeronautical meteorology data should be published to the `weather/aviation` topic or sub-topic thereof as stated in the WMO Codes Registry footnote:[http://codes.wmo.int/wis/topic-hierarchy/earth-system-discipline/weather/aviation].  
+
+.Example WIS2 Topic for publishing aeronautical meteorology data:
+----
+origin/a/wis2/{centre-id}/data/core/weather/aviation/metar
+----
+
+You may restrict access to the aeronautical meteorology data you publish through WIS2, for example, requiring authenticated access. Please refer to recipe <<_publishing_a_wis2_notification_message_with_access_control>> for further details.
+
+Please be aware that if you choose to embed aeronautical meteorology data within WIS2 Notification Messages, this data will be openly visible within WIS2. For more information about embedding data in notification messages, please refer to recipe <<_publishing_a_wis2_notification_message_with_embedded_data>>.

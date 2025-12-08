@@ -21,3 +21,5 @@ include::subscribing-to-gdc-reports.adoc[]
 include::validating-wcmp2.adoc[]
 
 include::validating-wnm.adoc[]
+
+include::publishing-aviation-data.adoc[]
