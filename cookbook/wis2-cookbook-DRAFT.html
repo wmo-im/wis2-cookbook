@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">World Meteorological Organization</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2025-12-08</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2025-12-10</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 0.1.0</p></td>
@@ -535,6 +535,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_subscribing_to_gdc_reports_of_wcmp2_validation_and_quality_assessment">3.9. Subscribing to GDC reports of WCMP2 validation and quality assessment</a></li>
 <li><a href="#_validating_a_wmo_core_metadata_profile_record">3.10. Validating a WMO Core Metadata Profile record</a></li>
 <li><a href="#_validating_a_wis2_notification_message">3.11. Validating a WIS2 Notification Message</a></li>
+<li><a href="#_publishing_aeronautical_meteorology_data_on_wis2">3.12. Publishing aeronautical meteorology data on WIS2</a></li>
 </ul>
 </li>
 <li><a href="#_recipes_for_earth_system_discipline_domain_experts">4. Recipes for Earth system discipline domain experts</a>
@@ -2008,6 +2009,84 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_publishing_aeronautical_meteorology_data_on_wis2"><a class="anchor" href="#_publishing_aeronautical_meteorology_data_on_wis2"></a>3.12. Publishing aeronautical meteorology data on WIS2</h3>
+<div class="paragraph">
+<p>In addition to publishing aeronautical meteorology data via ICAO SWIM (as defined in the ICAO Procedures for Air Navigation Services - Information Management, Doc 10199), WIS2 may be used as a secondary mechanism to share this data.</p>
+</div>
+<div class="paragraph">
+<p>However, as per ICAO Annex 3 - Meteorological Service for International Air Navigation, aeronautical meteorology data may only be used for the purposes of international air navigation.</p>
+</div>
+<div class="paragraph">
+<p>If you choose to publish aeronautical meteorology data through WIS2 you must clearly state the restrictions on use of this data in the associated WCMP2 discovery metadata record.</p>
+</div>
+<div class="paragraph">
+<p>First, because aeronautical meteorology data is subject to usage restrictions the Recommended data policy applies, as described in the WMO Unified Data Policy, Resolution 1 (Cg-Ext(2021)).</p>
+</div>
+<div class="paragraph">
+<p>Second, state the data usage rights.</p>
+</div>
+<div class="paragraph">
+<p>Third, because we&#8217;re using the Recommended data policy, you must provide a license for use of the dataset. This license must be published so that it can be referenced from a Link.</p>
+</div>
+<div class="listingblock">
+<div class="title">Proposed clauses in license for use of aeronautical meteorological data:</div>
+<div class="content">
+<pre>AERONAUTICAL METEOROLOGY DATA LICENSE
+
+  TERMS OF USE
+
+  This aeronautical meteorological data is provided under the following terms:
+
+    PERMITTED USE
+
+    This meteorological information is made available exclusively for the purposes of safety of air navigation.
+
+    RESTRICTIONS
+
+    Air Navigation Use Only: This data shall only be used for aviation-related purposes.
+
+    COMPLIANCE
+
+    Use of this data constitutes acceptance of these terms.</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Describing an aeronautical meteorology dataset:</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+    ...
+    "properties":{
+        "wmo:dataPolicy": "recommended",
+        "rights": "This information is freely disseminated for the purposes of safety of air navigation. ICAO Annex 3",
+        ...
+    },
+    "links": [{
+        "rel": "license",
+        "href": "https://example.org/license",
+        "type": "text/html",
+        "title": "Aeronautical Meteorological Data License"
+    }],
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>WIS2 Notification Messages indicating the availability of aeronautical meteorology data should be published to the <code>weather/aviation</code> topic or sub-topic thereof as stated in the WMO Codes Registry <sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnotedef_5" title="View footnote.">5</a>]</sup>.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example WIS2 Topic for publishing aeronautical meteorology data:</div>
+<div class="content">
+<pre>origin/a/wis2/{centre-id}/data/recommended/weather/aviation/metar</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You may restrict access to the aeronautical meteorology data you publish through WIS2, for example, requiring authenticated access. Please refer to recipe <a href="#_publishing_a_wis2_notification_message_with_access_control">Publishing a WIS2 Notification Message with access control</a> for further details.</p>
+</div>
+<div class="paragraph">
+<p>Please be aware that if you choose to embed aeronautical meteorology data within WIS2 Notification Messages, this data will be openly visible within WIS2. For more information about embedding data in notification messages, please refer to recipe <a href="#_publishing_a_wis2_notification_message_with_embedded_data">Publishing a WIS2 Notification Message with embedded data</a>.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -2395,10 +2474,13 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 <div class="footnote" id="_footnotedef_4">
 <a href="#_footnoteref_4">4</a>. <a href="https://standards.iso.org/iso/19115/-3/mcc/1.0/codelists.html" class="bare">https://standards.iso.org/iso/19115/-3/mcc/1.0/codelists.html</a>
 </div>
+<div class="footnote" id="_footnotedef_5">
+<a href="#_footnoteref_5">5</a>. <a href="http://codes.wmo.int/wis/topic-hierarchy/earth-system-discipline/weather/aviation" class="bare">http://codes.wmo.int/wis/topic-hierarchy/earth-system-discipline/weather/aviation</a>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-12-08 11:48:33 UTC
+Last updated 2025-12-10 17:22:37 UTC
 </div>
 </div>
 </body>
