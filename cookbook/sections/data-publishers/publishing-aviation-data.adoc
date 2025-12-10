@@ -12,7 +12,7 @@ Second, state the data usage rights.
 
 Third, because we're using the Recommended data policy, you must provide a license for use of the dataset. This license must be published so that it can be referenced from a Link.
 
-.Example clauses in license for use of aeronautical meteorological data:
+.Proposed clauses in license for use of aeronautical meteorological data:
 ----
 AERONAUTICAL METEOROLOGY DATA LICENSE
 
@@ -40,7 +40,7 @@ AERONAUTICAL METEOROLOGY DATA LICENSE
     ...
     "properties":{
         "wmo:dataPolicy": "recommended",
-        "rights": "This information is freely disseminated for the purposes of safety of international air navigation. ICAO Annex 3",
+        "rights": "This information is freely disseminated for the purposes of safety of air navigation. ICAO Annex 3",
         ...
     },
     "links": [{
@@ -57,7 +57,7 @@ WIS2 Notification Messages indicating the availability of aeronautical meteorolo
 
 .Example WIS2 Topic for publishing aeronautical meteorology data:
 ----
-origin/a/wis2/{centre-id}/data/core/weather/aviation/metar
+origin/a/wis2/{centre-id}/data/recommended/weather/aviation/metar
 ----
 
 You may restrict access to the aeronautical meteorology data you publish through WIS2, for example, requiring authenticated access. Please refer to recipe <<_publishing_a_wis2_notification_message_with_access_control>> for further details.
