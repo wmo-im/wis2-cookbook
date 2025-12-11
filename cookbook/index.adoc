@@ -1,6 +1,6 @@
 :title: WIS2 Cookbook
 :titletext: {title}
-:version: 1.0.0
+:version: 1.1-dev
 :date: {docdate}
 :copyright: Copyright © 2025 World Meteorological Organization (WMO)
 :doctype: book
@@ -23,8 +23,8 @@
 |[big]*World Meteorological Organization*
 |Date: {date}
 |Version: {version}
-|Document status: STABLE
-|Document location: https://wmo-im.github.io/wis2-cookbook/cookbook/wis2-cookbook-STABLE.html
+|Document status: DRAFT
+|Document location: https://wmo-im.github.io/wis2-cookbook/cookbook/wis2-cookbook-DRAFT.html
 |Standing Committee on Information Management and Technology (SC-IMT)footnote:[https://wmo.int/site/knowledge-hub/governance/infcom/standing-committee-information-management-and-technology-sc-imt]
 |Commission for Observation, Infrastructure and Information Systems (INFCOM)footnote:[https://wmo.int/site/knowledge-hub/governance/infcom]
 |{copyright}
