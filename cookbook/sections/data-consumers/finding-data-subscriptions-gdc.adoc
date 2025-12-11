@@ -1,6 +1,6 @@
 === Finding data subscription services from the Global Discovery Catalogue
 
-The https://wmo-im.github.io/wis2-guide/guide/wis2-guide-DRAFT.html#_2_4_4_global_discovery_catalogue[Global Discovery Catalogue (GDC)] contains both real-time and non real-time data.  The https://wmo-im.github.io/wcmp2/standard/wcmp2-STABLE.html[WMO Core Metadata Profile (WCMP2)] allows for description of real-time data via its https://wmo-im.github.io/wcmp2/standard/wcmp2-STABLE.html#_1_19_links_and_distribution_information[distribution information], which data publishers use to describe and define connectivity and subscription information for a given dataset.
+The https://wmo-im.github.io/wis2-guide/guide/wis2-guide-APPROVED.html#_2_4_4_global_discovery_catalogue[Global Discovery Catalogue (GDC)] contains both real-time and non real-time data.  The https://wmo-im.github.io/wcmp2/standard/wcmp2-STABLE.html[WMO Core Metadata Profile (WCMP2)] allows for description of real-time data via its https://wmo-im.github.io/wcmp2/standard/wcmp2-STABLE.html#_1_19_links_and_distribution_information[distribution information], which data publishers use to describe and define connectivity and subscription information for a given dataset.
 
 A typical WCMP2 distribution link for data subscriptions can be found below:
 
