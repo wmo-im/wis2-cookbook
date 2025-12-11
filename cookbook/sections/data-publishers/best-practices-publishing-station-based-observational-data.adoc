@@ -44,3 +44,5 @@ WNM allows for extensibility (i.e. adding additional properties) by design.  To 
 ----
 
 By providing geometry and WIGOS station identifier in a WNM for observational data, this allows for users to assess and filter WIS 2.0 notifications using location and WSI as the filter criteria.
+
+For more information on client side filtering see recipe <<_advertising_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm>>.
