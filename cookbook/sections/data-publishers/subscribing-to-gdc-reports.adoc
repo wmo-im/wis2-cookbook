@@ -2,7 +2,7 @@
 
 When a WIS2 Node publishes a WCMP2 record, GDCs perform validation according to the WCMP2 https://wmo-im.github.io/wcmp2/standard/wcmp2-STABLE.html#_conformance_class_abstract_test_suite_normative[Abstract Test Suite]).  If the record is compliant, a GDC will ingest and publish the record.  In addition, a GDC may provide additional quality assessment testing based on the https://wmo-im.github.io/wcmp2/kpi/wcmp2-kpi-DRAFT.html[(draft) WCMP2 Key Performance Indicators (KPIs)].
 
-GDC reports are made available as part of the https://wmo-im.github.io/wis2-monitoring-events/standard/wis2-monitoring-events-DRAFT.html[(draft) WIS2 Monitoring Events specification (WME)] and can be found by subscribing to a Global Broker using the topic `monitor/a/wis2/CENTRE_ID`, where:
+GDC reports are made available by some GDCs in pilot mode as part of the https://wmo-im.github.io/wis2-monitoring-events/standard/wis2-monitoring-events-DRAFT.html[(draft) WIS2 Monitoring Events specification (WME)] and can be found by subscribing to a Global Broker using the topic `monitor/a/wis2/CENTRE_ID`, where:
 
 * `CENTRE_ID` is the centre identifier of the subject of the message
 
