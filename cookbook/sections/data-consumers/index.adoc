@@ -1,5 +1,5 @@
 == Recipes for data consumers
 
-include::finding-data-subscriptions-gdc.adoc[]
-
 include::searching-the-gdc.adoc[]
+
+include::finding-data-subscriptions-gdc.adoc[]

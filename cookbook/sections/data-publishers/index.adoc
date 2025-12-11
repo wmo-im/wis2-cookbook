@@ -1,10 +1,8 @@
 == Recipes for data publishers
 
-include::advertising-client-sidefilters-wcmp2-wnm.adoc[]
-
 include::best-practices-publishing-station-based-observational-data.adoc[]
 
-include::providing-requirements-wis2node.adoc[]
+include::publishing-aviation-data.adoc[]
 
 include::publishing-wcmp2-historical-data.adoc[]
 
@@ -16,10 +14,12 @@ include::publishing-wnm-access-embedded-data.adoc[]
 
 include::publishing-wnm-access-resource-deletion.adoc[]
 
-include::subscribing-to-gdc-reports.adoc[]
+include::advertising-client-sidefilters-wcmp2-wnm.adoc[]
 
 include::validating-wcmp2.adoc[]
 
 include::validating-wnm.adoc[]
 
-include::publishing-aviation-data.adoc[]
+include::subscribing-to-gdc-reports.adoc[]
+
+include::providing-requirements-wis2node.adoc[]
