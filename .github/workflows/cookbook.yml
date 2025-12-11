@@ -39,7 +39,7 @@ jobs:
           git config --global user.email "tomkralidis@gmail.com"
           git config --global user.name "Tom Kralidis"
           rm -rf cookbook/images cookbook/wis2-cookbook-DRAFT*
-          mv -f /tmp/wis2-cookbook/* .
+          mv -f /tmp/wis2-cookbook/wis2-cookbook-DRAFT* /tmp/wis2-cookbook/images .
           git add .
           git commit -am "update WIS2 Guide build"
           git push
