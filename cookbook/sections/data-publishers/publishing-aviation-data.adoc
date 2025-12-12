@@ -2,13 +2,13 @@
 
 In addition to publishing aeronautical meteorology data via ICAO SWIM (as defined in the ICAO Procedures for Air Navigation Services - Information Management, Doc 10199), WIS2 may be used as a secondary mechanism to share this data.
 
-However, as per ICAO Annex 3 - Meteorological Service for International Air Navigation, aeronautical meteorology data may only be used for the purposes of international air navigation.
+However, as per the current version of ICAO Annex 3 - Meteorological Service for International Air Navigation, aeronautical meteorology data may only be used for the purposes of international air navigation.
 
 If you choose to publish aeronautical meteorology data through WIS2 you must clearly state the restrictions on use of this data in the associated WCMP2 discovery metadata record.
 
 First, because aeronautical meteorology data is subject to usage restrictions the Recommended data policy applies, as described in the WMO Unified Data Policy, Resolution 1 (Cg-Ext(2021)).
 
-Second, state the data usage rights.
+Second, the data usage rights must be stated.
 
 Third, because we're using the Recommended data policy, you must provide a license for use of the dataset. This license must be published so that it can be referenced from a Link.
 
