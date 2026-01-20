@@ -24,6 +24,6 @@ jobs:
         run: |
           mkdir -p /tmp/wis2-cookbook/cookbook/images \
           && cd cookbook \
-          && asciidoctor --trace -o /tmp/wis2-cookbook/cookbook/${FILE_BASENAME}.html index.adoc \
+          && asciidoctor --trace -a stylesheet=css/wmo-asciidoc.css -o /tmp/wis2-cookbook/cookbook/${FILE_BASENAME}.html index.adoc \
           && asciidoctor -a allow-uri-read --trace --backend docbook --out-file - index.adoc | pandoc --from docbook --to docx --output /tmp/wis2-cookbook/cookbook/${FILE_BASENAME}.docx \
           && asciidoctor -a allow-uri-read --trace -r asciidoctor-pdf --trace -b pdf -o /tmp/wis2-cookbook/cookbook/${FILE_BASENAME}.pdf index.adoc
