@@ -8,6 +8,8 @@ include::publishing-wcmp2-historical-data.adoc[]
 
 include::publishing-wcmp2-retired-data.adoc[]
 
+include::publishing-wcmp2-provenance.adoc[]
+
 include::publishing-wnm-access-control.adoc[]
 
 include::publishing-wnm-access-embedded-data.adoc[]
