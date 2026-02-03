@@ -96,7 +96,7 @@ body {
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">World Meteorological Organization</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2026-01-20</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2026-02-03</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 1.1-dev</p></td>
@@ -160,21 +160,22 @@ body {
 </ul>
 </li>
 <li><a href="#_publishing_a_wmo_core_metadata_profile_record_for_retired_data">3.4. Publishing a WMO Core Metadata Profile record for retired data</a></li>
-<li><a href="#_publishing_a_wis2_notification_message_with_access_control">3.5. Publishing a WIS2 Notification Message with access control</a></li>
-<li><a href="#_publishing_a_wis2_notification_message_with_embedded_data">3.6. Publishing a WIS2 Notification Message with embedded data</a></li>
-<li><a href="#_publishing_a_wis2_notification_message_for_resource_deletion">3.7. Publishing a WIS2 Notification Message for resource deletion</a></li>
-<li><a href="#_advertising_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm">3.8. Advertising client side filters for data subscriptions in WCMP2 and WNM</a>
+<li><a href="#_publishing_a_wmo_core_metadata_profile_record_with_data_provenance">3.5. Publishing a WMO Core Metadata Profile record with data provenance</a></li>
+<li><a href="#_publishing_a_wis2_notification_message_with_access_control">3.6. Publishing a WIS2 Notification Message with access control</a></li>
+<li><a href="#_publishing_a_wis2_notification_message_with_embedded_data">3.7. Publishing a WIS2 Notification Message with embedded data</a></li>
+<li><a href="#_publishing_a_wis2_notification_message_for_resource_deletion">3.8. Publishing a WIS2 Notification Message for resource deletion</a></li>
+<li><a href="#_advertising_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm">3.9. Advertising client side filters for data subscriptions in WCMP2 and WNM</a>
 <ul class="sectlevel3">
-<li><a href="#_example_surface_weather_observations">3.8.1. Example: Surface weather observations</a></li>
-<li><a href="#_example_numerical_weather_prediction_based_forecast">3.8.2. Example: Numerical weather prediction based forecast</a></li>
+<li><a href="#_example_surface_weather_observations">3.9.1. Example: Surface weather observations</a></li>
+<li><a href="#_example_numerical_weather_prediction_based_forecast">3.9.2. Example: Numerical weather prediction based forecast</a></li>
 </ul>
 </li>
-<li><a href="#_validating_a_wmo_core_metadata_profile_record">3.9. Validating a WMO Core Metadata Profile record</a></li>
-<li><a href="#_validating_a_wis2_notification_message">3.10. Validating a WIS2 Notification Message</a></li>
-<li><a href="#_subscribing_to_gdc_reports_of_wcmp2_validation_and_quality_assessment">3.11. Subscribing to GDC reports of WCMP2 validation and quality assessment</a></li>
-<li><a href="#_providing_a_requirements_specification_for_a_wis_2_0_node">3.12. Providing a requirements specification for a WIS 2.0 Node</a>
+<li><a href="#_validating_a_wmo_core_metadata_profile_record">3.10. Validating a WMO Core Metadata Profile record</a></li>
+<li><a href="#_validating_a_wis2_notification_message">3.11. Validating a WIS2 Notification Message</a></li>
+<li><a href="#_subscribing_to_gdc_reports_of_wcmp2_validation_and_quality_assessment">3.12. Subscribing to GDC reports of WCMP2 validation and quality assessment</a></li>
+<li><a href="#_providing_a_requirements_specification_for_a_wis_2_0_node">3.13. Providing a requirements specification for a WIS 2.0 Node</a>
 <ul class="sectlevel3">
-<li><a href="#_wis_2_0_node_user_requirements_specifications">3.12.1. WIS 2.0 Node - User requirements specifications</a></li>
+<li><a href="#_wis_2_0_node_user_requirements_specifications">3.13.1. WIS 2.0 Node - User requirements specifications</a></li>
 </ul>
 </li>
 </ul>
@@ -795,7 +796,30 @@ day&#8217;s update can be defined with an actionable link, then an MQTT link is 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_publishing_a_wis2_notification_message_with_access_control"><a class="anchor" href="#_publishing_a_wis2_notification_message_with_access_control"></a>3.5. Publishing a WIS2 Notification Message with access control</h3>
+<h3 id="_publishing_a_wmo_core_metadata_profile_record_with_data_provenance"><a class="anchor" href="#_publishing_a_wmo_core_metadata_profile_record_with_data_provenance"></a>3.5. Publishing a WMO Core Metadata Profile record with data provenance</h3>
+<div class="paragraph">
+<p>Data provenance provides the ability to describe an audit trail for the lifecycle of a given dataset.</p>
+</div>
+<div class="paragraph">
+<p>In WCMP2, one can provide linkages to provenance information via a dedicated link object.</p>
+</div>
+<div class="listingblock">
+<div class="title">Expressing data provenance as a WCMP2 link</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+    "rel": "describedBy",
+    "type": "text/html",
+    "title": "Provenance information for this dataset",
+    "href": "https://example.org/dataset1.html"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As with any WCMP2 link, the URL itself is defined by the data publisher.  The <code>describedBy</code> attribute (which is an <a href="https://www.iana.org/assignments/link-relations/link-relations.xhtml">official IANA link relation</a>) is the signal for identifying data provenance by a user assessing and reviewing dataset history and lineage.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_publishing_a_wis2_notification_message_with_access_control"><a class="anchor" href="#_publishing_a_wis2_notification_message_with_access_control"></a>3.6. Publishing a WIS2 Notification Message with access control</h3>
 <div class="paragraph">
 <p>Recommended data in WIS2 may be open or access controlled.  For data publication with access control implications, WNM provides a <code>security</code> object as part a link object.  The <code>security</code> object is defined using <a href="https://swagger.io/specification/#security-scheme-object">OpenAPI Security Scheme definitions</a>.</p>
 </div>
@@ -855,7 +879,7 @@ day&#8217;s update can be defined with an actionable link, then an MQTT link is 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_publishing_a_wis2_notification_message_with_embedded_data"><a class="anchor" href="#_publishing_a_wis2_notification_message_with_embedded_data"></a>3.6. Publishing a WIS2 Notification Message with embedded data</h3>
+<h3 id="_publishing_a_wis2_notification_message_with_embedded_data"><a class="anchor" href="#_publishing_a_wis2_notification_message_with_embedded_data"></a>3.7. Publishing a WIS2 Notification Message with embedded data</h3>
 <div class="paragraph">
 <p>A <a href="https://wmo-im.github.io/wis2-notification-message">WIS2 Notification Message</a> provides the ability to embed data as part of a notification (see the <a href="https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_15_properties_content">Properties / Content</a> section of the specification).</p>
 </div>
@@ -971,7 +995,7 @@ Redirect 204 no-content-here</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_publishing_a_wis2_notification_message_for_resource_deletion"><a class="anchor" href="#_publishing_a_wis2_notification_message_for_resource_deletion"></a>3.7. Publishing a WIS2 Notification Message for resource deletion</h3>
+<h3 id="_publishing_a_wis2_notification_message_for_resource_deletion"><a class="anchor" href="#_publishing_a_wis2_notification_message_for_resource_deletion"></a>3.8. Publishing a WIS2 Notification Message for resource deletion</h3>
 <div class="paragraph">
 <p>A <a href="https://wmo-im.github.io/wis2-notification-message">WIS2 Notification Message</a> provides the ability to publish notifications for new, updated or deleted data and metadata (see the <a href="https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_16_links">Links</a> section of the specification).</p>
 </div>
@@ -1019,7 +1043,7 @@ Redirect 204 no-content-here</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_advertising_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm"><a class="anchor" href="#_advertising_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm"></a>3.8. Advertising client side filters for data subscriptions in WCMP2 and WNM</h3>
+<h3 id="_advertising_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm"><a class="anchor" href="#_advertising_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm"></a>3.9. Advertising client side filters for data subscriptions in WCMP2 and WNM</h3>
 <div class="paragraph">
 <p>A key concept of a WCMP2 record is "actionable links"; this means being able to access a dataset or data granule
 without any further interactions.  For real-time data, a WCMP2 record provides linkages to the WIS2 Global Broker
@@ -1075,7 +1099,7 @@ data consumer is only interested in a certain subset of the data granules being 
 <p>To implement this behaviour, add additional properties to both WCMP2 and WNM as follows:</p>
 </div>
 <div class="sect3">
-<h4 id="_example_surface_weather_observations"><a class="anchor" href="#_example_surface_weather_observations"></a>3.8.1. Example: Surface weather observations</h4>
+<h4 id="_example_surface_weather_observations"><a class="anchor" href="#_example_surface_weather_observations"></a>3.9.1. Example: Surface weather observations</h4>
 <div class="listingblock">
 <div class="title">Surface weather observations: WCMP2 MQTT link with additional properties</div>
 <div class="content">
@@ -1119,7 +1143,7 @@ data consumer is only interested in a certain subset of the data granules being 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_example_numerical_weather_prediction_based_forecast"><a class="anchor" href="#_example_numerical_weather_prediction_based_forecast"></a>3.8.2. Example: Numerical weather prediction based forecast</h4>
+<h4 id="_example_numerical_weather_prediction_based_forecast"><a class="anchor" href="#_example_numerical_weather_prediction_based_forecast"></a>3.9.2. Example: Numerical weather prediction based forecast</h4>
 <div class="listingblock">
 <div class="title">Numerical weather prediction: WCMP2 MQTT link with additional properties</div>
 <div class="content">
@@ -1254,7 +1278,7 @@ if __name__ == '__main__':
 </div>
 </div>
 <div class="sect2">
-<h3 id="_validating_a_wmo_core_metadata_profile_record"><a class="anchor" href="#_validating_a_wmo_core_metadata_profile_record"></a>3.9. Validating a WMO Core Metadata Profile record</h3>
+<h3 id="_validating_a_wmo_core_metadata_profile_record"><a class="anchor" href="#_validating_a_wmo_core_metadata_profile_record"></a>3.10. Validating a WMO Core Metadata Profile record</h3>
 <div class="paragraph">
 <p>The <a href="https://github.com/World-Meteorological-Organization/pywcmp">pywcmp</a> tool provides a test suite to validate a message against the WCMP2 specification requirements, as well as a Python API for application integration.  Consult the pywcmp README on GitHub for more information/examples.</p>
 </div>
@@ -1360,7 +1384,7 @@ pywcmp kpi validate https://example.org/path/to/file.json</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_validating_a_wis2_notification_message"><a class="anchor" href="#_validating_a_wis2_notification_message"></a>3.10. Validating a WIS2 Notification Message</h3>
+<h3 id="_validating_a_wis2_notification_message"><a class="anchor" href="#_validating_a_wis2_notification_message"></a>3.11. Validating a WIS2 Notification Message</h3>
 <div class="paragraph">
 <p>A <a href="https://wmo-im.github.io/wis2-notification-message">WIS2 Notification Message</a> provides a <a href="http://schemas.wmo.int/wnm">JSON Schema</a> which can be used by any programming language that supports JSON and JSON Schema validation.</p>
 </div>
@@ -1398,7 +1422,7 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_subscribing_to_gdc_reports_of_wcmp2_validation_and_quality_assessment"><a class="anchor" href="#_subscribing_to_gdc_reports_of_wcmp2_validation_and_quality_assessment"></a>3.11. Subscribing to GDC reports of WCMP2 validation and quality assessment</h3>
+<h3 id="_subscribing_to_gdc_reports_of_wcmp2_validation_and_quality_assessment"><a class="anchor" href="#_subscribing_to_gdc_reports_of_wcmp2_validation_and_quality_assessment"></a>3.12. Subscribing to GDC reports of WCMP2 validation and quality assessment</h3>
 <div class="paragraph">
 <p>When a WIS2 Node publishes a WCMP2 record, GDCs perform validation according to the WCMP2 <a href="https://wmo-im.github.io/wcmp2/standard/wcmp2-STABLE.html#_conformance_class_abstract_test_suite_normative">Abstract Test Suite</a>).  If the record is compliant, a GDC will ingest and publish the record.  In addition, a GDC may provide additional quality assessment testing based on the <a href="https://wmo-im.github.io/wcmp2/kpi/wcmp2-kpi-DRAFT.html">(draft) WCMP2 Key Performance Indicators (KPIs)</a>.</p>
 </div>
@@ -1420,14 +1444,14 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_providing_a_requirements_specification_for_a_wis_2_0_node"><a class="anchor" href="#_providing_a_requirements_specification_for_a_wis_2_0_node"></a>3.12. Providing a requirements specification for a WIS 2.0 Node</h3>
+<h3 id="_providing_a_requirements_specification_for_a_wis_2_0_node"><a class="anchor" href="#_providing_a_requirements_specification_for_a_wis_2_0_node"></a>3.13. Providing a requirements specification for a WIS 2.0 Node</h3>
 <div class="paragraph">
 <p>The below recipe provides user requirements specifications for the implementation of a WIS 2.0 Node.</p>
 </div>
 <div class="sect3">
-<h4 id="_wis_2_0_node_user_requirements_specifications"><a class="anchor" href="#_wis_2_0_node_user_requirements_specifications"></a>3.12.1. WIS 2.0 Node - User requirements specifications</h4>
+<h4 id="_wis_2_0_node_user_requirements_specifications"><a class="anchor" href="#_wis_2_0_node_user_requirements_specifications"></a>3.13.1. WIS 2.0 Node - User requirements specifications</h4>
 <div class="sect4">
-<h5 id="_introduction_2"><a class="anchor" href="#_introduction_2"></a>3.12.1.1. Introduction</h5>
+<h5 id="_introduction_2"><a class="anchor" href="#_introduction_2"></a>3.13.1.1. Introduction</h5>
 <div class="sect5">
 <h6 id="_applicable_documents"><a class="anchor" href="#_applicable_documents"></a>Applicable Documents</h6>
 <table class="tableblock frame-all grid-all stretch">
@@ -1495,7 +1519,7 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_system_overview"><a class="anchor" href="#_system_overview"></a>3.12.1.2. System overview</h5>
+<h5 id="_system_overview"><a class="anchor" href="#_system_overview"></a>3.13.1.2. System overview</h5>
 <div class="sect5">
 <h6 id="_system_context"><a class="anchor" href="#_system_context"></a>System Context</h6>
 <div class="paragraph">
@@ -1559,7 +1583,7 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_user_requirements"><a class="anchor" href="#_user_requirements"></a>3.12.1.3. User requirements</h5>
+<h5 id="_user_requirements"><a class="anchor" href="#_user_requirements"></a>3.13.1.3. User requirements</h5>
 <div class="paragraph">
 <p>The purpose of the WIS 2.0 Node (hereafter, referred to as the Node) is to be available to receive data from the production system, and to serve these data via the Internet to the WIS 2.0 environment.</p>
 </div>
@@ -2124,7 +2148,7 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-01-20 18:39:57 UTC
+Last updated 2026-02-03 13:24:31 UTC
 </div>
 </div>
 </body>
