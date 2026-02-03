@@ -1,0 +1,18 @@
+=== Publishing a WMO Core Metadata Profile record with data provenance
+
+Data provenance provides the ability to describe an audit trail for the lifecycle of a given dataset.
+
+In WCMP2, one can provide linkages to provenance information via a dedicated link object.
+
+.Expressing data provenance as a WCMP2 link
+[source,json]
+----
+{
+    "rel": "describedBy",
+    "type": "text/html",
+    "title": "Provenance information for this dataset",
+    "href": "https://example.org/dataset1.html"
+}
+----
+
+As with any WCMP2 link, the URL itself is defined by the data publisher.  The ``describedBy`` attribute (which is an https://www.iana.org/assignments/link-relations/link-relations.xhtml[official IANA link relation]) is the signal for identifying data provenance by a user assessing and reviewing dataset history and lineage.
