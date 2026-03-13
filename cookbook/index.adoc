@@ -24,6 +24,7 @@
 |Date: {date}
 |Version: {version}
 |Document status: DRAFT
+|Revision history: see <<_revision_history,Annex A>>
 |Document location: https://wmo-im.github.io/wis2-cookbook/cookbook/wis2-cookbook-DRAFT.html
 |Standing Committee on Information Management and Technology (SC-IMT)footnote:[https://wmo.int/site/knowledge-hub/governance/infcom/standing-committee-information-management-and-technology-sc-imt]
 |Commission for Observation, Infrastructure and Information Systems (INFCOM)footnote:[https://wmo.int/site/knowledge-hub/governance/infcom]
@@ -41,3 +42,5 @@ include::sections/data-consumers/index.adoc[]
 include::sections/data-publishers/index.adoc[]
 
 include::sections/earth-system-discipline-domain-experts/index.adoc[]
+
+include::sections/annex_a.adoc[]
