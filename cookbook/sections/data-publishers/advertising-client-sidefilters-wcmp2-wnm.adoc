@@ -45,7 +45,7 @@ To implement this behaviour, add additional properties to both WCMP2 and WNM as 
   "title": "Real-time notifications",
   "href" : "mqtts://globalbroker.meteo.fr:8883",
   "channel": "cache/a/wis2/ca-eccc-msc/data/core/weather/surface-based-observations/synop",
-  "properties": {
+  "filters": {
     "wigos_station_identifier": {
        "type": "string",
        "title": "WIGOS station identifier"
@@ -80,7 +80,7 @@ When implemented by a data producer, a data consumer can:
   "title": "Real-time notifications",
   "href" : "mqtts://globalbroker.meteo.fr:8883",
   "channel": "origin/a/wis2/ca-eccc-msc/data/core/weather/prediction/forecast/medium-range/deterministic/global",
-  "properties": {
+  "filters": {
     "model_run": {
        "type": "string",
        "title": "Model run",
