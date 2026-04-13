@@ -25,6 +25,7 @@ WNM requires a `geometry` property, which allows for expressing the location of 
   "geometry": {
     "type": "Point",
     "coordinates": [-87.42188, 44.83941, 712]
+  }
 }
 ----
 
