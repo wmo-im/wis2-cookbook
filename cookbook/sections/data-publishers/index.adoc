@@ -10,6 +10,8 @@ include::publishing-wcmp2-retired-data.adoc[]
 
 include::publishing-wcmp2-provenance.adoc[]
 
+include::publishing-wcmp2-wigos-stations.adoc[]
+
 include::publishing-wnm-access-control.adoc[]
 
 include::publishing-wnm-access-embedded-data.adoc[]

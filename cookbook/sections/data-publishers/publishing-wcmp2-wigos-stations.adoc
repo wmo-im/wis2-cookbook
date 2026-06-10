@@ -1,0 +1,31 @@
+=== Publishing a WMO Core Metadata Profile record referencing WIGOS stations and networks
+
+WCMP2 allows for publication of any data (observations, forecasts, warnings, etc.) with the principle of discovery metadata.  WIGOS metadata refers to station or observation metadata which is currently managed in the https://oscar.wmo.int/surface[OSCAR Surface] system.
+
+Given that various metadata are managed across distributed systems, WCMP2 links can be used to relate a given dataset of observations measured at a station or set of stations on OSCAR/Surface, or other/similar systems.
+
+.Referring to a station as a WCMP2 link
+[source,json]
+----
+{
+    "rel": "station",
+    "type": "application/xml",
+    "title": "Station report for Thessaloniki (Greece)",
+    "href": "https://oscar.wmo.int/surface/rest/api/wmd/download/0-20008-0-THE"
+}
+----
+
+.Referring to a set of stations as a WCMP2 link
+[source,json]
+----
+{
+    "rel": "stations",
+    "type": "text/html",
+    "title": "Davos Integrated CryoNet Cluster",
+    "href": "https://oscar.wmo.int/surface/#/search/stationClusterReport/8"
+}
+----
+
+A data publisher can decide whether to enumerate one link foreach station, or refer to a facility set of stations.  As an example, for a network of 50 stations, it would be more suitable to refer to the set of stations as a single `rel=stations` link.
+
+NOTE: Link relations are governed by https://www.iana.org/assignments/link-relations/link-relations.xhtml[IANA link relations] and WMO extensions as defined in WCMP2, available on the https://codes.wmo.int/wis/_link-type[WMO Codes Registry].
