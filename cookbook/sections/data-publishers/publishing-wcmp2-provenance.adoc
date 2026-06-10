@@ -8,11 +8,11 @@ In WCMP2, one can provide linkages to provenance information via a dedicated lin
 [source,json]
 ----
 {
-    "rel": "describedBy",
+    "rel": "describedby",
     "type": "text/html",
     "title": "Provenance information for this dataset",
     "href": "https://example.org/dataset1.html"
 }
 ----
 
-As with any WCMP2 link, the URL itself is defined by the data publisher.  The ``describedBy`` attribute (which is an https://www.iana.org/assignments/link-relations/link-relations.xhtml[official IANA link relation]) is the signal for identifying data provenance by a user assessing and reviewing dataset history and lineage.
+As with any WCMP2 link, the URL itself is defined by the data publisher.  The ``describedby`` attribute (which is an https://www.iana.org/assignments/link-relations/link-relations.xhtml[official IANA link relation]) is the signal for identifying data provenance by a user assessing and reviewing dataset history and lineage.
