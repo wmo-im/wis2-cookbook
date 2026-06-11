@@ -10,7 +10,7 @@ Given that various metadata are managed across distributed systems, WCMP2 links 
 {
     "rel": "station",
     "type": "application/xml",
-    "title": "Station report for Thessaloniki (Greece)",
+    "title": "Station report details for Thessaloniki (Greece)",
     "href": "https://oscar.wmo.int/surface/rest/api/wmd/download/0-20008-0-THE"
 }
 ----
