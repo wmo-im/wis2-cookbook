@@ -83,7 +83,7 @@ GISC will follow up on errors reported on the monitor topic and assist the conta
 
 The WIS2 Node Assessment is considered complete when:
 
-- One or more metadata records are available for the WIS2 Node when searching https://gdc.wis2dev.io/collections/wis2-discovery-metadata/items?q="<centre-id>"
+- One or more metadata records are available for the WIS2 Node when searching `https://gdc.wis2dev.io/collections/wis2-discovery-metadata/items?q="<centre-id>"`
 - MQTT notifications have been published on the WIS2DEV GB at `origin/a/wis2/<centre-id>/metadata`
 - MQTT notifications have been published on the WIS2DEV GB at `origin/a/wis2/<centre-id>/data/#`
 - MQTT notifications have been published on the WIS2DEV GB at `cache/a/wis2/<centre-id>/metadata`
