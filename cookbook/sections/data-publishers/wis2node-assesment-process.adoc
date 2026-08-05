@@ -32,9 +32,9 @@ When a new WIS2 Node registration request is received from an authorized data pu
 
 The new subscription on the WIS2DEV Global Broker will subscribe to the topic:
 
-- `origin/a/wis2/<centre-id>/#`
+- `origin/a/wis2/&lt;centre-id&gt;/#`
 
-where `<centre-id>` is the unique identifier of the WIS2 Node.
+where `&lt;centre-id&gt;` is the unique identifier of the WIS2 Node.
 
 The WIS2DEV Global Broker republishes all valid WIS2 Notification Messages. A message is considered invalid when:
 
@@ -46,16 +46,16 @@ The WIS2DEV Global Broker republishes all valid WIS2 Notification Messages. A me
 
 The WIS2DEV Global Cache downloads data advertised in data-notifications published on:
 
-- `origin/a/wis2/<centre-id>/data/core/#`
-- `origin/a/wis2/<centre-id>/metadata/#`
+- `origin/a/wis2/&lt;centre-id&gt;/data/core/#`
+- `origin/a/wis2/&lt;centre-id&gt;/metadata/#`
 
 No download attempt is made if the data has already been downloaded, unless the download link indicates `rel="update"`.
 
-After a successful download, the WIS2DEV Global Cache publishes a data-notification on `cache/a/wis2/<centre-id>/#`, with the full topic matching that of the original WIS2 Node, but with `origin` replaced by `cache`.
+After a successful download, the WIS2DEV Global Cache publishes a data-notification on `cache/a/wis2/&lt;centre-id&gt;/#`, with the full topic matching that of the original WIS2 Node, but with `origin` replaced by `cache`.
 
 Notifications published by the WIS2DEV Global Cache on `cache/a/wis2/#` are republished by the WIS2DEV Global Broker.
 
-The WIS2DEV Global Discovery Catalogue subscribes to the WIS2DEV Global Broker at `cache/a/wis2/<centre-id>/metadata` and validates metadata records published by the WIS2 Node using the pywcmp ETS test suite.
+The WIS2DEV Global Discovery Catalogue subscribes to the WIS2DEV Global Broker at `cache/a/wis2/&lt;centre-id&gt;/metadata` and validates metadata records published by the WIS2 Node using the pywcmp ETS test suite.
 
 ==== Assessment Preparation for Data Publishers
 
@@ -69,9 +69,9 @@ Before the assessment, data publishers should ensure that:
 
 GISC subscribes to `mqtts://gb.wis2dev.io:8883` using username/password `everyone/everyone` and sets up a connection to the topics:
 
-- `origin/a/wis2/<centre-id>/#`
-- `cache/a/wis2/<centre-id>/#`
-- `monitor/a/wis2/<centre-id>`
+- `origin/a/wis2/&lt;centre-id&gt;/#`
+- `cache/a/wis2/&lt;centre-id&gt;/#`
+- `monitor/a/wis2/&lt;centre-id&gt;`
 
 GISC will coordinate with the contact point for the new WIS2 Node to publish metadata for their datasets first and then to publish data notifications.
 
@@ -83,11 +83,11 @@ GISC will follow up on errors reported on the monitor topic and assist the conta
 
 The WIS2 Node Assessment is considered complete when:
 
-- One or more metadata records are available for the WIS2 Node when searching `https://gdc.wis2dev.io/collections/wis2-discovery-metadata/items?q="<centre-id>"`
-- MQTT notifications have been published on the WIS2DEV GB at `origin/a/wis2/<centre-id>/metadata`
-- MQTT notifications have been published on the WIS2DEV GB at `origin/a/wis2/<centre-id>/data/#`
-- MQTT notifications have been published on the WIS2DEV GB at `cache/a/wis2/<centre-id>/metadata`
-- MQTT notifications have been published on the WIS2DEV GB at `cache/a/wis2/<centre-id>/data/core/#`
+- One or more metadata records are available for the WIS2 Node when searching `https://gdc.wis2dev.io/collections/wis2-discovery-metadata/items?q=%3Ccentre-id%3E`
+- MQTT notifications have been published on the WIS2DEV GB at `origin/a/wis2/&lt;centre-id&gt;/metadata`
+- MQTT notifications have been published on the WIS2DEV GB at `origin/a/wis2/&lt;centre-id&gt;/data/#`
+- MQTT notifications have been published on the WIS2DEV GB at `cache/a/wis2/&lt;centre-id&gt;/metadata`
+- MQTT notifications have been published on the WIS2DEV GB at `cache/a/wis2/&lt;centre-id&gt;/data/core/#`
 
 ==== Common Assessment Issues
 
@@ -106,3 +106,15 @@ The data publisher should ensure that the metadata record passes the pywcmp ETS 
 ===== Updated metadata records are rejected by the WIS2DEV Global Cache because a previous record with the same data-id was already cached and the download link did not indicate `rel="update"`
 
 The data publisher should ensure that the download link for updated metadata records indicates `rel="update"`.
+
+[NOTE]
+.Implementation note for publishers using wis2box
+====
+Many publishers use `wis2box` to implement their WIS2 Node.
+
+`wis2box` is designed to publish data-notifications only after metadata has been published, and it includes built-in validation of WCMP2 records using pywcmp.
+
+WIS2 Node implementations that use separate software to publish metadata and data-notifications may require additional coordination to pass the WIS2 Node Assessment Process. In particular, mismatches between the metadata identifier and the WIS2 topic advertised in the WCMP2 record can cause data-notifications to be discarded.
+
+Data publishers who want to make existing systems WIS2-compliant may consider sending their data to a `wis2box` instance configured with the `passthrough`-plugin to reduce metadata-related issues.
+====
