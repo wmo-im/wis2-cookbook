@@ -23,7 +23,7 @@ Data publishers and commercial WIS2 solution providers who want to test their sy
 The WIS2DEV environment consists of:
 
 - A Global Broker with a publicly accessible MQTT endpoint available at: `mqtts://gb.wis2dev.io:8883`
-- A Global Discovery Catalogue with an OAPI endpoint available at: https://gdc.wis2dev.io/
+- A Global Discovery Catalogue with an OAPI endpoint available at: `https://gdc.wis2dev.io/`
 - A Global Cache provided through Amazon S3 web services
 
 ==== WIS2DEV Global Broker
