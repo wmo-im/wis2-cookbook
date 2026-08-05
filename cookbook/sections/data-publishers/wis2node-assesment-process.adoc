@@ -51,7 +51,7 @@ The WIS2DEV Global Cache downloads data advertised in data-notifications publish
 
 No download attempt is made if the data has already been downloaded, unless the download link indicates `rel="update"`.
 
-After a successful download, the WIS2DEV Global Cache publishes a data-notification on `cache/a/wis2/<centre-id>/#`, with the full topic matching that of the original WIS2 Node, but with `"origin"` replaced by `"cache"`.
+After a successful download, the WIS2DEV Global Cache publishes a data-notification on `cache/a/wis2/<centre-id>/#`, with the full topic matching that of the original WIS2 Node, but with `origin` replaced by `cache`.
 
 Notifications published by the WIS2DEV Global Cache on `cache/a/wis2/#` are republished by the WIS2DEV Global Broker.
 
