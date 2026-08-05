@@ -1,0 +1,79 @@
+=== WIS2 Node Assessment Process
+
+Data publishers are required to demonstrate that their WIS2 Node implementation meets the requirements of the WIS2 specification.
+
+This assessment process begins when an authorized data publisher submits a WIS2 Node registration request to the WMO Secretariat.
+
+[NOTE]
+.Optional pre-registration testing
+====
+Data publishers and commercial WIS2 solution providers who want to test their systems before registration can contact the WMO Secretariat at wis2-support@wmo.int to request that a test system be connected to WIS2DEV.
+====
+
+==== Roles and Responsibilities
+
+During the WIS2 Node assessment:
+
+- The WMO Secretariat connects the WIS2 Node to the WIS2DEV environment.
+- The GISC in the data publisher's Area of Responsibility (AoR) performs the assessment.
+- The GISC informs the WMO Secretariat when the assessment is completed.
+
+==== WIS2DEV Environment
+
+The WIS2DEV environment consists of:
+
+- A Global Broker with a publicly accessible MQTT endpoint: mqtts://gb.wis2dev.io:8883
+- A Global Discovery Catalogue with an OAPI endpoint: https://gdc.wis2dev.io/
+- A Global Cache provided through Amazon S3 web services
+
+==== Broker Subscription and Message Handling
+
+When a new WIS2 Node registration request is received from an authorized data publisher, the WIS2DEV Global Broker is configured with a new subscription to the MQTT endpoint provided by the data publisher.
+
+The WIS2DEV Global Broker subscribes to the following topic:
+
+- origin/a/wis2/<centre-id>/#
+
+where <centre-id> is the unique identifier of the WIS2 Node.
+
+The WIS2DEV Global Broker republishes all valid WIS2 Notification Messages. A message is considered invalid when:
+
+- the channel does not match the WIS2 Topic Hierarchy, or
+- the message does not conform to the WIS2 Notification Message specification, or
+- the message is a data-notification for which no corresponding metadata record can be found in the WIS2DEV Global Discovery Catalogue.
+
+==== Global Cache and Metadata Validation
+
+The WIS2DEV Global Cache downloads data advertised in data-notifications published on:
+
+- origin/a/wis2/<centre-id>/data/core/#
+- origin/a/wis2/<centre-id>/metadata/#
+
+No download attempt is made if the data has already been downloaded, unless the download link indicates rel="update".
+
+After a successful download, the WIS2DEV Global Cache publishes a data-notification on cache/a/wis2/<centre-id>/#, with the full topic matching that of the original WIS2 Node, but with "origin" replaced by "cache". Notifications published by the WIS2DEV Global Cache on cache/a/wis2/# are republished by the WIS2DEV Global Broker.
+
+The WIS2DEV Global Discovery Catalogue subscribes to the WIS2DEV Global Broker at cache/a/wis2/<centre-id>/metadata and validates metadata records published by the WIS2 Node using the pywcmp ETS test suite.
+
+==== Assessment Preparation Checklist
+
+Before the assessment, data publishers should ensure that:
+
+- The WIS2DEV IP address, 52.25.203.140, is allowlisted for the HTTP and MQTT ports used by the WIS2 Node.
+- The WIS2 Node can publish data-notifications for metadata, and the published metadata contains a valid WCMP2 record.
+- The WIS2 Node can publish data-notifications for data, and the data-notifications match the published metadata.
+
+==== Common Assessment Issues
+
+- The canonical URL embedded in a WIS2 data-notification is not accessible from WIS2DEV.
+The data publisher should ensure that the canonical URL is reachable from the WIS2DEV environment.
+
+- The WIS2 Node is not publishing data-notifications for metadata.
+The data publisher should ensure that data-notifications for metadata are being published.
+
+- The metadata record published by the WIS2 Node is cached by the WIS2DEV Global Cache, but rejected by the WIS2DEV Global Discovery Catalogue because it fails the pywcmp ETS test suite.
+
+- Updated metadata records are rejected by the WIS2DEV Global Cache because a previous record with the same data-id was already cached and the download link did not indicate rel="update".
+The data publisher should ensure that the download link for updated metadata records indicates rel="update".
+
+
