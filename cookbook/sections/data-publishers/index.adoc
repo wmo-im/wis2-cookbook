@@ -1,6 +1,6 @@
 == Recipes for data publishers
 
-include::wis2node-assesment-process.adoc[]
+include::wis2node-assessment-process.adoc[]
 
 include::best-practices-publishing-station-based-observational-data.adoc[]
 
