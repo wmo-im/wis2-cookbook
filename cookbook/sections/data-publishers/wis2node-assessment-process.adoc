@@ -69,7 +69,7 @@ Before the assessment, data publishers should ensure that:
 
 === GISC test setup instructions
 
-GISCs subscribe to `mqtts://gb.wis2dev.io:8883` using username/password `everyone/everyone` and sets up a connection to the topics:
+GISCs subscribe to `mqtts://gb.wis2dev.io:8883` using username/password `everyone/everyone` and set up a connection to the topics:
 
 - `origin/a/wis2/&lt;centre-id&gt;/#`
 - `cache/a/wis2/&lt;centre-id&gt;/#`
@@ -77,7 +77,7 @@ GISCs subscribe to `mqtts://gb.wis2dev.io:8883` using username/password `everyon
 
 GISCs will coordinate with the contact point for the new WIS2 Node to publish metadata for their datasets first and then to publish data notifications.
 
-Approximately 30 minutes are required to pass after metadata is published before the Global Broker can validate that the published data has corresponding metadata.
+Approximately 30 minutes are needed after metadata is published before the Global Broker can validate that published data has corresponding metadata.
 
 GISCs will follow up on errors reported on the monitor topic and assist the contact point of the new WIS2 Node with corrective actions.
 
@@ -86,37 +86,46 @@ GISCs will follow up on errors reported on the monitor topic and assist the cont
 The WIS2 Node Assessment is considered complete when:
 
 - One or more metadata records are available for the WIS2 Node when searching `https://gdc.wis2dev.io/collections/wis2-discovery-metadata/items?q=%3Ccentre-id%3E`
-- MQTT notifications have been published on the WIS2DEV GB at `origin/a/wis2/&lt;centre-id&gt;/metadata`
-- MQTT notifications have been published on the WIS2DEV GB at `origin/a/wis2/&lt;centre-id&gt;/data/#`
-- MQTT notifications have been published on the WIS2DEV GB at `cache/a/wis2/&lt;centre-id&gt;/metadata`
-- MQTT notifications have been published on the WIS2DEV GB at `cache/a/wis2/&lt;centre-id&gt;/data/core/#`
+- MQTT notifications seen on WIS2DEV GB at `origin/a/wis2/&lt;centre-id&gt;/metadata`
+- MQTT notifications seen on WIS2DEV GB at `origin/a/wis2/&lt;centre-id&gt;/data/#`
+- MQTT notifications seen on WIS2DEV GB at `cache/a/wis2/&lt;centre-id&gt;/metadata`
+- MQTT notifications seen on WIS2DEV GB at `cache/a/wis2/&lt;centre-id&gt;/data/core/#`
 
 ==== Common Assessment Issues
 
-===== The canonical URL embedded in a WIS2 data-notification is not accessible from WIS2DEV
+[cols="2,3",options="header"]
+|===
+|Issue
+|Recommended action
 
-The data publisher should ensure that the canonical URL is reachable from the WIS2DEV environment.
+|Notifications published under `origin/a/wis2/&lt;centre-id&gt;` by the WIS2 Node are not being republished by the WIS2DEV Global Broker.
+|The WIS2DEV Global Broker will only republish notifications adhering to WIS2 standards. Messages reusing a previously used 'id' will be discarded as duplicates. Ensure that you use a valid WIS2 topic for the MQTT channel, that the payload adheres to the WIS2 Notification Message standard, and that a unique 'id' is used for each notification.
 
-===== The WIS2 Node is not publishing data notifications for metadata
+|Canonical URL embedded in a WIS2 data-notification is not accessible from WIS2DEV
+|Ensure that the canonical URL is reachable from the WIS2DEV environment over the public internet. Check that the DNS resolves to the correct IP address and that the WIS2DEV incoming IP address, `52.25.203.140`, is allowlisted.
 
-The data publisher should ensure that data notifications for metadata are being published.
+|WIS2 Node is not publishing data notifications for metadata
+|Ensure that data notifications for metadata are being published every 24 hours on the topic `origin/a/wis2/&lt;centre-id&gt;/metadata` and that the notification contains a valid WCMP2 record in the data payload.
 
-===== The metadata record published by the WIS2 Node is cached by the WIS2DEV Global Cache, but rejected by the WIS2DEV Global Discovery Catalogue because it fails the pywcmp validation and quality assessment tool
+|Publishing a metadata-notification results in a notification on `origin/a/wis2/&lt;centre-id&gt;/metadata` but does not result in a notification on `cache/a/wis2/&lt;centre-id&gt;/metadata` on the WIS2DEV Global Broker
+|Updated metadata records are rejected by the WIS2DEV Global Cache if a previous record with the same data-id was already cached and the download link did not indicate rel="update". Ensure that the download link for updated metadata records indicates rel="update".
 
-The data publisher should ensure that the metadata record passes the pywcmp ETS test suite before publishing.
+|Metadata records published by the WIS2 Node are cached by the WIS2DEV Global Cache, but rejected by the WIS2DEV Global Discovery Catalogue
+|The WIS2DEV Global Discovery Catalogue will reject data that fails the pywcmp validation and quality assessment. Non-wis2box users should ensure that the metadata record passes the pywcmp ETS validation before publishing; see https://github.com/World-Meteorological-Organization/pywcmp. Data publishers using wis2box should ensure they use the latest version of the wis2box software to ensure the latest version of pywcmp is used.
 
-===== Updated metadata records are rejected by the WIS2DEV Global Cache because a previous record with the same data-id was already cached and the download link did not indicate `rel="update"`
-
-The data publisher should ensure that the download link for updated metadata records indicates `rel="update"`.
+|===
 
 [NOTE]
-.Implementation note for publishers using wis2box
+.Implementation note regarding wis2box and metadata management
 ====
-Many publishers use `wis2box` to implement their WIS2 Node.
+`wis2box` reduces metadata-related issues by enforcing a "dataset-driven workflow".
 
-`wis2box` is designed to publish data notifications only after metadata has been published, and it includes built-in validation of WCMP2 records using pywcmp.
+- Before publishing any data notifications, a dataset must first be created
+- To create a dataset, a minimum amount of information must be provided to create the WCMP2-record
+- Before publishing the WCMP2-record, the content is always validated using pywcmp
+- Data notifications are associated to metadata programmatically by querying a local copy of the published WCMP2-records
 
-WIS2 Node implementations that use separate software to publish metadata and data notifications may require additional coordination to pass the WIS2 Node Assessment Process. In particular, mismatches between the metadata identifier and the WIS2 topic advertised in the WCMP2 record can cause data notifications to be discarded.
+WIS2 Node implementations that use separate software for metadata and data notifications are more likely to encounter metadata related issues.
 
-Data publishers who want to make existing systems WIS2-compliant may consider sending their data to a `wis2box` instance configured with the `passthrough`-plugin to reduce metadata-related issues.
+To reduce these issues, follow a wis2box-like workflow: create the metadata record first, then publish data notifications based on the published metadata records for your WIS2 Node.
 ====
