@@ -26,7 +26,7 @@ Data publishers and commercial WIS2 solution providers who want to test their sy
 
 ==== WIS2 Development Environment
 
-The WIS2 Development environment (WIS2-dev) consists of:
+The WIS2 Development Environment (WIS2-dev) consists of:
 
 - A Global Broker with a publicly accessible MQTT endpoint available at: `mqtts://gb.wis2dev.io:8883`
 - A Global Discovery Catalogue with an OGC API - Records endpoint available at: `https://gdc.wis2dev.io/`
