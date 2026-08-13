@@ -96,7 +96,7 @@ body {
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">World Meteorological Organization</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2026-06-11</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Date: 2026-08-13</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 1.2.dev1</p></td>
@@ -149,37 +149,53 @@ body {
 </li>
 <li><a href="#_recipes_for_data_publishers">3. Recipes for data publishers</a>
 <ul class="sectlevel2">
-<li><a href="#_best_practices_for_publishing_station_based_observational_data">3.1. Best practices for publishing station based observational data</a>
+<li><a href="#_wis2_node_assessment_process">3.1. WIS2 Node Assessment Process</a>
 <ul class="sectlevel3">
-<li><a href="#_geometry">3.1.1. Geometry</a></li>
-<li><a href="#_client_side_filtering">3.1.2. Client Side Filtering</a></li>
+<li><a href="#_roles_and_responsibilities">3.1.1. Roles and Responsibilities</a></li>
+<li><a href="#_wis2_development_environment">3.1.2. WIS2 Development Environment</a></li>
+<li><a href="#_wis2dev_gb">3.1.3. wis2dev GB</a></li>
+<li><a href="#_wis2dev_gc">3.1.4. wis2dev GC</a></li>
+<li><a href="#_wis2dev_gdc">3.1.5. wis2dev GDC</a></li>
+<li><a href="#_assessment_preparation_for_data_publishers">3.1.6. Assessment Preparation for Data Publishers</a></li>
 </ul>
 </li>
-<li><a href="#_publishing_aeronautical_meteorology_data_on_wis2">3.2. Publishing aeronautical meteorology data on WIS2</a></li>
-<li><a href="#_publishing_a_wmo_core_metadata_profile_record_for_historical_data">3.3. Publishing a WMO Core Metadata Profile record for historical data</a>
+<li><a href="#_gisc_test_setup_instructions">3.2. GISC test setup instructions</a>
 <ul class="sectlevel3">
-<li><a href="#_temporal_aspects">3.3.1. Temporal aspects</a></li>
-<li><a href="#_distribution_and_notification_aspects">3.3.2. Distribution and notification aspects</a></li>
+<li><a href="#_assessment_completion_checklist">3.2.1. Assessment Completion Checklist</a></li>
+<li><a href="#_common_assessment_issues">3.2.2. Common Assessment Issues</a></li>
 </ul>
 </li>
-<li><a href="#_publishing_a_wmo_core_metadata_profile_record_for_retired_data">3.4. Publishing a WMO Core Metadata Profile record for retired data</a></li>
-<li><a href="#_publishing_a_wmo_core_metadata_profile_record_with_data_provenance">3.5. Publishing a WMO Core Metadata Profile record with data provenance</a></li>
-<li><a href="#_publishing_a_wmo_core_metadata_profile_record_referencing_wigos_stations_and_networks">3.6. Publishing a WMO Core Metadata Profile record referencing WIGOS stations and networks</a></li>
-<li><a href="#_publishing_a_wis2_notification_message_with_access_control">3.7. Publishing a WIS2 Notification Message with access control</a></li>
-<li><a href="#_publishing_a_wis2_notification_message_with_embedded_data">3.8. Publishing a WIS2 Notification Message with embedded data</a></li>
-<li><a href="#_publishing_a_wis2_notification_message_for_resource_deletion">3.9. Publishing a WIS2 Notification Message for resource deletion</a></li>
-<li><a href="#_advertising_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm">3.10. Advertising client side filters for data subscriptions in WCMP2 and WNM</a>
+<li><a href="#_best_practices_for_publishing_station_based_observational_data">3.3. Best practices for publishing station based observational data</a>
 <ul class="sectlevel3">
-<li><a href="#_example_surface_weather_observations">3.10.1. Example: Surface weather observations</a></li>
-<li><a href="#_example_numerical_weather_prediction_based_forecast">3.10.2. Example: Numerical weather prediction based forecast</a></li>
+<li><a href="#_geometry">3.3.1. Geometry</a></li>
+<li><a href="#_client_side_filtering">3.3.2. Client Side Filtering</a></li>
 </ul>
 </li>
-<li><a href="#_validating_a_wmo_core_metadata_profile_record">3.11. Validating a WMO Core Metadata Profile record</a></li>
-<li><a href="#_validating_a_wis2_notification_message">3.12. Validating a WIS2 Notification Message</a></li>
-<li><a href="#_subscribing_to_gdc_reports_of_wcmp2_validation_and_quality_assessment">3.13. Subscribing to GDC reports of WCMP2 validation and quality assessment</a></li>
-<li><a href="#_providing_a_requirements_specification_for_a_wis_2_0_node">3.14. Providing a requirements specification for a WIS 2.0 Node</a>
+<li><a href="#_publishing_aeronautical_meteorology_data_on_wis2">3.4. Publishing aeronautical meteorology data on WIS2</a></li>
+<li><a href="#_publishing_a_wmo_core_metadata_profile_record_for_historical_data">3.5. Publishing a WMO Core Metadata Profile record for historical data</a>
 <ul class="sectlevel3">
-<li><a href="#_wis_2_0_node_user_requirements_specifications">3.14.1. WIS 2.0 Node - User requirements specifications</a></li>
+<li><a href="#_temporal_aspects">3.5.1. Temporal aspects</a></li>
+<li><a href="#_distribution_and_notification_aspects">3.5.2. Distribution and notification aspects</a></li>
+</ul>
+</li>
+<li><a href="#_publishing_a_wmo_core_metadata_profile_record_for_retired_data">3.6. Publishing a WMO Core Metadata Profile record for retired data</a></li>
+<li><a href="#_publishing_a_wmo_core_metadata_profile_record_with_data_provenance">3.7. Publishing a WMO Core Metadata Profile record with data provenance</a></li>
+<li><a href="#_publishing_a_wmo_core_metadata_profile_record_referencing_wigos_stations_and_networks">3.8. Publishing a WMO Core Metadata Profile record referencing WIGOS stations and networks</a></li>
+<li><a href="#_publishing_a_wis2_notification_message_with_access_control">3.9. Publishing a WIS2 Notification Message with access control</a></li>
+<li><a href="#_publishing_a_wis2_notification_message_with_embedded_data">3.10. Publishing a WIS2 Notification Message with embedded data</a></li>
+<li><a href="#_publishing_a_wis2_notification_message_for_resource_deletion">3.11. Publishing a WIS2 Notification Message for resource deletion</a></li>
+<li><a href="#_advertising_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm">3.12. Advertising client side filters for data subscriptions in WCMP2 and WNM</a>
+<ul class="sectlevel3">
+<li><a href="#_example_surface_weather_observations">3.12.1. Example: Surface weather observations</a></li>
+<li><a href="#_example_numerical_weather_prediction_based_forecast">3.12.2. Example: Numerical weather prediction based forecast</a></li>
+</ul>
+</li>
+<li><a href="#_validating_a_wmo_core_metadata_profile_record">3.13. Validating a WMO Core Metadata Profile record</a></li>
+<li><a href="#_validating_a_wis2_notification_message">3.14. Validating a WIS2 Notification Message</a></li>
+<li><a href="#_subscribing_to_gdc_reports_of_wcmp2_validation_and_quality_assessment">3.15. Subscribing to GDC reports of WCMP2 validation and quality assessment</a></li>
+<li><a href="#_providing_a_requirements_specification_for_a_wis_2_0_node">3.16. Providing a requirements specification for a WIS 2.0 Node</a>
+<ul class="sectlevel3">
+<li><a href="#_wis_2_0_node_user_requirements_specifications">3.16.1. WIS 2.0 Node - User requirements specifications</a></li>
 </ul>
 </li>
 </ul>
@@ -462,7 +478,290 @@ for feature in response['features']:
 <h2 id="_recipes_for_data_publishers"><a class="anchor" href="#_recipes_for_data_publishers"></a>3. Recipes for data publishers</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_best_practices_for_publishing_station_based_observational_data"><a class="anchor" href="#_best_practices_for_publishing_station_based_observational_data"></a>3.1. Best practices for publishing station based observational data</h3>
+<h3 id="_wis2_node_assessment_process"><a class="anchor" href="#_wis2_node_assessment_process"></a>3.1. WIS2 Node Assessment Process</h3>
+<div class="paragraph">
+<p>Data publishers are required to demonstrate that their WIS2 Node implementation meets the requirements of the WIS2 specification as part of the "WIS2 Node Assessment Process".</p>
+</div>
+<div class="paragraph">
+<p>The WIS2 Node Assessment Process is initiated whenever an authorized data publisher submits a WIS2 Node registration request to the WMO Secretariat.</p>
+</div>
+<div class="paragraph">
+<p>Global Information System Centres (GISCs) are responsible for assessing WIS2 Node implementations in their Area of Responsibility (AoR) and providing feedback to the WMO Secretariat.</p>
+</div>
+<div class="paragraph">
+<p>For an overview GISCs and their AoRs, see <a href="https://community.wmo.int/site/knowledge-hub/programmes-and-initiatives/wmo-information-system-wis/wis-centres-ncs-dcpcs-and-giscs">WMO: WIS centres (NCs, DCPCs, and GISCs)</a> on the WMO Knowledge Hub.</p>
+</div>
+<div class="sect3">
+<h4 id="_roles_and_responsibilities"><a class="anchor" href="#_roles_and_responsibilities"></a>3.1.1. Roles and Responsibilities</h4>
+<div class="paragraph">
+<p>Prior to the WIS2 Node Assessment process, the WMO Secretariat will ensure the centre-id is published in the WMO Codes Registry at <a href="http://codes.wmo.int/wis/topic-hierarchy/centre-id" class="bare">http://codes.wmo.int/wis/topic-hierarchy/centre-id</a></p>
+</div>
+<div class="paragraph">
+<p>During the WIS2 Node assessment:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The WMO Secretariat connects the WIS2 Node to the WIS2 Development Environment (called wis2dev later).</p>
+</li>
+<li>
+<p>The GISC associated to the new WIS2 Node performs the assessment.</p>
+</li>
+<li>
+<p>The GISC informs WMO Secretariat when the assessment has been completed.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="title">Optional pre-registration testing</div>
+<div class="paragraph">
+<p>Data publishers or WIS2 solution providers who want to test their systems before registration can contact the WMO Secretariat at <a href="mailto:wis2-support@wmo.int">wis2-support@wmo.int</a> to request that a test system be connected to wis2dev.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_wis2_development_environment"><a class="anchor" href="#_wis2_development_environment"></a>3.1.2. WIS2 Development Environment</h4>
+<div class="paragraph">
+<p>The WIS2 Development Environment (wis2dev) consists of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A Global Broker (wis2dev GB) with a publicly accessible MQTT endpoint available at: <code>mqtts://gb.wis2dev.io:8883</code></p>
+</li>
+<li>
+<p>A Global Discovery Catalogue (wis2dev GDC) with an OGC API - Records endpoint available at: <code><a href="https://gdc.wis2dev.io/" class="bare">https://gdc.wis2dev.io/</a></code></p>
+</li>
+<li>
+<p>A Global Cache (wis2dev GC) provided through Amazon S3 web services</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_wis2dev_gb"><a class="anchor" href="#_wis2dev_gb"></a>3.1.3. wis2dev GB</h4>
+<div class="paragraph">
+<p>When a new WIS2 Node registration request is received from an authorized data publisher, the wis2dev GB is configured with a new subscription to the MQTT endpoint provided by the data publisher.</p>
+</div>
+<div class="paragraph">
+<p>The new subscription on the wis2dev GB will subscribe to the topic:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>origin/a/wis2/&lt;centre-id&gt;/#</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>where <code>&lt;centre-id&gt;</code> is the unique identifier of the WIS2 Node.</p>
+</div>
+<div class="paragraph">
+<p>The wis2dev GB republishes all valid WIS2 Notification Messages. A message is considered invalid when:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the topic used when publishing the Notification Message does not match any approved topic in the WIS2 Topic Hierarchy, or</p>
+</li>
+<li>
+<p>the message does not conform to the WIS2 Notification Message specification, or</p>
+</li>
+<li>
+<p>the message is a data notification for which no corresponding discovery metadata record can be found in the wis2dev GDC.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_wis2dev_gc"><a class="anchor" href="#_wis2dev_gc"></a>3.1.4. wis2dev GC</h4>
+<div class="paragraph">
+<p>The wis2dev Global Cache downloads data advertised in data notifications published on:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>origin/a/wis2/&lt;centre-id&gt;/data/core/#</code></p>
+</li>
+<li>
+<p><code>origin/a/wis2/&lt;centre-id&gt;/metadata/#</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>No download attempt is made if the data has already been downloaded, unless the download link indicates <code>rel="update"</code>.</p>
+</div>
+<div class="paragraph">
+<p>After a successful download, the wis2dev GC publishes a data notification on <code>cache/a/wis2/&lt;centre-id&gt;/#</code>, with the full topic matching that of the original WIS2 Node, but with <code>origin</code> replaced by <code>cache</code>.</p>
+</div>
+<div class="paragraph">
+<p>Notifications published by the wis2dev GC on <code>cache/a/wis2/#</code> are republished by the wis2dev GB.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_wis2dev_gdc"><a class="anchor" href="#_wis2dev_gdc"></a>3.1.5. wis2dev GDC</h4>
+<div class="paragraph">
+<p>The wis2dev Global Discovery Catalogue subscribes to the wis2dev GB at <code>cache/a/wis2/&lt;centre-id&gt;/metadata</code> and validates discovery metadata records published by the WIS2 Node using the pywcmp validation and quality assessment tool.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_assessment_preparation_for_data_publishers"><a class="anchor" href="#_assessment_preparation_for_data_publishers"></a>3.1.6. Assessment Preparation for Data Publishers</h4>
+<div class="paragraph">
+<p>Before the assessment, data publishers should ensure that:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The wis2dev IP address, <code>52.25.203.140</code>, is allowlisted for the HTTP and MQTT ports used by the WIS2 Node.</p>
+</li>
+<li>
+<p>The WIS2 Node can publish data notifications for metadata, and the published metadata contains a valid WCMP2 record.</p>
+</li>
+<li>
+<p>The WIS2 Node can publish data notifications for data, and the data notifications match the published metadata.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_gisc_test_setup_instructions"><a class="anchor" href="#_gisc_test_setup_instructions"></a>3.2. GISC test setup instructions</h3>
+<div class="paragraph">
+<p>GISCs subscribe to <code>mqtts://gb.wis2dev.io:8883</code> using username/password <code>everyone/everyone</code> and set up a connection to the topics:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>origin/a/wis2/&lt;centre-id&gt;/#</code></p>
+</li>
+<li>
+<p><code>cache/a/wis2/&lt;centre-id&gt;/#</code></p>
+</li>
+<li>
+<p><code>monitor/a/wis2/&lt;centre-id&gt;</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>GISCs will coordinate with the contact point for the new WIS2 Node to first publish discovery metadata for their datasets and then to publish data notifications.</p>
+</div>
+<div class="paragraph">
+<p>Approximately 30 minutes are needed after metadata is published before the Global Broker can validate that published data has corresponding metadata.</p>
+</div>
+<div class="paragraph">
+<p>GISCs will follow up on errors reported on the monitor topic (<code>monitor/a/wis2/#</code>) and assist the contact point of the new WIS2 Node with corrective actions.</p>
+</div>
+<div class="sect3">
+<h4 id="_assessment_completion_checklist"><a class="anchor" href="#_assessment_completion_checklist"></a>3.2.1. Assessment Completion Checklist</h4>
+<div class="paragraph">
+<p>The WIS2 Node Assessment is considered complete when:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>One or more metadata records are available for the WIS2 Node when searching <code><a href="https://gdc.wis2dev.io/collections/wis2-discovery-metadata/items?q=%3Ccentre-id%3E" class="bare">https://gdc.wis2dev.io/collections/wis2-discovery-metadata/items?q=%3Ccentre-id%3E</a></code></p>
+</li>
+<li>
+<p>MQTT notifications seen on wis2dev GB at <code>origin/a/wis2/&lt;centre-id&gt;/metadata</code></p>
+</li>
+<li>
+<p>MQTT notifications seen on wis2dev GB at <code>origin/a/wis2/&lt;centre-id&gt;/data/#</code></p>
+</li>
+<li>
+<p>MQTT notifications seen on wis2dev GB at <code>cache/a/wis2/&lt;centre-id&gt;/metadata</code></p>
+</li>
+<li>
+<p>MQTT notifications seen on wis2dev GB at <code>cache/a/wis2/&lt;centre-id&gt;/data/core/#</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_common_assessment_issues"><a class="anchor" href="#_common_assessment_issues"></a>3.2.2. Common Assessment Issues</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Issue</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Recommended action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Notifications published under <code>origin/a/wis2/&lt;centre-id&gt;</code> by the WIS2 Node are not being republished by the wis2dev GB.</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The wis2dev GB will only republish notifications adhering to WIS2 standards. Messages reusing a previously used 'id' will be discarded as duplicates. Ensure that you use a valid WIS2 topic for the MQTT channel, that the payload adheres to the WIS2 Notification Message standard, and that a unique id is used for each notification.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Canonical URL embedded in a WIS2 data-notification is not accessible from wis2dev</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Ensure that the canonical URL is reachable from the wis2dev environment over the public Internet. Check that the DNS resolves to the correct IP address and that the wis2dev incoming IP address, <code>52.25.203.140</code>, is allowed to access the WIS2 Node for MQTT(S) / WS(S) and HTTP(S).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">WIS2 Node is not publishing data notifications for metadata</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Ensure that data notifications for metadata are being published every 24 hours on the topic <code>origin/a/wis2/&lt;centre-id&gt;/metadata</code> and that the notification contains a valid WCMP2 record in the data payload.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Publishing a metadata-notification results in a notification on <code>origin/a/wis2/&lt;centre-id&gt;/metadata</code> but does not result in a notification on <code>cache/a/wis2/&lt;centre-id&gt;/metadata</code> on the wis2dev GB</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Updated metadata records are rejected by the wis2dev GC if a previous record with the same data-id was already cached and the download link did not indicate rel="update". Ensure that the download link for updated metadata records indicates rel="update" or the Notification Message is using a new value for <code>properties.data_id</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Metadata records published by the WIS2 Node are cached by the wis2dev GC, but rejected by the wis2dev GDC</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The wis2dev GDC will reject data that fails the pywcmp validation and quality assessment tool. Non-wis2box users should ensure that the metadata record passes the pywcmp ETS validation prior to publishing (see <a href="https://github.com/World-Meteorological-Organization/pywcmp" class="bare">https://github.com/World-Meteorological-Organization/pywcmp</a>). Data publishers using wis2box should ensure they use the latest version of the wis2box software to ensure the latest version of pywcmp is used. Note that the wis2dev GDC provides pywcmp validation and quality assessment as an online service (see <a href="#_validating_a_wmo_core_metadata_profile_record">Validating a WMO Core Metadata Profile record</a>)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="title">Implementation note regarding wis2box and metadata management</div>
+<div class="paragraph">
+<p><code>wis2box</code> reduces metadata-related issues by enforcing a "dataset-driven workflow".</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Before publishing any data notifications, a dataset must first be created</p>
+</li>
+<li>
+<p>To create a dataset, a minimum amount of information must be provided to create the WCMP2 record</p>
+</li>
+<li>
+<p>Before publishing the WCMP2 record, the content is always validated using pywcmp</p>
+</li>
+<li>
+<p>Data notifications are associated to metadata programmatically by querying a local copy of the published WCMP2 records</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>WIS2 Node implementations that use separate software for metadata and data notifications are more likely to encounter metadata related issues.</p>
+</div>
+<div class="paragraph">
+<p>To reduce these issues, follow a wis2box-like workflow: create the metadata record first, then publish data notifications based on the published metadata records for your WIS2 Node.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_best_practices_for_publishing_station_based_observational_data"><a class="anchor" href="#_best_practices_for_publishing_station_based_observational_data"></a>3.3. Best practices for publishing station based observational data</h3>
 <div class="paragraph">
 <p>The WMO Unified Data Policy defines the following data types:</p>
 </div>
@@ -502,7 +801,7 @@ for feature in response['features']:
 <p>As publishing data to WIS 2.0 requires the WIS 2.0 Notificiation Message (WNM), the following aspects should be included when publishing observational data.</p>
 </div>
 <div class="sect3">
-<h4 id="_geometry"><a class="anchor" href="#_geometry"></a>3.1.1. Geometry</h4>
+<h4 id="_geometry"><a class="anchor" href="#_geometry"></a>3.3.1. Geometry</h4>
 <div class="paragraph">
 <p>WNM requires a <code>geometry</code> property, which allows for expressing the location of a data granule (in this case a BUFR file) as follows:</p>
 </div>
@@ -521,7 +820,7 @@ for feature in response['features']:
 </div>
 </div>
 <div class="sect3">
-<h4 id="_client_side_filtering"><a class="anchor" href="#_client_side_filtering"></a>3.1.2. Client Side Filtering</h4>
+<h4 id="_client_side_filtering"><a class="anchor" href="#_client_side_filtering"></a>3.3.2. Client Side Filtering</h4>
 <div class="paragraph">
 <p>WNM allows for extensibility (i.e. adding additional properties) by design.  To enable client side filtering, and when the WIGOS Station Identifier (WSI) exists for observational data, a WNM should include <code>properties.wigos_station_identifier</code> as follows:</p>
 </div>
@@ -543,7 +842,7 @@ for feature in response['features']:
 </div>
 </div>
 <div class="sect2">
-<h3 id="_publishing_aeronautical_meteorology_data_on_wis2"><a class="anchor" href="#_publishing_aeronautical_meteorology_data_on_wis2"></a>3.2. Publishing aeronautical meteorology data on WIS2</h3>
+<h3 id="_publishing_aeronautical_meteorology_data_on_wis2"><a class="anchor" href="#_publishing_aeronautical_meteorology_data_on_wis2"></a>3.4. Publishing aeronautical meteorology data on WIS2</h3>
 <div class="paragraph">
 <p>In addition to publishing aeronautical meteorology data via ICAO SWIM (as defined in the ICAO Procedures for Air Navigation Services - Information Management, Doc 10199), WIS2 may be used as a secondary mechanism to share this data.</p>
 </div>
@@ -621,12 +920,12 @@ for feature in response['features']:
 </div>
 </div>
 <div class="sect2">
-<h3 id="_publishing_a_wmo_core_metadata_profile_record_for_historical_data"><a class="anchor" href="#_publishing_a_wmo_core_metadata_profile_record_for_historical_data"></a>3.3. Publishing a WMO Core Metadata Profile record for historical data</h3>
+<h3 id="_publishing_a_wmo_core_metadata_profile_record_for_historical_data"><a class="anchor" href="#_publishing_a_wmo_core_metadata_profile_record_for_historical_data"></a>3.5. Publishing a WMO Core Metadata Profile record for historical data</h3>
 <div class="paragraph">
 <p>WIS2 and WCMP2 have been designed to support both real-time and historical data.  While real-time data publishing in WIS2 typically includes real-time data notifications, archive data may or may not require data notifications, depending on how often the dataset is disseminated and/or updated.</p>
 </div>
 <div class="sect3">
-<h4 id="_temporal_aspects"><a class="anchor" href="#_temporal_aspects"></a>3.3.1. Temporal aspects</h4>
+<h4 id="_temporal_aspects"><a class="anchor" href="#_temporal_aspects"></a>3.5.1. Temporal aspects</h4>
 <div class="paragraph">
 <p>Of critical importance is describing the temporal nature of the archive.  Some examples:</p>
 </div>
@@ -667,12 +966,12 @@ for feature in response['features']:
 </div>
 </div>
 <div class="sect3">
-<h4 id="_distribution_and_notification_aspects"><a class="anchor" href="#_distribution_and_notification_aspects"></a>3.3.2. Distribution and notification aspects</h4>
+<h4 id="_distribution_and_notification_aspects"><a class="anchor" href="#_distribution_and_notification_aspects"></a>3.5.2. Distribution and notification aspects</h4>
 <div class="paragraph">
 <p>The way in which a historical archive is disseminated can result in a few different possibilities in WCMP2 and WIS2 data notifications.</p>
 </div>
 <div class="sect4">
-<h5 id="_publishing_links_of_an_archive_in_wcmp2_provided_via_an_api"><a class="anchor" href="#_publishing_links_of_an_archive_in_wcmp2_provided_via_an_api"></a>3.3.2.1. Publishing links of an archive in WCMP2 provided via an API</h5>
+<h5 id="_publishing_links_of_an_archive_in_wcmp2_provided_via_an_api"><a class="anchor" href="#_publishing_links_of_an_archive_in_wcmp2_provided_via_an_api"></a>3.5.2.1. Publishing links of an archive in WCMP2 provided via an API</h5>
 <div class="paragraph">
 <p>Historical data made available via an Application Programming Interface (API) allows for data subsetting and reduction (i.e. extracting
 archive data based on space, time or other attributes), for users to focus on and work with only the part of the archive they are interested in.</p>
@@ -695,7 +994,7 @@ archive data based on space, time or other attributes), for users to focus on an
 </div>
 </div>
 <div class="sect4">
-<h5 id="_publishing_links_of_an_archive_in_wcmp2_whose_updates_are_not_disseminated_as_data_granules"><a class="anchor" href="#_publishing_links_of_an_archive_in_wcmp2_whose_updates_are_not_disseminated_as_data_granules"></a>3.3.2.2. Publishing links of an archive in WCMP2 whose updates are not disseminated as data granules</h5>
+<h5 id="_publishing_links_of_an_archive_in_wcmp2_whose_updates_are_not_disseminated_as_data_granules"><a class="anchor" href="#_publishing_links_of_an_archive_in_wcmp2_whose_updates_are_not_disseminated_as_data_granules"></a>3.5.2.2. Publishing links of an archive in WCMP2 whose updates are not disseminated as data granules</h5>
 <div class="paragraph">
 <p>WIS2 Notifications promote "actionable links" when describing data updates via MQTT.  In some cases, a historical archive may be updated without
 publishing data granule level updates.  For example, if an archive is updated every 90 days, and updates are published into the existing archive
@@ -726,7 +1025,7 @@ clearly defines an archive (via the <code>rel=archives</code> link relation) is 
 </div>
 </div>
 <div class="sect4">
-<h5 id="_publishing_links_via_updates_into_an_existing_archive"><a class="anchor" href="#_publishing_links_via_updates_into_an_existing_archive"></a>3.3.2.3. Publishing links via updates into an existing archive</h5>
+<h5 id="_publishing_links_via_updates_into_an_existing_archive"><a class="anchor" href="#_publishing_links_via_updates_into_an_existing_archive"></a>3.5.2.3. Publishing links via updates into an existing archive</h5>
 <div class="paragraph">
 <p>If a historical archives does publish data granules (i.e. if a daily climate archive is updated daily and each
 day&#8217;s update can be defined with an actionable link, then an MQTT link is also recommended.</p>
@@ -751,7 +1050,7 @@ day&#8217;s update can be defined with an actionable link, then an MQTT link is 
 </div>
 </div>
 <div class="sect4">
-<h5 id="_publishing_notifications_of_discovery_metadata_wcmp2_considerations"><a class="anchor" href="#_publishing_notifications_of_discovery_metadata_wcmp2_considerations"></a>3.3.2.4. Publishing notifications of discovery metadata (WCMP2) considerations</h5>
+<h5 id="_publishing_notifications_of_discovery_metadata_wcmp2_considerations"><a class="anchor" href="#_publishing_notifications_of_discovery_metadata_wcmp2_considerations"></a>3.5.2.4. Publishing notifications of discovery metadata (WCMP2) considerations</h5>
 <div class="paragraph">
 <p>Data on WIS2 requires discovery metadata (WCMP2).  For data publishers of historical archive data without the required WIS2 Node broker (MQTT) capability, there exist some options to lower the barrier to publication:</p>
 </div>
@@ -772,7 +1071,7 @@ day&#8217;s update can be defined with an actionable link, then an MQTT link is 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_publishing_a_wmo_core_metadata_profile_record_for_retired_data"><a class="anchor" href="#_publishing_a_wmo_core_metadata_profile_record_for_retired_data"></a>3.4. Publishing a WMO Core Metadata Profile record for retired data</h3>
+<h3 id="_publishing_a_wmo_core_metadata_profile_record_for_retired_data"><a class="anchor" href="#_publishing_a_wmo_core_metadata_profile_record_for_retired_data"></a>3.6. Publishing a WMO Core Metadata Profile record for retired data</h3>
 <div class="paragraph">
 <p>The primary target for WCMP2 records is for real-time or archive data discovery, access and visualization, with the understanding that a dataset (and its associated discovery metadata) is properly managed and kept up to date.  In certain cases, datasets may become unavailable; this could mean that the dataset lifecycle has reached end of life, and/or no longer maintained.</p>
 </div>
@@ -802,7 +1101,7 @@ day&#8217;s update can be defined with an actionable link, then an MQTT link is 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_publishing_a_wmo_core_metadata_profile_record_with_data_provenance"><a class="anchor" href="#_publishing_a_wmo_core_metadata_profile_record_with_data_provenance"></a>3.5. Publishing a WMO Core Metadata Profile record with data provenance</h3>
+<h3 id="_publishing_a_wmo_core_metadata_profile_record_with_data_provenance"><a class="anchor" href="#_publishing_a_wmo_core_metadata_profile_record_with_data_provenance"></a>3.7. Publishing a WMO Core Metadata Profile record with data provenance</h3>
 <div class="paragraph">
 <p>Data provenance provides the ability to describe an audit trail for the lifecycle of a given dataset.</p>
 </div>
@@ -825,7 +1124,7 @@ day&#8217;s update can be defined with an actionable link, then an MQTT link is 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_publishing_a_wmo_core_metadata_profile_record_referencing_wigos_stations_and_networks"><a class="anchor" href="#_publishing_a_wmo_core_metadata_profile_record_referencing_wigos_stations_and_networks"></a>3.6. Publishing a WMO Core Metadata Profile record referencing WIGOS stations and networks</h3>
+<h3 id="_publishing_a_wmo_core_metadata_profile_record_referencing_wigos_stations_and_networks"><a class="anchor" href="#_publishing_a_wmo_core_metadata_profile_record_referencing_wigos_stations_and_networks"></a>3.8. Publishing a WMO Core Metadata Profile record referencing WIGOS stations and networks</h3>
 <div class="paragraph">
 <p>WCMP2 allows for publication of any data (observations, forecasts, warnings, etc.) with the principle of discovery metadata.  WIGOS metadata refers to station or observation metadata which is currently managed in the <a href="https://oscar.wmo.int/surface">OSCAR Surface</a> system.</p>
 </div>
@@ -871,7 +1170,7 @@ Link relations are governed by <a href="https://www.iana.org/assignments/link-re
 </div>
 </div>
 <div class="sect2">
-<h3 id="_publishing_a_wis2_notification_message_with_access_control"><a class="anchor" href="#_publishing_a_wis2_notification_message_with_access_control"></a>3.7. Publishing a WIS2 Notification Message with access control</h3>
+<h3 id="_publishing_a_wis2_notification_message_with_access_control"><a class="anchor" href="#_publishing_a_wis2_notification_message_with_access_control"></a>3.9. Publishing a WIS2 Notification Message with access control</h3>
 <div class="paragraph">
 <p>Recommended data in WIS2 may be open or access controlled.  For data publication with access control implications, WNM provides a <code>security</code> object as part a link object.  The <code>security</code> object is defined using <a href="https://swagger.io/specification/#security-scheme-object">OpenAPI Security Scheme definitions</a>.</p>
 </div>
@@ -931,7 +1230,7 @@ Link relations are governed by <a href="https://www.iana.org/assignments/link-re
 </div>
 </div>
 <div class="sect2">
-<h3 id="_publishing_a_wis2_notification_message_with_embedded_data"><a class="anchor" href="#_publishing_a_wis2_notification_message_with_embedded_data"></a>3.8. Publishing a WIS2 Notification Message with embedded data</h3>
+<h3 id="_publishing_a_wis2_notification_message_with_embedded_data"><a class="anchor" href="#_publishing_a_wis2_notification_message_with_embedded_data"></a>3.10. Publishing a WIS2 Notification Message with embedded data</h3>
 <div class="paragraph">
 <p>A <a href="https://wmo-im.github.io/wis2-notification-message">WIS2 Notification Message</a> provides the ability to embed data as part of a notification (see the <a href="https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_15_properties_content">Properties / Content</a> section of the specification).</p>
 </div>
@@ -1047,7 +1346,7 @@ Redirect 204 no-content-here</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_publishing_a_wis2_notification_message_for_resource_deletion"><a class="anchor" href="#_publishing_a_wis2_notification_message_for_resource_deletion"></a>3.9. Publishing a WIS2 Notification Message for resource deletion</h3>
+<h3 id="_publishing_a_wis2_notification_message_for_resource_deletion"><a class="anchor" href="#_publishing_a_wis2_notification_message_for_resource_deletion"></a>3.11. Publishing a WIS2 Notification Message for resource deletion</h3>
 <div class="paragraph">
 <p>A <a href="https://wmo-im.github.io/wis2-notification-message">WIS2 Notification Message</a> provides the ability to publish notifications for new, updated or deleted data and metadata (see the <a href="https://wmo-im.github.io/wis2-notification-message/standard/wis2-notification-message-STABLE.html#_1_16_links">Links</a> section of the specification).</p>
 </div>
@@ -1095,7 +1394,7 @@ Redirect 204 no-content-here</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_advertising_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm"><a class="anchor" href="#_advertising_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm"></a>3.10. Advertising client side filters for data subscriptions in WCMP2 and WNM</h3>
+<h3 id="_advertising_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm"><a class="anchor" href="#_advertising_client_side_filters_for_data_subscriptions_in_wcmp2_and_wnm"></a>3.12. Advertising client side filters for data subscriptions in WCMP2 and WNM</h3>
 <div class="paragraph">
 <p>A key concept of a WCMP2 record is "actionable links"; this means being able to access a dataset or data granule
 without any further interactions.  For real-time data, a WCMP2 record provides linkages to the WIS2 Global Broker
@@ -1151,7 +1450,7 @@ data consumer is only interested in a certain subset of the data granules being 
 <p>To implement this behaviour, add additional properties to both WCMP2 and WNM as follows:</p>
 </div>
 <div class="sect3">
-<h4 id="_example_surface_weather_observations"><a class="anchor" href="#_example_surface_weather_observations"></a>3.10.1. Example: Surface weather observations</h4>
+<h4 id="_example_surface_weather_observations"><a class="anchor" href="#_example_surface_weather_observations"></a>3.12.1. Example: Surface weather observations</h4>
 <div class="listingblock">
 <div class="title">Surface weather observations: WCMP2 MQTT link with additional properties</div>
 <div class="content">
@@ -1195,7 +1494,7 @@ data consumer is only interested in a certain subset of the data granules being 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_example_numerical_weather_prediction_based_forecast"><a class="anchor" href="#_example_numerical_weather_prediction_based_forecast"></a>3.10.2. Example: Numerical weather prediction based forecast</h4>
+<h4 id="_example_numerical_weather_prediction_based_forecast"><a class="anchor" href="#_example_numerical_weather_prediction_based_forecast"></a>3.12.2. Example: Numerical weather prediction based forecast</h4>
 <div class="listingblock">
 <div class="title">Numerical weather prediction: WCMP2 MQTT link with additional properties</div>
 <div class="content">
@@ -1330,7 +1629,7 @@ if __name__ == '__main__':
 </div>
 </div>
 <div class="sect2">
-<h3 id="_validating_a_wmo_core_metadata_profile_record"><a class="anchor" href="#_validating_a_wmo_core_metadata_profile_record"></a>3.11. Validating a WMO Core Metadata Profile record</h3>
+<h3 id="_validating_a_wmo_core_metadata_profile_record"><a class="anchor" href="#_validating_a_wmo_core_metadata_profile_record"></a>3.13. Validating a WMO Core Metadata Profile record</h3>
 <div class="paragraph">
 <p>The <a href="https://github.com/World-Meteorological-Organization/pywcmp">pywcmp</a> tool provides a test suite to validate a message against the WCMP2 specification requirements, as well as a Python API for application integration.  Consult the pywcmp README on GitHub for more information/examples.</p>
 </div>
@@ -1436,7 +1735,7 @@ pywcmp kpi validate https://example.org/path/to/file.json</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_validating_a_wis2_notification_message"><a class="anchor" href="#_validating_a_wis2_notification_message"></a>3.12. Validating a WIS2 Notification Message</h3>
+<h3 id="_validating_a_wis2_notification_message"><a class="anchor" href="#_validating_a_wis2_notification_message"></a>3.14. Validating a WIS2 Notification Message</h3>
 <div class="paragraph">
 <p>A <a href="https://wmo-im.github.io/wis2-notification-message">WIS2 Notification Message</a> provides a <a href="http://schemas.wmo.int/wnm">JSON Schema</a> which can be used by any programming language that supports JSON and JSON Schema validation.</p>
 </div>
@@ -1474,7 +1773,7 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_subscribing_to_gdc_reports_of_wcmp2_validation_and_quality_assessment"><a class="anchor" href="#_subscribing_to_gdc_reports_of_wcmp2_validation_and_quality_assessment"></a>3.13. Subscribing to GDC reports of WCMP2 validation and quality assessment</h3>
+<h3 id="_subscribing_to_gdc_reports_of_wcmp2_validation_and_quality_assessment"><a class="anchor" href="#_subscribing_to_gdc_reports_of_wcmp2_validation_and_quality_assessment"></a>3.15. Subscribing to GDC reports of WCMP2 validation and quality assessment</h3>
 <div class="paragraph">
 <p>When a WIS2 Node publishes a WCMP2 record, GDCs perform validation according to the WCMP2 <a href="https://wmo-im.github.io/wcmp2/standard/wcmp2-STABLE.html#_conformance_class_abstract_test_suite_normative">Abstract Test Suite</a>).  If the record is compliant, a GDC will ingest and publish the record.  In addition, a GDC may provide additional quality assessment testing based on the <a href="https://wmo-im.github.io/wcmp2/kpi/wcmp2-kpi-DRAFT.html">(draft) WCMP2 Key Performance Indicators (KPIs)</a>.</p>
 </div>
@@ -1496,14 +1795,14 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_providing_a_requirements_specification_for_a_wis_2_0_node"><a class="anchor" href="#_providing_a_requirements_specification_for_a_wis_2_0_node"></a>3.14. Providing a requirements specification for a WIS 2.0 Node</h3>
+<h3 id="_providing_a_requirements_specification_for_a_wis_2_0_node"><a class="anchor" href="#_providing_a_requirements_specification_for_a_wis_2_0_node"></a>3.16. Providing a requirements specification for a WIS 2.0 Node</h3>
 <div class="paragraph">
 <p>The below recipe provides user requirements specifications for the implementation of a WIS 2.0 Node.</p>
 </div>
 <div class="sect3">
-<h4 id="_wis_2_0_node_user_requirements_specifications"><a class="anchor" href="#_wis_2_0_node_user_requirements_specifications"></a>3.14.1. WIS 2.0 Node - User requirements specifications</h4>
+<h4 id="_wis_2_0_node_user_requirements_specifications"><a class="anchor" href="#_wis_2_0_node_user_requirements_specifications"></a>3.16.1. WIS 2.0 Node - User requirements specifications</h4>
 <div class="sect4">
-<h5 id="_introduction_2"><a class="anchor" href="#_introduction_2"></a>3.14.1.1. Introduction</h5>
+<h5 id="_introduction_2"><a class="anchor" href="#_introduction_2"></a>3.16.1.1. Introduction</h5>
 <div class="sect5">
 <h6 id="_applicable_documents"><a class="anchor" href="#_applicable_documents"></a>Applicable Documents</h6>
 <table class="tableblock frame-all grid-all stretch">
@@ -1571,7 +1870,7 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_system_overview"><a class="anchor" href="#_system_overview"></a>3.14.1.2. System overview</h5>
+<h5 id="_system_overview"><a class="anchor" href="#_system_overview"></a>3.16.1.2. System overview</h5>
 <div class="sect5">
 <h6 id="_system_context"><a class="anchor" href="#_system_context"></a>System Context</h6>
 <div class="paragraph">
@@ -1635,7 +1934,7 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_user_requirements"><a class="anchor" href="#_user_requirements"></a>3.14.1.3. User requirements</h5>
+<h5 id="_user_requirements"><a class="anchor" href="#_user_requirements"></a>3.16.1.3. User requirements</h5>
 <div class="paragraph">
 <p>The purpose of the WIS 2.0 Node (hereafter, referred to as the Node) is to be available to receive data from the production system, and to serve these data via the Internet to the WIS 2.0 environment.</p>
 </div>
@@ -2239,7 +2538,7 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-11 19:24:14 UTC
+Last updated 2026-08-13 16:24:47 UTC
 </div>
 </div>
 </body>
