@@ -23,7 +23,7 @@ The https://github.com/World-Meteorological-Organization/pywis-pubsub[pywis-pubs
 # install pywis-pubsub
 pip3 install pywis-pubsub
 
-# sync WIS2 Motification Message and WIS2 Monitoring Events Message schemas and codelists bundle
+# sync WIS2 Notification Message (WNM) and WIS2 Monitoring Events Message (WMEM) schemas and codelists bundle
 pywis-pubsub bundle sync
 
 # validate WNM against abstract test suite (file on disk)
