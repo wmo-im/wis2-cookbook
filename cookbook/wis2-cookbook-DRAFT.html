@@ -1753,7 +1753,7 @@ check-jsonschema --schemafile wis2-notification-message-bundled.json /path/to/my
 </div>
 </div>
 <div class="paragraph">
-<p>The <a href="https://github.com/World-Meteorological-Organization/pywis-pubsub">pywis-pubsub</a> tool provides a test suite to validate a message against the WNM specification requirements, as well as a Python API for application integration.  Consult the pywis-pubsub README on GitHub for more information/examples.</p>
+<p>The <a href="https://github.com/World-Meteorological-Organization/pywis-pubsub">pywis-pubsub</a> tool provides a test suite to validate messages against the WNM <a href="https://wmo-im.github.io/wis2-notification-message">(WIS2 Notification Message)</a> and WMEM <a href="https://wmo-im.github.io/wis2-monitoring-events">(WIS2 Monitoring Events)</a> Message specification requirements, as well as a Python API for application integration.  Consult the pywis-pubsub README on GitHub for additional information/examples.</p>
 </div>
 <div class="listingblock">
 <div class="title">Using pywis-pubsub</div>
@@ -1761,8 +1761,8 @@ check-jsonschema --schemafile wis2-notification-message-bundled.json /path/to/my
 <pre class="highlight"><code class="language-bash" data-lang="bash"># install pywis-pubsub
 pip3 install pywis-pubsub
 
-# sync WIS2 notification schema
-pywis-pubsub schema sync
+# sync WIS2 Notification Message (WNM) and WIS2 Monitoring Events Message (WMEM) schemas and codelists bundle
+pywis-pubsub bundle sync
 
 # validate WNM against abstract test suite (file on disk)
 pywis-pubsub ets validate /path/to/file.json
@@ -2538,7 +2538,7 @@ pywis-pubsub ets validate https://example.org/path/to/file.json</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-08-13 16:24:47 UTC
+Last updated 2026-08-13 16:25:25 UTC
 </div>
 </div>
 </body>
