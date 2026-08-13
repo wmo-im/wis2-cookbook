@@ -1,5 +1,7 @@
 == Recipes for data publishers
 
+include::wis2node-assessment-process.adoc[]
+
 include::best-practices-publishing-station-based-observational-data.adoc[]
 
 include::publishing-aviation-data.adoc[]
