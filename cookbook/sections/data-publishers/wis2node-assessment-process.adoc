@@ -14,14 +14,14 @@ Prior to the WIS2 Node Assessment process, the WMO Secretariat will ensure the c
 
 During the WIS2 Node assessment:
 
-- The WMO Secretariat connects the WIS2 Node to the wis2dev environment.
-- The GISC in the data publisher's AoR performs the assessment.
+- The WMO Secretariat connects the WIS2 Node to the WIS2 Development Environment (called wis2dev later).
+- The GISC associated to the new WIS2 Node performs the assessment.
 - The GISC informs WMO Secretariat when the assessment has been completed.
 
 [NOTE]
 .Optional pre-registration testing
 ====
-Data publishers and commercial WIS2 solution providers who want to test their systems before registration can contact the WMO Secretariat at wis2-support@wmo.int to request that a test system be connected to wis2dev.
+Data publishers or WIS2 solution providers who want to test their systems before registration can contact the WMO Secretariat at wis2-support@wmo.int to request that a test system be connected to wis2dev.
 ====
 
 ==== WIS2 Development Environment
@@ -44,7 +44,7 @@ where `&lt;centre-id&gt;` is the unique identifier of the WIS2 Node.
 
 The wis2dev GB republishes all valid WIS2 Notification Messages. A message is considered invalid when:
 
-- the channel does not match the WIS2 Topic Hierarchy, or
+- the topic used when publishing the Notification Message does not match any approved topic in the WIS2 Topic Hierarchy, or
 - the message does not conform to the WIS2 Notification Message specification, or
 - the message is a data notification for which no corresponding discovery metadata record can be found in the wis2dev GDC.
 
@@ -107,17 +107,17 @@ The WIS2 Node Assessment is considered complete when:
 |Notifications published under `origin/a/wis2/&lt;centre-id&gt;` by the WIS2 Node are not being republished by the wis2dev GB.
 |The wis2dev GB will only republish notifications adhering to WIS2 standards. Messages reusing a previously used 'id' will be discarded as duplicates. Ensure that you use a valid WIS2 topic for the MQTT channel, that the payload adheres to the WIS2 Notification Message standard, and that a unique id is used for each notification.
 
-|Canonical URL embedded in a WIS2 data-notification is not accessible from WIS2-dev
-|Ensure that the canonical URL is reachable from the wis2dev environment over the public Internet. Check that the DNS resolves to the correct IP address and that the wis2dev incoming IP address, `52.25.203.140`, is allowlisted.
+|Canonical URL embedded in a WIS2 data-notification is not accessible from wis2dev
+|Ensure that the canonical URL is reachable from the wis2dev environment over the public Internet. Check that the DNS resolves to the correct IP address and that the wis2dev incoming IP address, `52.25.203.140`, is allowed to access the WIS2 Node for MQTT(S) / WS(S) and HTTP(S).
 
 |WIS2 Node is not publishing data notifications for metadata
 |Ensure that data notifications for metadata are being published every 24 hours on the topic `origin/a/wis2/&lt;centre-id&gt;/metadata` and that the notification contains a valid WCMP2 record in the data payload.
 
 |Publishing a metadata-notification results in a notification on `origin/a/wis2/&lt;centre-id&gt;/metadata` but does not result in a notification on `cache/a/wis2/&lt;centre-id&gt;/metadata` on the wis2dev GB
-|Updated metadata records are rejected by the wis2dev GC if a previous record with the same data-id was already cached and the download link did not indicate rel="update". Ensure that the download link for updated metadata records indicates rel="update".
+|Updated metadata records are rejected by the wis2dev GC if a previous record with the same data-id was already cached and the download link did not indicate rel="update". Ensure that the download link for updated metadata records indicates rel="update" or the Notification Message is using a new value for `properties.data_id`.
 
 |Metadata records published by the WIS2 Node are cached by the wis2dev GC, but rejected by the wis2dev GDC
-|The wis2dev GDC will reject data that fails the pywcmp validation and quality assessment tool. Non-wis2box users should ensure that the metadata record passes the pywcmp ETS validation prior to publishing (see https://github.com/World-Meteorological-Organization/pywcmp). Data publishers using wis2box should ensure they use the latest version of the wis2box software to ensure the latest version of pywcmp is used.
+|The wis2dev GDC will reject data that fails the pywcmp validation and quality assessment tool. Non-wis2box users should ensure that the metadata record passes the pywcmp ETS validation prior to publishing (see https://github.com/World-Meteorological-Organization/pywcmp). Data publishers using wis2box should ensure they use the latest version of the wis2box software to ensure the latest version of pywcmp is used. Note that the wis2dev GDC provides pywcmp validation and quality assessment as an online service (see <<_validating_a_wmo_core_metadata_profile_record>>)
 
 |===
 
